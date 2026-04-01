@@ -1,1416 +1,926 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <meta name="theme-color" content="#222932" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="description" content="Инструктаж для водителей таксопарка СНЕЖОК" />
-  <title>Таксопарк СНЕЖОК — Инструктаж водителя</title>
-  
-  <!-- ПРЕДЗАГРУЗКА КРИТИЧНЫХ РЕСУРСОВ -->
-  <link rel="preload" href="https://flagcdn.com/w40/ru.png" as="image">
-  <link rel="preload" href="https://flagcdn.com/w40/kg.png" as="image">
-  <link rel="preload" href="https://flagcdn.com/w40/kz.png" as="image">
-  <link rel="preconnect" href="https://flagcdn.com" crossorigin>
-  
-  <link rel="manifest" href="application/manifest+json,{%22name%22:%22Таксопарк%20СНЕЖОК%22,%22short_name%22:%22СНЕЖОК%22,%22start_url%22:%22.%22,%22display%22:%22standalone%22,%22theme_color%22:%22%23222932%22,%22background_color%22:%22%23ffffff%22}" />
-  
-  <style>
-    /* === ПЕРЕМЕННЫЕ === */
-    :root {
-      --color-primary: #222932;
-      --color-accent: #0066FF;
-      --color-warning: #FFC107;
-      --color-danger: #DC3545;
-      --color-success: #28A745;
-      --color-bg: #FFFFFF;
-      --color-bg-alt: #F8F9FA;
-      --color-text: #222932;
-      --color-text-muted: #6C757D;
-      --color-border: #E9ECEF;
-      --color-bullet: #9CA3AF;
-      --nav-bg: #222932;
-      --nav-text: rgba(255, 255, 255, 0.6);
-      --nav-text-active: #ffffff;
-      --shadow-sm: 0 2px 8px rgba(34, 41, 50, 0.08);
-      --shadow-md: 0 4px 16px rgba(34, 41, 50, 0.12);
-      --shadow-lg: 0 8px 32px rgba(34, 41, 50, 0.16);
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 16px;
-      --spacing-xs: 8px;
-      --spacing-sm: 12px;
-      --spacing-md: 16px;
-      --spacing-lg: 24px;
-      --spacing-xl: 32px;
-      --transition: 0.3s ease;
-      --safe-top: env(safe-area-inset-top, 0px);
-      --safe-bottom: env(safe-area-inset-bottom, 0px);
-      --header-height: 70px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Таксопарк СНЕЖОК — Инструктаж водителя</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* === ТЁМНАЯ ТЕМА (инверсия навигации) === */
-    [data-theme="dark"] {
-      --color-bg: #1A1A1A;
-      --color-bg-alt: #242424;
-      --color-text: #FFFFFF;
-      --color-text-muted: #B0B0B0;
-      --color-border: #333333;
-      --color-primary: #FFFFFF;
-      --color-bullet: #9CA3AF;
-      --nav-bg: #FFFFFF;
-      --nav-text: rgba(34, 41, 50, 0.6);
-      --nav-text-active: #222932;
-      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
-      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
-    }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
 
-    /* === СБРОС И БАЗА === */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    html { 
-      scroll-behavior: smooth;
-      font-size: calc(16px + 0.25vw);
-    }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      background: var(--color-bg);
-      color: var(--color-text);
-      line-height: 1.5;
-      font-size: 1rem;
-      padding-top: calc(var(--safe-top) + var(--header-height));
-      padding-bottom: calc(var(--safe-bottom) + 70px);
-      transition: background var(--transition), color var(--transition);
-    }
-    img { max-width: 100%; display: block; }
-    button { font: inherit; border: none; background: none; cursor: pointer; }
-    a { color: inherit; text-decoration: none; }
-    ul, ol { list-style: none; }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
 
-    /* === ШАПКА (закреплённая, скрывается при скролле) === */
-    .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: calc(var(--header-height) + var(--safe-top));
-      padding: calc(var(--safe-top) + 12px) var(--spacing-md) 12px;
-      background: var(--color-bg);
-      border-bottom: 1px solid var(--color-border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 1000;
-      transition: background var(--transition), border-color var(--transition), transform 0.3s ease;
-    }
-    .header.hidden {
-      transform: translateY(calc(-100% - var(--safe-top)));
-    }
-    .header.scrolled {
-      box-shadow: var(--shadow-md);
-    }
-    .logo {
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      color: var(--color-primary);
-      white-space: nowrap;
-      transition: color var(--transition);
-    }
-    .header-right {
-      display: flex;
-      gap: var(--spacing-sm);
-      align-items: center;
-    }
-    .theme-toggle {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--color-bg-alt);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background var(--transition), transform 0.2s;
-      flex-shrink: 0;
-    }
-    .theme-toggle:active {
-      transform: scale(0.95);
-      background: var(--color-border);
-    }
-    .theme-toggle svg {
-      width: 20px;
-      height: 20px;
-      fill: var(--color-text);
-      transition: fill var(--transition);
-    }
-    .lang-wrapper {
-      position: relative;
-    }
-    .lang-current {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--color-bg-alt);
-      border: 2px solid var(--color-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: border-color var(--transition), transform 0.2s;
-      flex-shrink: 0;
-      overflow: hidden;
-    }
-    .lang-current:hover {
-      border-color: var(--color-accent);
-      transform: scale(1.05);
-    }
-    .lang-current:active {
-      transform: scale(0.95);
-    }
-    .lang-current img {
-      width: 60%;
-      height: 60%;
-      object-fit: contain;
-      border-radius: 4px;
-    }
-    .lang-dropdown {
-      position: absolute;
-      top: calc(100% + 8px);
-      right: 0;
-      background: var(--color-bg);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
-      padding: var(--spacing-xs);
-      box-shadow: var(--shadow-lg);
-      display: none;
-      flex-direction: column;
-      gap: var(--spacing-xs);
-      z-index: 1001;
-      min-width: 160px;
-      animation: slideDown 0.2s ease;
-    }
-    @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .lang-dropdown.show {
-      display: flex;
-    }
-    .lang-option {
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-sm);
-      padding: var(--spacing-xs) var(--spacing-sm);
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      transition: background var(--transition), transform 0.1s;
-    }
-    .lang-option:hover {
-      background: var(--color-bg-alt);
-      transform: translateX(4px);
-    }
-    .lang-option:active {
-      background: var(--color-border);
-      transform: scale(0.98);
-    }
-    .lang-option.active {
-      background: var(--color-bg-alt);
-      font-weight: 600;
-    }
-    .lang-option img {
-      width: 24px;
-      height: 16px;
-      object-fit: cover;
-      border-radius: 2px;
-      border: 1px solid var(--color-border);
-    }
-    .lang-option span {
-      font-size: 0.85rem;
-      color: var(--color-text);
-    }
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
 
-    /* === КОНТЕНТ === */
-    .container {
-      padding: var(--spacing-lg) var(--spacing-md);
-      max-width: 640px;
-      margin: 0 auto;
-      width: 100%;
-    }
-    .section {
-      margin-bottom: var(--spacing-xl);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      background: var(--color-bg);
-      box-shadow: var(--shadow-sm);
-      transition: box-shadow var(--transition), transform 0.2s;
-    }
-    .section:hover {
-      box-shadow: var(--shadow-md);
-    }
-    .section-header {
-      padding: var(--spacing-lg);
-      background: var(--color-bg);
-      font-weight: 600;
-      font-size: 1.1rem;
-      color: var(--color-primary);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      user-select: none;
-      transition: background var(--transition);
-    }
-    .section-header:active {
-      background: var(--color-bg-alt);
-    }
-    .section-header::after {
-      content: '+';
-      font-size: 1.5rem;
-      color: var(--color-accent);
-      transition: transform var(--transition), content 0.2s;
-      font-weight: 300;
-      flex-shrink: 0;
-      margin-left: var(--spacing-sm);
-      line-height: 1;
-    }
-    .section.active .section-header::after {
-      content: '−';
-      transform: rotate(0);
-    }
-    /* Убираем значок для несворачиваемых секций */
-    .section[data-non-collapsible] .section-header::after {
-      display: none;
-    }
-    .section[data-non-collapsible] .section-header {
-      cursor: default;
-    }
-    .section-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height var(--transition), opacity 0.3s ease;
-      background: var(--color-bg-alt);
-      opacity: 0;
-    }
-    .section.active .section-content {
-      max-height: 5000px;
-      opacity: 1;
-    }
-    .section-body {
-      padding: var(--spacing-lg);
-      animation: fadeInUp 0.3s ease-out;
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
 
-    /* === СПИСКИ И ТЕКСТ === */
-    .text-block { margin-bottom: var(--spacing-md); color: var(--color-text); transition: color var(--transition); }
-    .text-block:last-child { margin-bottom: 0; }
-    .list { margin-left: var(--spacing-lg); margin-bottom: var(--spacing-sm); }
-    .list li {
-      position: relative;
-      padding-left: var(--spacing-sm);
-      margin-bottom: var(--spacing-xs);
-      color: var(--color-text);
-      transition: color var(--transition);
-    }
-    .list li::before {
-      content: '•';
-      position: absolute;
-      left: -16px;
-      color: var(--color-bullet);
-      font-weight: bold;
-      font-size: 1.1rem;
-      line-height: 1;
-      transition: color var(--transition);
-    }
-    .important {
-      border-left: 4px solid var(--color-warning);
-      background: rgba(255, 193, 7, 0.1);
-      padding: var(--spacing-md);
-      margin: var(--spacing-md) 0;
-      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-      font-size: 1rem;
-      color: var(--color-text);
-      transition: all var(--transition);
-      animation: pulse 2s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.95; }
-    }
-    [data-theme="dark"] .important {
-      background: rgba(255, 193, 7, 0.15);
-    }
-    .important::before {
-      content: '⚠';
-      margin-right: var(--spacing-xs);
-      font-weight: bold;
-    }
+        .language-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
 
-    /* === КАРУСЕЛЬ === */
-    .carousel {
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--radius-lg);
-      margin: var(--spacing-md) 0;
-      background: var(--color-bg-alt);
-      box-shadow: var(--shadow-sm);
-      transition: all var(--transition);
-    }
-    .carousel-track {
-      display: flex;
-      transition: transform 0.3s ease;
-      touch-action: pan-y;
-    }
-    .carousel-slide {
-      min-width: 100%;
-      aspect-ratio: 4/3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: #fff;
-      font-size: 1rem;
-      text-align: center;
-      padding: var(--spacing-md);
-      flex-shrink: 0;
-      transition: opacity 0.3s ease;
-    }
-    .carousel-slide.loading {
-      opacity: 0.5;
-    }
-    .carousel-slide:nth-child(2) {
-      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    }
-    .carousel-slide:nth-child(3) {
-      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    }
-    .carousel-dots {
-      position: absolute;
-      bottom: var(--spacing-md);
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: var(--spacing-xs);
-      padding: var(--spacing-xs) var(--spacing-sm);
-      background: rgba(34, 41, 50, 0.8);
-      border-radius: 20px;
-      z-index: 10;
-      transition: background var(--transition);
-    }
-    .carousel-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.5);
-      border: none;
-      padding: 0;
-      cursor: pointer;
-      transition: all var(--transition);
-    }
-    .carousel-dot.active {
-      background: #fff;
-      transform: scale(1.4);
-    }
-    .carousel-dot:active {
-      transform: scale(1.2);
-    }
-    .carousel-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(34, 41, 50, 0.7);
-      border: none;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 10;
-      transition: background var(--transition), transform 0.2s;
-    }
-    .carousel-arrow:hover {
-      background: rgba(34, 41, 50, 0.9);
-      transform: translateY(-50%) scale(1.1);
-    }
-    .carousel-arrow:active {
-      transform: translateY(-50%) scale(0.95);
-    }
-    .carousel-arrow.prev { left: var(--spacing-sm); }
-    .carousel-arrow.next { right: var(--spacing-sm); }
-    .carousel-arrow svg {
-      width: 20px;
-      height: 20px;
-      fill: currentColor;
-    }
-    .carousel-hint {
-      text-align: center;
-      font-size: 0.8rem;
-      color: var(--color-text-muted);
-      margin: var(--spacing-xs) 0 var(--spacing-sm);
-      transition: color var(--transition);
-      animation: slideHint 1.5s ease-in-out infinite;
-    }
-    @keyframes slideHint {
-      0%, 100% { transform: translateX(0); }
-      50% { transform: translateX(5px); }
-    }
+        .language-selector a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background: rgba(255,255,255,0.2);
+            transition: background 0.3s;
+        }
 
-    /* === КОНТАКТЫ (несворачиваемые) === */
-    .contacts-scroll {
-      display: flex;
-      gap: var(--spacing-md);
-      overflow-x: auto;
-      padding: var(--spacing-sm) 2px var(--spacing-md);
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-    .contacts-scroll::-webkit-scrollbar {
-      display: none;
-    }
-    .contact-card {
-      flex-shrink: 0;
-      width: 260px;
-      border-radius: var(--radius-lg);
-      padding: var(--spacing-lg);
-      background: var(--color-bg);
-      box-shadow: var(--shadow-sm);
-      scroll-snap-align: start;
-      transition: box-shadow var(--transition), transform 0.2s;
-      text-align: center;
-      border: 1px solid var(--color-border);
-    }
-    .contact-card:active {
-      transform: scale(0.98);
-    }
-    .contact-avatar {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--color-accent), #0052cc);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto var(--spacing-sm);
-      border: 4px solid var(--color-warning);
-      position: relative;
-      transition: transform 0.2s;
-    }
-    .contact-card:active .contact-avatar {
-      transform: scale(0.95);
-    }
-    .contact-avatar span {
-      font-size: 1.7rem;
-      font-weight: 700;
-      color: #fff;
-      text-transform: uppercase;
-    }
-    .contact-flag {
-      position: absolute;
-      top: -4px;
-      left: -4px;
-      width: 28px;
-      height: 20px;
-      border-radius: 4px;
-      border: 2px solid var(--color-bg);
-      box-shadow: var(--shadow-sm);
-      overflow: hidden;
-    }
-    .contact-flag img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .contact-name {
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-bottom: var(--spacing-xs);
-      color: var(--color-primary);
-      transition: color var(--transition);
-    }
-    .contact-role {
-      font-size: 0.85rem;
-      color: var(--color-accent);
-      font-weight: 500;
-      margin-bottom: var(--spacing-xs);
-    }
-    .contact-schedule {
-      font-size: 0.8rem;
-      color: var(--color-text-muted);
-      margin-bottom: var(--spacing-md);
-      transition: color var(--transition);
-    }
-    .contact-actions {
-      display: flex;
-      justify-content: center;
-      gap: var(--spacing-sm);
-    }
-    .contact-btn {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.2s, box-shadow var(--transition);
-      box-shadow: var(--shadow-sm);
-    }
-    .contact-btn:active {
-      transform: scale(0.9);
-    }
-    .contact-btn.phone {
-      background: var(--color-accent);
-      color: #fff;
-    }
-    .contact-btn.whatsapp {
-      background: var(--color-success);
-      color: #fff;
-    }
-    .contact-btn.telegram {
-      background: #0088cc;
-      color: #fff;
-    }
-    .contact-btn svg {
-      width: 22px;
-      height: 22px;
-      fill: currentColor;
-    }
-    .contact-address {
-      margin-top: var(--spacing-lg);
-      padding-top: var(--spacing-md);
-      border-top: 1px solid var(--color-border);
-      font-size: 0.9rem;
-      color: var(--color-text);
-      text-align: center;
-      transition: color var(--transition), border-color var(--transition);
-    }
-    .contact-address a {
-      color: var(--color-accent);
-      text-decoration: underline;
-    }
-    .contacts-hint {
-      text-align: center;
-      font-size: 0.8rem;
-      color: var(--color-text-muted);
-      margin-bottom: var(--spacing-sm);
-      transition: color var(--transition);
-    }
+        .language-selector a:hover {
+            background: rgba(255,255,255,0.3);
+        }
 
-    /* === НАВИГАЦИОННАЯ ПОЛОСКА (инверсия в тёмной теме) === */
-    .nav-bar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: calc(var(--safe-bottom) + 70px);
-      background: var(--nav-bg);
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-around;
-      padding-bottom: var(--safe-bottom);
-      z-index: 1000;
-      transition: background var(--transition), box-shadow var(--transition);
-      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-    }
-    .nav-item {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: var(--spacing-sm);
-      color: var(--nav-text);
-      font-size: 0.75rem;
-      transition: color var(--transition), transform 0.2s;
-    }
-    .nav-item:active {
-      transform: scale(0.95);
-    }
-    .nav-item.active {
-      color: var(--nav-text-active);
-    }
-    .nav-item svg {
-      width: 24px;
-      height: 24px;
-      fill: currentColor;
-      margin-bottom: 4px;
-      transition: transform 0.2s;
-    }
-    .nav-item:active svg {
-      transform: scale(0.9);
-    }
+        .language-selector img {
+            width: 25px;
+            height: auto;
+            border-radius: 3px;
+        }
 
-    /* === ФУТЕР === */
-    .footer {
-      text-align: center;
-      padding: var(--spacing-xl) var(--spacing-md) calc(var(--spacing-xl) + var(--safe-bottom));
-      color: var(--color-text-muted);
-      font-size: 0.85rem;
-      transition: color var(--transition);
-    }
+        /* Sections */
+        .section {
+            background: white;
+            margin: 20px 0;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
 
-    /* === УТИЛИТЫ === */
-    .hidden { display: none !important; }
-    .mt-1 { margin-top: var(--spacing-xs); }
-    .mb-0 { margin-bottom: 0 !important; }
-    .text-accent { color: var(--color-accent); }
-    .text-danger { color: var(--color-danger); }
-    .text-warning { color: var(--color-warning); }
-    small { color: var(--color-text-muted); font-size: 0.85rem; transition: color var(--transition); }
-    code {
-      background: var(--color-bg-alt);
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      color: var(--color-text);
-      transition: all var(--transition);
-    }
+        .section-title {
+            font-size: 22px;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            font-weight: 700;
+        }
 
-    /* === АДАПТИВНОСТЬ === */
-    @media (max-width: 380px) {
-      :root {
-        --spacing-lg: 18px;
-        --spacing-xl: 24px;
-      }
-      .logo { font-size: 1rem; }
-      .contact-card { width: 240px; padding: var(--spacing-md); }
-      .contact-avatar { width: 70px; height: 70px; }
-      .contact-avatar span { font-size: 1.5rem; }
-      .contact-btn { width: 40px; height: 40px; }
-      .contact-btn svg { width: 20px; height: 20px; }
-      .lang-dropdown { min-width: 140px; }
-      .carousel-arrow { width: 36px; height: 36px; }
-      .carousel-arrow svg { width: 18px; height: 18px; }
-    }
-    @media (min-width: 641px) {
-      .container { padding: var(--spacing-xl) 24px; }
-    }
-    @media (max-height: 500px) and (orientation: landscape) {
-      .header { height: 50px; }
-      body { padding-top: 50px; }
-      .section-body { padding: var(--spacing-md); }
-      .nav-bar { height: 50px; }
-      body { padding-bottom: 50px; }
-    }
-  </style>
+        /* Lists */
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-list li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-list li:last-child {
+            border-bottom: none;
+        }
+
+        .info-list li:before {
+            content: "•";
+            color: #667eea;
+            font-weight: bold;
+            position: absolute;
+            left: 10px;
+            font-size: 18px;
+        }
+
+        .check-list li:before {
+            content: "✔";
+            color: #4CAF50;
+        }
+
+        .sublist {
+            list-style: none;
+            padding-left: 25px;
+            margin: 10px 0;
+        }
+
+        .sublist li {
+            padding: 5px 0;
+            position: relative;
+            border: none;
+        }
+
+        .sublist li:before {
+            content: "-";
+            position: absolute;
+            left: -15px;
+            color: #667eea;
+        }
+
+        /* Highlight styles */
+        .highlight-yellow {
+            background-color: #fff3cd;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: 600;
+            display: block;
+            margin: 15px 0;
+        }
+
+        .highlight-lightblue {
+            background-color: #d1ecf1;
+            padding: 10px;
+            border-radius: 5px;
+            font-style: italic;
+            color: #0c5460;
+            display: block;
+            margin: 15px 0;
+        }
+
+        .highlight-lightred {
+            background-color: #f8d7da;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #721c24;
+            font-weight: bold;
+        }
+
+        .highlight-lightgray {
+            background-color: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .highlight-lightyellow {
+            background-color: #fff9c4;
+            padding: 10px;
+            border-radius: 5px;
+            display: block;
+            margin: 10px 0;
+        }
+
+        .text-red {
+            color: #dc3545;
+            font-weight: 600;
+        }
+
+        .text-bold {
+            font-weight: 700;
+        }
+
+        .text-underlined {
+            text-decoration: underline;
+        }
+
+        .text-italic {
+            font-style: italic;
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+            border-left: 5px solid #dc3545;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        /* Order List */
+        .order-list {
+            counter-reset: order-counter;
+            list-style: none;
+            padding: 0;
+        }
+
+        .order-list li {
+            counter-increment: order-counter;
+            padding: 12px 0 12px 45px;
+            position: relative;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-list li:before {
+            content: counter(order-counter);
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #667eea;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* Carousel - Swipe Only */
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            margin: 20px 0;
+            touch-action: pan-y;
+        }
+
+        .carousel-wrapper {
+            display: flex;
+            transition: transform 0.3s ease;
+            cursor: grab;
+        }
+
+        .carousel-wrapper:active {
+            cursor: grabbing;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            padding: 10px;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .carousel-item p {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .indicator.active {
+            background: #667eea;
+        }
+
+        /* Image Block */
+        .image-block {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .image-block img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .small-icon {
+            width: 30px;
+            height: auto;
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 5px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 30px 0;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .footer-nav a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .footer p {
+            margin: 5px 0;
+            opacity: 0.9;
+        }
+
+        /* Special backgrounds */
+        .bg-burgundy {
+            background-color: #8b0000;
+            color: white;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        .bg-lightred-italic {
+            background-color: #f8d7da;
+            font-style: italic;
+            padding: 10px;
+            border-radius: 5px;
+            display: block;
+            margin: 10px 0;
+        }
+
+        .underline-red-bg {
+            text-decoration: underline;
+            background-color: #f8d7da;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .section {
+                padding: 15px;
+                margin: 15px 0;
+            }
+
+            .section-title {
+                font-size: 18px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- ШАПКА -->
-  <header class="header" id="header">
-    <div class="logo">таксопарк СНЕЖОК</div>
-    <div class="header-right">
-      <div class="lang-wrapper">
-        <div class="lang-current" id="langCurrent" aria-label="Выбрать язык">
-          <img src="https://flagcdn.com/w40/ru.png" alt="RU" id="currentFlag">
-        </div>
-        <div class="lang-dropdown" id="langDropdown">
-          <div class="lang-option active" data-lang="ru">
-            <img src="https://flagcdn.com/w40/ru.png" alt="RU">
-            <span>Русский</span>
-          </div>
-          <div class="lang-option" data-lang="kg">
-            <img src="https://flagcdn.com/w40/kg.png" alt="KG">
-            <span>Кыргызча</span>
-          </div>
-          <div class="lang-option" data-lang="kz">
-            <img src="https://flagcdn.com/w40/kz.png" alt="KZ">
-            <span>Қазақша</span>
-          </div>
-          <div class="lang-option" data-lang="uz">
-            <img src="https://flagcdn.com/w40/uz.png" alt="UZ">
-            <span>O'zbek</span>
-          </div>
-          <div class="lang-option" data-lang="tj">
-            <img src="https://flagcdn.com/w40/tj.png" alt="TJ">
-            <span>Тоҷикӣ</span>
-          </div>
-          <div class="lang-option" data-lang="tm">
-            <img src="https://flagcdn.com/w40/tm.png" alt="TM">
-            <span>Türkmen</span>
-          </div>
-        </div>
-      </div>
-      <button class="theme-toggle" id="themeToggle" aria-label="Тёмная тема">
-        <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 109 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 01-4.4 2.26 5.403 5.403 0 01-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
-      </button>
-    </div>
-  </header>
-
-  <!-- ОСНОВНОЙ КОНТЕНТ -->
-  <main class="container">
-
-    <!-- УСЛОВИЯ АРЕНДЫ -->
-    <section class="section" data-section="rental">
-      <div class="section-header">Условия аренды</div>
-      <div class="section-content">
-        <div class="section-body">
-          <div class="text-block"><strong>1.</strong> Минимальный срок аренды – 14 дней.<br><strong>1.1.</strong> В случае досрочного возврата – оплата трёх дней аренды.</div>
-          <div class="text-block"><strong>2.</strong> Первый день аренды – бесплатно (для новых водителей).<br><strong>2.1.</strong> Последний день аренды: сдача автомобиля с 09:00 до 11:00 без оплаты (автомобиль должен быть чистым).<br><strong>2.2.</strong> Сдача автомобиля: понедельник - пятница.<br><strong>2.3.</strong> За 3 дня до сдачи автомобиля оповестить начальника колонны.</div>
-          <div class="text-block"><strong>3.</strong> Списание аренды – ежедневно в 12:00.<br><strong>3.1.</strong> Комиссия парка – 3%.</div>
-          <div class="text-block"><strong>4.</strong> Внутренняя страховка компании – стоимость +100 ₽/день.*</div>
-          <div class="text-block"><strong>5.</strong> Водитель несет ответственность за автомобиль:
-            <ul class="list">
-              <li>сколы, царапины, вмятины;</li>
-              <li>повреждение ходовой части;</li>
-              <li>покрышки, диски;</li>
-              <li>стекла автомобиля;</li>
-              <li>и другие повреждения.</li>
-            </ul>
-          </div>
-          <div class="text-block"><strong>6.</strong> Оплата штрафов и проезда по ЦКАД, МСД производится автоматически со счёта «Элемент». Штрафы свыше 1 000 ₽ списываются по 1 000 ₽ ежедневно.</div>
-          <div class="text-block"><strong>7.</strong> Запрещена передача автомобиля другому лицу.</div>
-          <div class="text-block"><strong>8.</strong> Запрещено нецелевое использование автомобиля.</div>
-          <div class="important">* Внутренняя страховка – в случае повреждения автомобиля водитель оплачивает ремонт не более 20.000 ₽. Данная опция не действует в случае: передачи автомобиля постороннему лицу; нахождения за рулем в состоянии опьянения; грубого нарушения ПДД; умышленного создания аварийной ситуации; уезда с места ДТП; отсутствия документов об оформлении ДТП; если машина была неисправна и вы знали об этом; использования авто в личных целях.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ОСМОТР АВТОМОБИЛЯ + КАРУСЕЛЬ -->
-    <section class="section" data-section="inspection">
-      <div class="section-header">Осмотр автомобиля</div>
-      <div class="section-content">
-        <div class="section-body">
-          <div class="text-block"><strong>✔ Осмотр внешнего вида:</strong>
-            <ul class="list">
-              <li>оклейка кузова (убедиться в наличии "шашек" на крыльях);</li>
-              <li>наличие повреждений (царапин, вмятин);</li>
-              <li>состояние салона, колес, лобового стекла.</li>
-            </ul>
-          </div>
-          <div class="text-block"><strong>✔ Техническое состояние:</strong>
-            <ul class="list">
-              <li>уровень масла, тормозной и охлаждающей жидкости;</li>
-              <li>состояние ремня генератора и аккумулятора.</li>
-            </ul>
-          </div>
-          <div class="text-block"><strong>✔ Проверить работу световых приборов:</strong>
-            <ul class="list">
-              <li>габаритные огни, фары, поворотники, стоп-сигнал, лампочки заднего хода.</li>
-            </ul>
-          </div>
-          <div class="text-block"><strong>✔ Проверить наличие:</strong>
-            <ul class="list">
-              <li>шашка на крышу и по бокам, знак аварийной остановки, огнетушитель, аптечка, запасное колесо, домкрат, ключ для колеса.</li>
-            </ul>
-          </div>
-          <div class="important">При получении автомобиля проверьте документы, сроки действия, сверьте регистрационные номера с документами.</div>
-
-          <!-- КАРУСЕЛЬ с ленивой загрузкой -->
-          <p class="carousel-hint">← Прокрутите →</p>
-          <div class="carousel" id="inspectionCarousel">
-            <div class="carousel-track" id="carouselTrack">
-              <div class="carousel-slide loading" data-bg="linear-gradient(135deg, #667eea 0%, #764ba2 100%)">📸 Внешний вид авто</div>
-              <div class="carousel-slide loading" data-bg="linear-gradient(135deg, #f093fb 0%, #f5576c 100%)">🚗 Салон автомобиля</div>
-              <div class="carousel-slide loading" data-bg="linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)">🔧 Технический осмотр</div>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1>Таксопарк СНЕЖОК — Инструктаж водителя</h1>
+            <div class="language-selector">
+                <a href="#"><img src="https://flagcdn.com/w40/ru.png" alt="RU"> Русский</a>
+                <a href="#"><img src="https://flagcdn.com/w40/kg.png" alt="KG"> Кыргызча</a>
+                <a href="#"><img src="https://flagcdn.com/w40/kz.png" alt="KZ"> Қазақша</a>
+                <a href="#"><img src="https://flagcdn.com/w40/uz.png" alt="UZ"> O'zbek</a>
+                <a href="#"><img src="https://flagcdn.com/w40/tj.png" alt="TJ"> Тоҷикӣ</a>
+                <a href="#"><img src="https://flagcdn.com/w40/tm.png" alt="TM"> Türkmen</a>
             </div>
-            <button class="carousel-arrow prev" id="carouselPrev" aria-label="Назад">
-              <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-            </button>
-            <button class="carousel-arrow next" id="carouselNext" aria-label="Вперёд">
-              <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-            </button>
-            <div class="carousel-dots" id="carouselDots">
-              <button class="carousel-dot active" data-slide="0"></button>
-              <button class="carousel-dot" data-slide="1"></button>
-              <button class="carousel-dot" data-slide="2"></button>
-            </div>
-          </div>
-
-          <div class="text-block"><strong>При себе необходимо иметь:</strong>
-            <ul class="list">
-              <li>Водительское удостоверение (проверьте срок)</li>
-              <li>Свидетельство о регистрации (СТС)</li>
-              <li>Страховой полис ОСАГО</li>
-              <li>Диагностическая карта</li>
-              <li>Заполненный путевой лист</li>
-            </ul>
-          </div>
         </div>
-      </div>
-    </section>
+    </header>
 
-    <!-- ПОРЯДОК ПОЛУЧЕНИЯ ПУТЕВОГО ЛИСТА -->
-    <section class="section" data-section="waybill">
-      <div class="section-header">Порядок получения путевого листа</div>
-      <div class="section-content">
-        <div class="section-body">
-          <ol class="list" style="list-style:decimal;margin-left:24px">
-            <li>По прибытию в парк получите у механика документы на автомобиль, карточку фрахтовщика, путевой лист, "шашку". Поставьте подпись.</li>
-            <li>Пройдите медосвидетельствование на аппарате телемедицины, поставьте время и подпись.</li>
-            <li>Получите ключи, произведите осмотр автомобиля. После осмотра — подпись у механика.</li>
-            <li>Поставьте подпись о приеме ТС в исправном состоянии.</li>
-            <li>Подпишите графу об осведомленности при утере "шашек", путевого листа или карты.</li>
-            <li>На выезде из парка поставьте отметку о времени выезда.</li>
-            <li>Отметьте километраж на момент выезда.</li>
-          </ol>
-        </div>
-      </div>
-    </section>
+    <main class="container">
 
-    <!-- ПРЕДРЕЙСОВЫЙ ОСМОТР -->
-    <section class="section" data-section="pretrip">
-      <div class="section-header">Предрейсовый осмотр</div>
-      <div class="section-content">
-        <div class="section-body">
-          <div class="text-block"><strong>✔</strong> Обойдите автомобиль, убедитесь в отсутствии повреждений.</div>
-          <div class="text-block"><strong>✔</strong> Проверьте колеса, уровни жидкостей, ремень, аккумулятор, отсутствие течи.</div>
-          <div class="text-block"><strong>✔</strong> Проверьте документы и срок их действия.</div>
-          <div class="text-block"><strong>✔</strong> Убедитесь в чистоте автомобиля.</div>
-          <div class="important">Если обнаружили повреждения на стоянке: позвоните начальнику колонны; не трогая машину, сфотографируйте со всех сторон и повреждения крупным планом; вызовите полицию.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ТЕХОБСЛУЖИВАНИЕ -->
-    <section class="section" data-section="maintenance">
-      <div class="section-header">Технический осмотр и ремонт</div>
-      <div class="section-content">
-        <div class="section-body">
-          <div class="text-block">Техническое обслуживание – каждые 10.000 км.</div>
-          <div class="text-block">Ремонт и прочее обслуживание – только в автосервисе таксопарка!</div>
-          <div class="text-block">За день до ТО или ремонта необходимо позвонить для записи.</div>
-          <div class="important">Любое самостоятельное вмешательство (ремонт, замена запчасти, долив масла) только после согласования с начальником колонны!</div>
-          <div class="important">Совет: при получении автомобиля узнайте у начальника колонны, через сколько километров нужно приехать на ТО.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ГИБДД И МАДИ -->
-    <section class="section" data-section="police">
-      <div class="section-header">Правила общения с ГИБДД и МАДИ</div>
-      <div class="section-content">
-        <div class="section-body">
-          <div class="text-block"><strong>✔</strong> Ведите себя спокойно, не торопитесь, общайтесь вежливо, не провоцируйте.</div>
-          <div class="text-block"><strong>✔</strong> Не используйте фразы "на каком основании", "не имеете право" и т.п.</div>
-          <div class="text-block"><strong>✔</strong> Если оформляют протокол — вежливо попросите объяснить причину.</div>
-          <div class="text-block"><strong>✔</strong> Если не понимаете — просите переводчика и ничего не подписывайте!</div>
-          <div class="text-block"><strong>✔</strong> Сообщите начальнику колонны о составлении протокола.</div>
-          <div class="important">Некоторые сотрудники могут воспользоваться незнанием вами языка или законов. Если не уверены — звоните начальнику колонны!</div>
-          <div class="text-block"><strong>МАДИ может проверить:</strong>
-            <ul class="list">
-              <li>наличие "шашек", карточки фрахтовщика, путевого листа, безопасность перевозки.</li>
-            </ul>
-          </div>
-          <div class="important">Сотрудник МАДИ не может останавливать автомобиль для проверки документов — это делает только полиция. Но если подошёл — предоставьте документы, не спорьте.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ВЫЕЗД ЗА ОБЛАСТЬ -->
-    <section class="section" data-section="region">
-      <div class="section-header">Выезд за пределы Московской области</div>
-      <div class="section-content">
-        <div class="section-body">
-          <div class="text-block">При выезде за пределы Московской области звонок начальнику колонны обязателен!</div>
-          <div class="important">В случае поломки или ДТП за пределами области эвакуатор оплачивается водителем.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ДТП -->
-    <section class="section" data-section="accident">
-      <div class="section-header">Что делать при ДТП</div>
-      <div class="section-content">
-        <div class="section-body">
-          <ol class="list" style="list-style:decimal;margin-left:24px">
-            <li>Остановитесь, включите аварийку, выставьте знак, за городом наденьте светоотражающий жилет.</li>
-            <li>Если есть пострадавшие — вызовите скорую (103 или 112).</li>
-            <li class="important">Если не умеете — не оказывайте помощь сами.</li>
-            <li>Сфотографируйте место ДТП, повреждения всех авто, номера.</li>
-            <li>Дождитесь сотрудника ГИБДД для оформления.</li>
-          </ol>
-          <div class="important">Если сотрудник ГИБДД просит освободить проезжую часть — припаркуйтесь по правилам: не нарушайте знак 3.27, оплачивайте платную парковку.</div>
-          <div class="text-block"><strong>Условия для европротокола:</strong>
-            <ul class="list">
-              <li>начальник колонны одобрил;</li>
-              <li>участвуют только два ТС;</li>
-              <li>нет пострадавших;</li>
-              <li>у обоих есть ОСАГО;</li>
-              <li>оба согласны;</li>
-              <li>не повреждена инфраструктура;</li>
-              <li>положение авто не менялось после ДТП.</li>
-            </ul>
-          </div>
-          <div class="important">Совет: после составления европротокола дождитесь, пока второй участник уедет первым.</div>
-          <div class="important">В случае ДТП по вашей вине эвакуатор оплачивается вами.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- МЕХАНИК И ЭВАКУАТОР -->
-    <section class="section" data-section="tow">
-      <div class="section-header">Механик и эвакуатор</div>
-      <div class="section-content">
-        <div class="section-body">
-          <div class="text-block"><strong>В случае поломки:</strong></div>
-          <ol class="list" style="list-style:decimal;margin-left:24px">
-            <li>Остановитесь по правилам, выставьте знак аварийной остановки.</li>
-            <li>Высадите пассажиров.</li>
-            <li>Позвоните начальнику колонны для вызова механика или эвакуатора.</li>
-          </ol>
-          <div class="important">Если встали на платной парковке — оплатите её, позже получите компенсацию.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ШТРАФЫ -->
-    <section class="section" data-section="fines">
-      <div class="section-header">ШТРАФЫ</div>
-      <div class="section-content">
-        <div class="section-body">
-          <div class="text-block"><strong class="text-danger">Отсутствие карты фрахтовщика</strong> – штраф 30.000 ₽<br><small>Карта оформляется при приёме, должна быть на передней панели справа.</small></div>
-          <div class="text-block"><strong class="text-danger">Отсутствие фонаря "такси" и/или "шашки"</strong> – штраф 50.000 ₽</div>
-          <div class="important">Совет: после работы снимайте фонарь и кладите на пол со стороны водителя. Так его не украдут, и вы не забудете установить при выходе на линию.</div>
-          <div class="text-block"><strong class="text-danger">Парковка на газоне и тротуаре</strong> – штраф 300.000 ₽</div>
-          <div class="important">Совет: паркуйте машину так, чтобы все четыре колеса стояли на асфальте.</div>
-          <div class="text-block"><strong class="text-danger">Нарушение правил перевозки детей</strong> – штраф 200.000 ₽</div>
-          <div class="text-block"><strong>К нарушениям относится:</strong>
-            <ul class="list">
-              <li>отсутствие детского кресла;</li>
-              <li>неподходящее или неправильно установленное кресло;</li>
-              <li>ребенок в кресле не пристегнут.</li>
-            </ul>
-          </div>
-          <div class="important">Если у клиента нет кресла — попросите отменить заказ. Если отказывается — свяжитесь с техподдержкой. Если клиент со своим креслом — он устанавливает его сам.</div>
-          <div class="text-block"><small>Дети младше 12 лет, ростом выше 150 см и весом более 36 кг, могут ехать сзади с обычными ремнями.</small></div>
-          <div class="text-block"><strong class="text-danger">Вождение в состоянии опьянения</strong> – штраф 145.000 ₽ и лишение прав на 1,5–2 года.</div>
-          <div class="text-block"><strong class="text-danger">Отказ от медосвидетельствования</strong> – лишение прав на 1,5–2 года.</div>
-          <div class="important">Не отказывайтесь от освидетельствования: это может быть проверка алкотестером или поездка в медучреждение. Лекарства тоже могут влиять на вождение — проверяйте инструкцию.</div>
-          <div class="text-block"><strong>Запрещено:</strong><br><small>Андипал, Беллатаминал, Валокордин, Валосердин, Каффетин, Корвалдин, Корвалол, Омнопон, Пентабуфен, Пенталгин-Н, Пентанов, Пливалгин, Седал, Седальгин Нео, Солпадеин, Тедеин, Теофедрин, Терпинкод, Тофф Плюс</small></div>
-          <div class="text-block"><strong>С осторожностью:</strong><br><small>Алпразолам, Антигрипин, Атаракс, Габапентин, Диазепам, Димедрол, Лавокодин, Лоперамид, сиропы на спирту, Супрастин, Тавегил, Телфаст, Феназепам, Фенибут, Цетрин и др.</small></div>
-          <div class="text-block"><strong class="text-danger">Неоплаченная парковка</strong> – штраф 50.000 ₽</div>
-          <div class="important">ВНИМАНИЕ: время бесплатной парковки – первые 5 минут!</div>
-          <div class="text-block"><strong>Оплата через приложение «Парковки России»:</strong>
-            <ol class="list" style="list-style:decimal;margin-left:24px">
-              <li>Откройте приложение, разрешите доступ к геолокации.</li>
-              <li>Введите номер телефона для СМС с пин-кодом.</li>
-              <li>Введите пин-код, добавьте данные авто в разделе «Автомобили».</li>
-              <li>Выберите номер парковочной зоны на карте, нажмите «Припарковать».</li>
-              <li>Для отмены — нажмите «Завершить».</li>
+        <!-- Block 1: Rental Conditions -->
+        <section class="section">
+            <h2 class="section-title">Условия аренды</h2>
+            <ol class="info-list" style="list-style: decimal; padding-left: 20px;">
+                <li style="padding-left: 10px; border: none;">Минимальный срок аренды – 14 дней.</li>
+                <li style="padding-left: 10px; border: none;">Первый день аренды – бесплатно (для новых водителей).</li>
+                <li style="padding-left: 10px; border: none;">Сдача автомобиля: понедельник - пятница.</li>
+                <li style="padding-left: 10px; border: none;">За 3 дня до сдачи автомобиля оповестить начальника колонны.</li>
+                <li style="padding-left: 10px; border: none;">Списание аренды – ежедневно в 12:00.</li>
+                <li style="padding-left: 10px; border: none;">Комиссия парка – 3%.</li>
+                <li style="padding-left: 10px; border: none;">Внутренняя страховка компании (КАСКО) – стоимость +100 ₽/день.*</li>
             </ol>
-            <small>До конца суток можно изменить время парковки, если она была оплачена.</small>
-          </div>
-          <div class="text-block"><strong>Оплата СМС на 7757:</strong><br>
-            <small>Формат: <code>номер_парковки*номер_авто*часы</code><br>Пример: <code>1004*А123АА199*3</code><br>
-            Продление: <code>X2</code> | Отмена: <code>S</code><br>
-            Дождитесь СМС-отчет о выполнении.</small>
-          </div>
-          <div class="important">Знак платной парковки установлен не всегда. Иногда есть только синяя разметка. Перед парковкой откройте Яндекс.Навигатор, Яндекс.Про или «Парковки России» — там точно указано, платное ли место.</div>
-          <div class="important">Помните: внутри ТТК бесплатных парковок нет.</div>
-          <div class="text-block"><strong class="text-danger">Проезд на запрещающий сигнал светофора</strong> – штраф 7.500 ₽<br><small>Снижайте скорость при мигающем зелёном. Жёлтый сигнал запрещает движение.</small></div>
-          <div class="text-block"><strong class="text-danger">Пересечение стоп-линии</strong> – штраф 7.500 ₽<br><small>Останавливайтесь так, чтобы видеть стоп-линию.</small></div>
-          <div class="text-block"><strong class="text-danger">Движение под "кирпич" на автобусной полосе</strong> – штраф 4.500 ₽</div>
-          <div class="text-block"><strong class="text-danger">Остановка под знаком 3.27</strong> – штраф 4.500 ₽<br><small>Сочетание 3.27 + 5.18 разрешает остановку такси.</small></div>
-          <div class="text-block"><strong>Превышение скорости:</strong>
-            <ul class="list">
-              <li>20-40 км/ч – 750 ₽</li>
-              <li>40-60 км/ч – 1.500–2.250 ₽</li>
-              <li>60-80 км/ч – 3.000–3.750 ₽ / лишение 4-6 мес.</li>
-              <li>80+ км/ч – 7.500 ₽ / лишение 6 мес.</li>
+            
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin-top: 15px;">
+                <p class="text-bold" style="margin-bottom: 10px;">* Внутренняя страховка – в случае значительного повреждения автомобиля водитель оплачивает не более 20.000 ₽, остальные расходы покрывает компания. Данная опция не действует в случае:</p>
+                <ul class="sublist">
+                    <li>передача автомобиля постороннему лицу;</li>
+                    <li>нахождение за рулем в состоянии опьянения;</li>
+                    <li>грубое нарушение правил дорожного движения;</li>
+                    <li>умышленное нанесение ущерба;</li>
+                    <li>уезд с места ДТП;</li>
+                    <li>отсутствие документов об оформлении ДТП;</li>
+                    <li>машина была неисправна и вы знали об этом;</li>
+                    <li>использовали авто в личных целях.</li>
+                </ul>
+            </div>
+
+            <ol class="info-list" style="list-style: decimal; padding-left: 20px; margin-top: 15px; counter-reset: order-counter 7;">
+                <li style="padding-left: 10px; border: none;">Водитель несет ответственность за автомобиль:
+                    <ul class="sublist">
+                        <li>сколы, царапины, вмятины;</li>
+                        <li>повреждение ходовой части;</li>
+                        <li>покрышки, диски;</li>
+                        <li>стекла автомобиля;</li>
+                        <li>и другие повреждения.</li>
+                    </ul>
+                </li>
+                <li style="padding-left: 10px; border: none;">Оплата штрафов и проезда по ЦКАД, МСД производится автоматически со счёта мобильного приложения водителя. Штрафы свыше 1 000 ₽ списываются по 1 000 ₽ ежедневно.</li>
+                <li style="padding-left: 10px; border: none;">Запрещена передача автомобиля другому лицу.</li>
+                <li style="padding-left: 10px; border: none;">Запрещено нецелевое использование автомобиля.</li>
+            </ol>
+        </section>
+
+        <!-- Block 2: Vehicle Inspection -->
+        <section class="section">
+            <h2 class="section-title">Осмотр автомобиля при получении</h2>
+            
+            <h3 style="color: #667eea; margin: 15px 0 10px;">✔ Осмотр внешнего вида:</h3>
+            <ul class="sublist">
+                <li>оклейка кузова (убедиться в наличии "шашек" на крыльях автомобиля);</li>
+                <li>наличие повреждений (царапин, вмятин и так далее);</li>
+                <li>состояние салона;</li>
+                <li>состояние колес;</li>
+                <li>целостность лобового стекла.</li>
             </ul>
-          </div>
-          <div class="text-block"><strong>Типичные ограничения:</strong>
-            <ul class="list">
-              <li>жилые зоны — 20 км/ч;</li>
-              <li>городские дороги — 60 км/ч (иногда 40-50);</li>
-              <li>ТТК, магистрали — 80 км/ч;</li>
-              <li>МКАД — 100 км/ч.</li>
+
+            <h3 style="color: #667eea; margin: 15px 0 10px;">✔ Техническое состояние:</h3>
+            <ul class="sublist">
+                <li>уровень масла, тормозной жидкости и охлаждающей жидкости;</li>
+                <li>состояния ремня генератора;</li>
+                <li>состояние аккумулятора.</li>
             </ul>
-          </div>
-          <div class="important">Соблюдайте скоростной режим!</div>
-          <div class="text-block"><strong class="text-danger">Движение по обочине</strong> – штраф 2.250 ₽<br><small>Равносильно созданию аварийной ситуации. В случае ДТП виновником будете вы.</small></div>
-          <div class="text-block"><strong class="text-danger">Непристёгнутый ремень</strong> – штраф 1.500 ₽<br><small>Ответственность за пассажиров несёт водитель.</small></div>
-          <div class="text-block"><strong class="text-danger">Телефон за рулём</strong> – штраф 1.500 ₽</div>
-          <div class="important">В режиме "Доставка" запрещена перевозка пассажиров. В режиме "Такси" запрещена перевозка посылок.</div>
+
+            <h3 style="color: #667eea; margin: 15px 0 10px;">✔ Проверить работу световых приборов:</h3>
+            <ul class="sublist">
+                <li>габаритные огни;</li>
+                <li>фары;</li>
+                <li>поворотники;</li>
+                <li>стоп-сигнал;</li>
+                <li>лампочки заднего хода.</li>
+            </ul>
+
+            <h3 style="color: #667eea; margin: 15px 0 10px;">✔ Проверить наличие:</h3>
+            <ul class="sublist">
+                <li>шашка на крышу;</li>
+                <li>шашки по бокам автомобиля;</li>
+                <li>знак аварийной остановки;</li>
+                <li>огнетушитель;</li>
+                <li>аптечка;</li>
+                <li>запасное колесо;</li>
+                <li>домкрат;</li>
+                <li>ключ для откручивания колеса.</li>
+            </ul>
+
+            <div class="warning-box" style="margin-top: 20px; background: #d1ecf1; border-left-color: #17a2b8;">
+                <p class="text-bold">При получении автомобиля проверьте документы, сроки действия документов, сверьте регистрационные номера с документами.</p>
+            </div>
+        </section>
+
+        <!-- Block 3: Required Documents - Carousel -->
+        <section class="section">
+            <h2 class="section-title">При себе необходимо иметь документы</h2>
+            
+            <div class="carousel-container" id="documentsCarousel">
+                <div class="carousel-wrapper" id="documentsWrapper">
+                    <div class="carousel-item">
+                        <img src="img/driver_license/driver_license.png" alt="Водительское удостоверение">
+                        <p>Водительское удостоверение <span class="text-red">(проверьте срок действия)</span></p>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/sts/sts_2.img" alt="СТС">
+                        <p>Свидетельство о регистрации (СТС) <span class="text-red">(проверьте срок действия)</span></p>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/save/save.png" alt="ОСАГО">
+                        <p>Страховой полис ОСАГО <span class="text-red">(проверьте срок действия)</span></p>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/diagnostic/diag_card.png" alt="Диагностическая карта">
+                        <p>Диагностическая карта <span class="text-red">(проверьте срок действия)</span></p>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/road_list/road_list.png" alt="Путевой лист">
+                        <p><span class="highlight-lightgray">Заполненный</span> путевой лист</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-indicators" id="documentsIndicators"></div>
+
+            <div class="warning-box">
+                <p>Неправильное заполнение путевого листа влечет наложение штрафа в размере <span class="highlight-lightred">100.000 ₽</span> и <span class="highlight-lightred">2 месяца</span> автомобиль будет находиться на <span class="highlight-lightred">штрафстоянке</span></p>
+            </div>
+
+            <h3 class="text-bold text-underlined" style="margin: 20px 0 15px; color: #667eea;">Порядок получения путевого листа</h3>
+            
+            <ol class="order-list">
+                <li>По прибытию в парк, получаете у механика документы на автомобиль, карточку фрахтовщика (перевозчика), путевой лист, "шашку" на крышу. Ставите <span class="highlight-lightgray">подпись</span> о получении.</li>
+                <li>Проходите медицинского освидетельствование (общее самочувствие, температура тела, артериальное давление, проверка на состояние опьянения), ставите <span class="highlight-lightgray">время</span> и подпись у ответственного.</li>
+                <li>Получаете у механика ключи от автомобиля и производите осмотр автомобиля. После завершения осмотра, <span class="highlight-lightgray">время</span> и подпись у механика о выдаче транспортного средства.</li>
+                <li>Ставите свою <span class="highlight-lightgray">подпись</span> о приеме транспортного средства в технически исправном состоянии.</li>
+                <li>Ставите <span class="highlight-lightgray">подпись</span> в графе об осведомленности о действиях в случае утери "шашек", путевого листа или карты фрахтовщика.</li>
+                <li>На выезде из парка ставите отметку о <span class="highlight-lightgray">времени</span> выезда.</li>
+                <li>Отметка о <span class="highlight-lightgray">километраже</span> автомобиля на момент выезда.</li>
+            </ol>
+
+            <div class="highlight-lightblue">
+                В отдельных случаях возможен выезд механика и медицинского работника к водителю.
+            </div>
+        </section>
+
+        <!-- Block 4: Daily Inspection -->
+        <section class="section">
+            <h2 class="section-title">Ежедневный осмотр автомобиля</h2>
+            
+            <ul class="info-list check-list">
+                <li>Обойдите автомобиль вокруг и убедитесь в отсутствии повреждений.</li>
+                <li>Проверьте колеса.</li>
+                <li>Проверьте:
+                    <ul class="sublist">
+                        <li>уровень масла, тормозной жидкости, охлаждающей жидкости;</li>
+                        <li>ремень на наличие трещин и разрывов;</li>
+                        <li>состояние аккумулятора и крепление клемм аккумулятора;</li>
+                        <li>отсутствие течи жидкостей.</li>
+                    </ul>
+                </li>
+                <li>Проверьте документы и срок их действия.</li>
+                <li>Убедитесь в чистоте автомобиля.</li>
+            </ul>
+
+            <div class="warning-box" style="margin-top: 20px;">
+                <p class="text-bold underline-red-bg">Если обнаружили повреждения на месте стоянки:</p>
+                <ul class="sublist" style="margin-top: 10px;">
+                    <li>позвоните начальнику колонны;</li>
+                    <li>не трогая машину, сфотографируйте со всех сторон машину, сфотографируйте повреждения и повреждения крупным планом;</li>
+                    <li>вызовите полицию, для оформления происшествия.</li>
+                </ul>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 20px; border-radius: 8px; margin-top: 20px;">
+                <h3 style="color: #2e7d32; margin-bottom: 15px;">✔ Рекомендации:</h3>
+                <p style="margin-bottom: 15px;">Самое выгодное время для работы на линии — с <span class="text-bold">05:00 до 11:00</span> и с <span class="text-bold">15:00 до 20:00</span>. В эти часы спрос на поездки максимальный, что позволяет эффективно планировать доход.</p>
+                <p style="margin-bottom: 15px;">Однако мы хотим напомнить: ваш комфорт и безопасность важнее всего. Для стабильной работы необходим баланс между нагрузкой и отдыхом. Усталость снижает концентрацию, поэтому обязательно делайте перерывы и высыпайтесь.</p>
+                <p>Советуем заправлять и мыть автомобиль заранее, ещё с вечера. Это сэкономит вам утренние часы и позволит избежать ненужной спешки перед выездом на линию.</p>
+            </div>
+        </section>
+
+        <!-- Block 5: Our Vehicles Carousel -->
+        <section class="section">
+            <h2 class="section-title">Наши автомобили</h2>
+            
+            <div class="carousel-container" id="carsCarousel">
+                <div class="carousel-wrapper" id="carsWrapper">
+                    <div class="carousel-item">
+                        <img src="vrem/granta.png" alt="Lada Granta">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="vrem/h5.png" alt="Haval H5">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="vrem/jac.png" alt="JAC">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="vrem/jetta.png" alt="Volkswagen Jetta">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="vrem/kaiyi.png" alt="Kaiyi">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="vrem/moscvich.png" alt="Moskvich">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="vrem/polo.png" alt="Volkswagen Polo">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="vrem/rapid.png" alt="Skoda Rapid">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="vrem/u5plus.png" alt="UAZ U5 Plus">
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-indicators" id="carsIndicators"></div>
+        </section>
+
+        <!-- Block 6: Technical Inspection -->
+        <section class="section">
+            <h2 class="section-title">Технический осмотр и ремонт</h2>
+            
+            <div class="image-block">
+                <img src="img/TO/ТО.png" alt="Техническое обслуживание">
+            </div>
+
+            <ul class="info-list">
+                <li>Техническое обслуживание – каждые 10.000 км.</li>
+                <li>Ремонт и прочее обслуживание – только в автосервисе таксопарка!</li>
+                <li>Техническое обслуживание и ремонт только по предварительной записи. Запись за три дня до визита в сервис.</li>
+            </ul>
+
+            <div class="highlight-yellow">
+                Любое самостоятельное вмешательство (ремонт, замена запчасти, долив масла) только после согласования с начальником колонны!
+            </div>
+
+            <div class="highlight-lightblue">
+                Совет: при получении автомобиля узнайте у начальника колонны через сколько километров вам нужно приехать на техническое обслуживание.
+            </div>
+        </section>
+
+        <!-- Block 7: Traffic Police Rules -->
+        <section class="section">
+            <h2 class="section-title">Правила поведения при общении с ГИБДД и МАДИ</h2>
+            
+            <ul class="info-list check-list">
+                <li>Ведите себя спокойно (не нужно нервничать).</li>
+                <li>Не торопитесь.</li>
+                <li>Общайтесь вежливо.</li>
+                <li>Не провоцируйте (грубость, повышенный тон и тому подобное).<br><span style="color: #666; font-size: 14px;">не используйте фразы "на каком основании", "причина остановки", "не имеете право" и так далее.</span></li>
+                <li>Если оформляют протокол, вежливо попросите объяснить причину оформления.</li>
+                <li>Если не понимаете – просите переводчика.</li>
+                <li>Если не понимаете – ничего не подписывайте!</li>
+                <li>Сообщите начальнику колонны о составлении протокола.</li>
+            </ul>
+
+            <div class="highlight-yellow">
+                Некоторые сотрудники могут воспользоваться незнанием вами русского языка или законов РФ. Если не уверены в законности их действий – звоните начальнику колонны!
+            </div>
+
+            <div class="image-block">
+                <img src="img/madi/madi.png" alt="МАДИ">
+            </div>
+
+            <p class="text-bold" style="margin: 20px 0 10px; color: #667eea;">Сотрудники МАДИ могут проверить:</p>
+            <ul class="sublist">
+                <li>наличие "шашек" на крыше и по бокам автомобиля;</li>
+                <li>наличие карточки фрахтовщика (перевозчика);</li>
+                <li>наличие путевого листа;</li>
+                <li>обеспечение безопасности перевозки пассажиров.</li>
+            </ul>
+
+            <p style="margin-top: 15px; padding: 15px; background: #f8f9fa; border-radius: 5px;">Сотрудник МАДИ не может останавливать автомобиль для проверки документов. Это могут делать только сотрудники полиции.</p>
+
+            <div class="highlight-yellow">
+                Если сотрудник МАДИ подошёл к вам самостоятельно и требует документы, то предоставьте ему их. Не вступайте в спор и не создавайте конфликтную ситуацию.
+            </div>
+        </section>
+
+        <!-- Block 8: Exit Beyond Moscow Region -->
+        <section class="section">
+            <h2 class="section-title">Выезд за пределы Московской области</h2>
+            
+            <div class="image-block">
+                <img src="img/get_out/out.png" alt="Выезд за пределы области">
+            </div>
+
+            <div class="warning-box" style="margin-top: 20px;">
+                <p class="text-bold" style="font-size: 16px; margin-bottom: 15px;">При выезде за пределы Московской области звонок начальнику колонны обязателен!</p>
+                <p>В случае поломки или ДТП за пределами Московской области эвакуатор оплачивается водителем.</p>
+            </div>
+        </section>
+
+        <!-- Block 9: What to Do in Case of Accident -->
+        <section class="section">
+            <h2 class="section-title">Что делать при ДТП</h2>
+            
+            <ol class="order-list">
+                <li>Остановитесь, включите аварийную сигнализацию, выставьте знак, за городом наденьте светоотражающий жилет.</li>
+                <li>Если есть пострадавшие – вызовите скорую помощь <span class="bg-burgundy">(103 или 112)</span><br><span class="bg-lightred-italic">Если не умеете – не оказывайте помощь сами.</span></li>
+                <li>Сфотографируйте место ДТП, повреждение всех автомобилей, номера автомобилей.</li>
+                <li>Дождитесь сотрудника ГИБДД для оформления.</li>
+            </ol>
+
+            <div style="background: #e8f5e9; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                <p class="text-bold">✔ Если сотрудник ГИБДД просит освободить проезжую часть, припаркуйте автомобиль соблюдая правила стоянки и остановки</p>
+                <ul class="sublist">
+                    <li>не ставьте автомобиль в нарушении знака 3.27 <img src="img/taxi_parking/3_27.png" alt="3.27" class="small-icon"></li>
+                    <li>оплачивайте платную парковку;</li>
+                    <li>не нарушайте другие правила дорожного движения.</li>
+                </ul>
+            </div>
+
+            <p class="text-bold" style="margin: 20px 0 10px;">Условия для составления европротокола:</p>
+            <ul class="sublist">
+                <li>начальник колонны одобрил составление европротокола;</li>
+                <li>в ДТП участвуют только два транспортных средства;</li>
+                <li>нет пострадавших;</li>
+                <li>у обоих водителей есть действующий полис ОСАГО;</li>
+                <li>оба водителя согласны на европротокол;</li>
+                <li>не повреждена инфраструктура, например ограждения, столбы;</li>
+                <li>расположение транспортных средств не было изменено после ДТП</li>
+            </ul>
+
+            <p class="text-bold text-underlined" style="margin: 15px 0;">Европротокол составляется в самом крайнем случае. Делайте все возможное для оформления ДТП сотрудниками ГИБДД.</p>
+
+            <div class="highlight-lightblue">
+                Совет: после составления европротокола, дождитесь пока второй участник ДТП уедет первым
+            </div>
+
+            <div class="bg-lightred-italic">
+                В случае ДТП по вашей вине, эвакуатор оплачивается вами.
+            </div>
+
+            <div class="image-block">
+                <img src="img/euro/euro_1.png" alt="Европротокол">
+            </div>
+        </section>
+
+        <!-- Block 10: Breakdown on the Road -->
+        <section class="section">
+            <h2 class="section-title">Поломка в дороге</h2>
+            
+            <div class="image-block">
+                <img src="img/dmg/dmg.png" alt="Поломка">
+            </div>
+
+            <p style="margin: 15px 0;">В случае поломки на дороге необходимо:</p>
+            <ol class="order-list">
+                <li>Остановить автомобиль соблюдая правила дорожного движения (в том числе знаки запрещающие остановку и стоянку) и правил безопасности.</li>
+                <li>Выставьте знак аварийной остановки.</li>
+                <li>Высадите пассажиров.</li>
+                <li>Позвоните начальнику колонны, для вызова механика или эвакуатора.</li>
+            </ol>
+
+            <div class="highlight-lightyellow">
+                Если вынуждены встать на платной парковке, её необходимо оплатить — в дальнейшем вы получите компенсацию.
+            </div>
+        </section>
+
+        <!-- Block 11: Fines -->
+        <section class="section">
+            <h2 class="section-title">Штрафы*</h2>
+            
+            <p style="margin-bottom: 20px; font-style: italic; color: #666;">* Обратите внимание: суммы штрафов, отображенные ниже, указаны в полном размере без учета льгот. Многие из них можно оплатить со скидкой 25 - 50%.</p>
+
+            <div style="margin: 20px 0;">
+                <p class="text-bold">Отсутствие карты фрахтовщика (перевозчика) – штраф <span class="highlight-lightred">30.000 ₽</span></p>
+                <p style="margin: 10px 0;">Карта фрахтовщика: оформляется при приёме водителя. Должна быть установлена на передней панели с правой стороны.</p>
+                <div class="image-block">
+                    <img src="img/taxi_card/taxi_card.png" alt="Карта фрахтовщика">
+                </div>
+            </div>
+
+            <div style="margin: 20px 0;">
+                <p class="text-bold">Отсутствие фонаря "такси" и (или) цветографической схемы "шашка" по бокам автомобиля – штраф <span class="highlight-lightred">50.000 ₽</span></p>
+                <div class="image-block">
+                    <img src="img/taxi_hat/taxi_hat.png" alt="Фонарь такси">
+                </div>
+                <div class="highlight-lightblue">
+                    Совет: после работы снимайте фонарь и кладите на пол со стороны водителя. Так фонарь не украдут, а при выходе на линию вы не забудете его установить. Не стоит класть фонарь в багажник.
+                </div>
+            </div>
+
+            <div style="margin: 20px 0;">
+                <p class="text-bold">Парковка на газоне и тротуаре запрещена штраф– <span class="highlight-lightred">300.000 ₽</span></p>
+                <div class="image-block">
+                    <img src="img/grass/grass.png" alt="Парковка на газоне">
+                </div>
+                <p class="text-italic" style="background: #d1ecf1; padding: 10px; border-radius: 5px; margin-top: 10px;">Совет: паркуйте машину так, чтобы все четыре колеса стояли на асфальте проезжей части для автомобилей. Не ставьте машину на тротуар для пешеходов и на бордюр.</p>
+            </div>
+
+            <div style="margin: 20px 0;">
+                <p class="text-bold">Нарушение правил перевозки детей штраф– <span class="highlight-lightred">200.000 ₽</span></p>
+                <p style="margin: 10px 0;">К нарушениям относится:</p>
+                <ul class="sublist">
+                    <li>отсутствие детского кресла;</li>
+                    <li>неподходящее для ребенка кресло;</li>
+                    <li>неправильно установленное кресло;</li>
+                    <li>ребенок в кресле не пристегнут.</li>
+                </ul>
+                <div class="highlight-lightyellow">
+                    Если у клиента нет детского кресла — попросите отменить заказ. Если клиент отказывается — свяжитесь с техподдержкой.
+                </div>
+                <div class="highlight-lightyellow">
+                    Если клиент со своим креслом — он устанавливает его самостоятельно.
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-nav">
+                <a href="#">Главная</a>
+                <a href="#">Штрафы</a>
+                <a href="#">Контакты</a>
+            </div>
+            <p>© Таксопарк СНЕЖОК • 2026</p>
+            <p>Работайте законно и с уверенностью!</p>
         </div>
-      </div>
-    </section>
+    </footer>
 
-    <!-- ЗАПРЕЩЕНО -->
-    <section class="section" data-section="prohibited">
-      <div class="section-header">Запрещено!</div>
-      <div class="section-content">
-        <div class="section-body">
-          <div class="important">Остерегайтесь предложений пассажиров «подработать» или «перевезти пакет» за вознаграждение — за этим часто скрываются незаконные схемы. Службы безопасности и полиция отслеживают подозрительные действия. Ваша репутация дороже сиюминутной выгоды.</div>
-          <div class="text-block">Если что-то вызывает сомнения — откажитесь, сообщите диспетчеру и доверяйте только официальным заказам.</div>
-          <div class="text-block"><strong class="text-accent">Работайте законно и с уверенностью в завтрашнем дне!</strong></div>
-        </div>
-      </div>
-    </section>
+    <!-- JavaScript for Carousels -->
+    <script>
+        // Documents Carousel
+        let docIndex = 0;
+        const docWrapper = document.getElementById('documentsWrapper');
+        const docItems = document.querySelectorAll('#documentsWrapper .carousel-item');
+        const docTotal = docItems.length;
+        const docIndicators = document.getElementById('documentsIndicators');
 
-    <!-- КОНТАКТЫ (НЕСВОРАЧИВАЕМЫЕ) -->
-    <section class="section active" data-section="contacts" data-non-collapsible>
-      <div class="section-header">Контакты</div>
-      <div class="section-content" style="max-height: 5000px; opacity: 1;">
-        <div class="section-body">
-          <p class="contacts-hint">← Прокрутите →</p>
-          <div class="contacts-scroll">
-            <!-- Кайрат -->
-            <div class="contact-card">
-              <div class="contact-avatar">
-                <span>К</span>
-                <div class="contact-flag"><img src="https://flagcdn.com/w40/ru.png" alt="RU" loading="lazy"></div>
-              </div>
-              <h3 class="contact-name">Кайрат</h3>
-              <p class="contact-role">Начальник колонны</p>
-              <p class="contact-schedule">пн-сб: 9:00-20:00</p>
-              <div class="contact-actions">
-                <a href="tel:+79153214530" class="contact-btn phone haptic" aria-label="Позвонить">
-                  <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                </a>
-                <a href="https://wa.me/79153214530" class="contact-btn whatsapp haptic" target="_blank" rel="noopener" aria-label="WhatsApp">
-                  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                </a>
-                <a href="https://t.me/+79153214530" class="contact-btn telegram haptic" target="_blank" rel="noopener" aria-label="Telegram">
-                  <svg viewBox="0 0 24 24"><path d="M11.944 17.97L4.58 13.62 19.54 3l-5.35 18.99-.246-.02zm4.31-11.54l-1.58 7.43c-.11.52-.42.65-.86.4l-2.38-1.76-1.15 1.12c-.13.13-.24.24-.49.24l.17-2.44 4.46-4.03c.2-.17-.04-.26-.3-.09l-5.52 3.47-2.38-.74c-.52-.16-.53-.52.11-.77l9.34-3.59c.43-.16.81.1.67.75z"/></svg>
-                </a>
-              </div>
-            </div>
-            <!-- Ринат -->
-            <div class="contact-card">
-              <div class="contact-avatar">
-                <span>Р</span>
-                <div class="contact-flag"><img src="https://flagcdn.com/w40/ru.png" alt="RU" loading="lazy"></div>
-              </div>
-              <h3 class="contact-name">Ринат</h3>
-              <p class="contact-role">Начальник колонны</p>
-              <p class="contact-schedule">пн-сб: 9:00-20:00</p>
-              <div class="contact-actions">
-                <a href="tel:+79261868292" class="contact-btn phone haptic" aria-label="Позвонить">
-                  <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                </a>
-                <a href="https://wa.me/79261868292" class="contact-btn whatsapp haptic" target="_blank" rel="noopener" aria-label="WhatsApp">
-                  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                </a>
-                <a href="https://t.me/+79261868292" class="contact-btn telegram haptic" target="_blank" rel="noopener" aria-label="Telegram">
-                  <svg viewBox="0 0 24 24"><path d="M11.944 17.97L4.58 13.62 19.54 3l-5.35 18.99-.246-.02zm4.31-11.54l-1.58 7.43c-.11.52-.42.65-.86.4l-2.38-1.76-1.15 1.12c-.13.13-.24.24-.49.24l.17-2.44 4.46-4.03c.2-.17-.04-.26-.3-.09l-5.52 3.47-2.38-.74c-.52-.16-.53-.52.11-.77l9.34-3.59c.43-.16.81.1.67.75z"/></svg>
-                </a>
-              </div>
-            </div>
-            <!-- Алтынбек -->
-            <div class="contact-card">
-              <div class="contact-avatar">
-                <span>А</span>
-                <div class="contact-flag"><img src="https://flagcdn.com/w40/kg.png" alt="KG" loading="lazy"></div>
-              </div>
-              <h3 class="contact-name">Алтынбек</h3>
-              <p class="contact-role">Начальник колонны</p>
-              <p class="contact-schedule">вс-пт: 9:00-20:00</p>
-              <div class="contact-actions">
-                <a href="tel:+79995775461" class="contact-btn phone haptic" aria-label="Позвонить">
-                  <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                </a>
-                <a href="https://wa.me/79995775461" class="contact-btn whatsapp haptic" target="_blank" rel="noopener" aria-label="WhatsApp">
-                  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                </a>
-                <a href="https://t.me/+79995775461" class="contact-btn telegram haptic" target="_blank" rel="noopener" aria-label="Telegram">
-                  <svg viewBox="0 0 24 24"><path d="M11.944 17.97L4.58 13.62 19.54 3l-5.35 18.99-.246-.02zm4.31-11.54l-1.58 7.43c-.11.52-.42.65-.86.4l-2.38-1.76-1.15 1.12c-.13.13-.24.24-.49.24l.17-2.44 4.46-4.03c.2-.17-.04-.26-.3-.09l-5.52 3.47-2.38-.74c-.52-.16-.53-.52.11-.77l9.34-3.59c.43-.16.81.1.67.75z"/></svg>
-                </a>
-              </div>
-            </div>
-            <!-- Гафар -->
-            <div class="contact-card">
-              <div class="contact-avatar">
-                <span>Г</span>
-                <div class="contact-flag"><img src="https://flagcdn.com/w40/ru.png" alt="RU" loading="lazy"></div>
-              </div>
-              <h3 class="contact-name">Гафар</h3>
-              <p class="contact-role">Начальник колонны</p>
-              <p class="contact-schedule">пн-сб: 9:00-20:00</p>
-              <div class="contact-actions">
-                <a href="tel:+79997676492" class="contact-btn phone haptic" aria-label="Позвонить">
-                  <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                </a>
-                <a href="https://wa.me/79997676492" class="contact-btn whatsapp haptic" target="_blank" rel="noopener" aria-label="WhatsApp">
-                  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                </a>
-                <a href="https://t.me/+79997676492" class="contact-btn telegram haptic" target="_blank" rel="noopener" aria-label="Telegram">
-                  <svg viewBox="0 0 24 24"><path d="M11.944 17.97L4.58 13.62 19.54 3l-5.35 18.99-.246-.02zm4.31-11.54l-1.58 7.43c-.11.52-.42.65-.86.4l-2.38-1.76-1.15 1.12c-.13.13-.24.24-.49.24l.17-2.44 4.46-4.03c.2-.17-.04-.26-.3-.09l-5.52 3.47-2.38-.74c-.52-.16-.53-.52.11-.77l9.34-3.59c.43-.16.81.1.67.75z"/></svg>
-                </a>
-              </div>
-            </div>
-            <!-- Парвиз -->
-            <div class="contact-card">
-              <div class="contact-avatar">
-                <span>П</span>
-                <div class="contact-flag"><img src="https://flagcdn.com/w40/tj.png" alt="TJ" loading="lazy"></div>
-              </div>
-              <h3 class="contact-name">Парвиз</h3>
-              <p class="contact-role">Начальник колонны</p>
-              <p class="contact-schedule">вс-пт: 9:00-20:00</p>
-              <div class="contact-actions">
-                <a href="tel:+79996609187" class="contact-btn phone haptic" aria-label="Позвонить">
-                  <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                </a>
-                <a href="https://wa.me/79996609187" class="contact-btn whatsapp haptic" target="_blank" rel="noopener" aria-label="WhatsApp">
-                  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                </a>
-                <a href="https://t.me/+79996609187" class="contact-btn telegram haptic" target="_blank" rel="noopener" aria-label="Telegram">
-                  <svg viewBox="0 0 24 24"><path d="M11.944 17.97L4.58 13.62 19.54 3l-5.35 18.99-.246-.02zm4.31-11.54l-1.58 7.43c-.11.52-.42.65-.86.4l-2.38-1.76-1.15 1.12c-.13.13-.24.24-.49.24l.17-2.44 4.46-4.03c.2-.17-.04-.26-.3-.09l-5.52 3.47-2.38-.74c-.52-.16-.53-.52.11-.77l9.34-3.59c.43-.16.81.1.67.75z"/></svg>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="contact-address">
-            <strong>📍 Адрес:</strong><br>
-            Московская область, г. Нахабино,<br>
-            ул. Красноармейская, д. 61 Б<br>
-            <a href="https://yandex.ru/maps/?text=Нахабино+Красноармейская+61Б" target="_blank" rel="noopener">Показать на карте →</a>
-          </div>
-        </div>
-      </div>
-    </section>
+        // Cars Carousel
+        let carIndex = 0;
+        const carWrapper = document.getElementById('carsWrapper');
+        const carItems = document.querySelectorAll('#carsWrapper .carousel-item');
+        const carTotal = carItems.length;
+        const carIndicators = document.getElementById('carsIndicators');
 
-  </main>
-
-  <!-- НАВИГАЦИОННАЯ ПОЛОСКА -->
-  <nav class="nav-bar">
-    <a href="#" class="nav-item active" data-section="home">
-      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-      Главная
-    </a>
-    <a href="#" class="nav-item" data-section="fines">
-      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-      Штрафы
-    </a>
-    <a href="#" class="nav-item" data-section="contacts">
-      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-      Контакты
-    </a>
-  </nav>
-
-  <!-- ФУТЕР -->
-  <footer class="footer">
-    © Таксопарк СНЕЖОК • 2026<br>
-    Работайте законно и с уверенностью!
-  </footer>
-
-  <!-- СКРИПТЫ -->
-  <script>
-    // === ТАКТИЛЬНАЯ ОБРАТНАЯ СВЯЗЬ ===
-    function hapticFeedback() {
-      if ('vibrate' in navigator) {
-        navigator.vibrate(10);
-      }
-    }
-    document.querySelectorAll('.haptic').forEach(btn => {
-      btn.addEventListener('touchstart', hapticFeedback);
-      btn.addEventListener('click', hapticFeedback);
-    });
-
-    // === ТЁМНАЯ ТЕМА ===
-    const themeToggle = document.getElementById('themeToggle');
-    const html = document.documentElement;
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      html.setAttribute('data-theme', 'dark');
-    }
-    themeToggle.addEventListener('click', () => {
-      hapticFeedback();
-      const isDark = html.getAttribute('data-theme') === 'dark';
-      if (isDark) {
-        html.removeAttribute('data-theme');
-        localStorage.setItem('theme', 'light');
-      } else {
-        html.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-      }
-    });
-
-    // === ЯЗЫКОВАЯ ПАНЕЛЬ ===
-    const langCurrent = document.getElementById('langCurrent');
-    const langDropdown = document.getElementById('langDropdown');
-    const langOptions = document.querySelectorAll('.lang-option');
-    const currentFlag = document.getElementById('currentFlag');
-
-    langCurrent.addEventListener('click', (e) => {
-      e.stopPropagation();
-      hapticFeedback();
-      langDropdown.classList.toggle('show');
-    });
-    document.addEventListener('click', () => langDropdown.classList.remove('show'));
-    langDropdown.addEventListener('click', (e) => e.stopPropagation());
-
-    langOptions.forEach(option => {
-      option.addEventListener('click', () => {
-        hapticFeedback();
-        const lang = option.dataset.lang;
-        langOptions.forEach(o => o.classList.remove('active'));
-        option.classList.add('active');
-        currentFlag.src = `https://flagcdn.com/w40/${lang}.png`;
-        localStorage.setItem('lang', lang);
-        langDropdown.classList.remove('show');
-      });
-    });
-
-    const savedLang = localStorage.getItem('lang');
-    if (savedLang) {
-      const option = document.querySelector(`.lang-option[data-lang="${savedLang}"]`);
-      if (option) {
-        langOptions.forEach(o => o.classList.remove('active'));
-        option.classList.add('active');
-        currentFlag.src = `https://flagcdn.com/w40/${savedLang}.png`;
-      }
-    }
-
-    // === АККОРДЕОНЫ (кроме контактов) ===
-    const sections = document.querySelectorAll('.section:not([data-non-collapsible])');
-    const savedSections = JSON.parse(localStorage.getItem('openSections') || '["fines"]');
-    sections.forEach(section => {
-      if (savedSections.includes(section.dataset.section)) {
-        section.classList.add('active');
-      }
-      const header = section.querySelector('.section-header');
-      header.addEventListener('click', () => {
-        hapticFeedback();
-        section.classList.toggle('active');
-        saveSections();
-      });
-    });
-    function saveSections() {
-      const open = Array.from(sections).filter(s => s.classList.contains('active')).map(s => s.dataset.section);
-      localStorage.setItem('openSections', JSON.stringify(open));
-    }
-
-    // === КАРУСЕЛЬ с ленивой загрузкой ===
-    (function initCarousel() {
-      const track = document.getElementById('carouselTrack');
-      const dots = document.querySelectorAll('.carousel-dot');
-      const prevBtn = document.getElementById('carouselPrev');
-      const nextBtn = document.getElementById('carouselNext');
-      const slides = document.querySelectorAll('.carousel-slide');
-      let currentIndex = 0;
-      const totalSlides = 3;
-      let startX = 0, currentX = 0, isDragging = false, translateX = 0;
-
-      // Ленивая загрузка градиентов
-      slides.forEach((slide, index) => {
-        if (index === 0) {
-          slide.style.background = slide.dataset.bg;
-          slide.classList.remove('loading');
+        function createIndicators(total, container, callback) {
+            for (let i = 0; i < total; i++) {
+                const indicator = document.createElement('div');
+                indicator.className = 'indicator' + (i === 0 ? ' active' : '');
+                indicator.onclick = () => callback(i);
+                container.appendChild(indicator);
+            }
         }
-      });
 
-      function loadSlide(index) {
-        if (index >= 0 && index < totalSlides) {
-          const slide = slides[index];
-          if (slide.classList.contains('loading')) {
-            setTimeout(() => {
-              slide.style.background = slide.dataset.bg;
-              slide.classList.remove('loading');
-            }, 100 * index);
-          }
+        function updateCarousel(wrapper, indicators, currentIndex, total) {
+            wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+            const indicatorDots = indicators.querySelectorAll('.indicator');
+            indicatorDots.forEach((ind, index) => {
+                ind.classList.toggle('active', index === currentIndex);
+            });
         }
-      }
 
-      function goToSlide(index) {
-        if (index < 0) index = 0;
-        if (index >= totalSlides) index = totalSlides - 1;
-        currentIndex = index;
-        translateX = currentIndex * 100;
-        track.style.transform = `translateX(-${translateX}%)`;
-        track.style.transition = 'transform 0.3s ease';
-        dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
-        loadSlide(currentIndex - 1);
-        loadSlide(currentIndex + 1);
-      }
-
-      function handleTouchStart(e) { isDragging = true; startX = e.touches[0].clientX; track.style.transition = 'none'; }
-      function handleTouchMove(e) {
-        if (!isDragging) return;
-        currentX = e.touches[0].clientX;
-        const diff = currentX - startX;
-        const percent = translateX - (diff / track.clientWidth * 100);
-        track.style.transform = `translateX(-${percent}%)`;
-      }
-      function handleTouchEnd() {
-        if (!isDragging) return;
-        isDragging = false;
-        const diff = currentX - startX;
-        const threshold = track.clientWidth * 0.15;
-        if (diff < -threshold) goToSlide(currentIndex + 1);
-        else if (diff > threshold) goToSlide(currentIndex - 1);
-        else goToSlide(currentIndex);
-      }
-
-      prevBtn.addEventListener('click', () => { hapticFeedback(); goToSlide(currentIndex - 1); });
-      nextBtn.addEventListener('click', () => { hapticFeedback(); goToSlide(currentIndex + 1); });
-      dots.forEach(dot => dot.addEventListener('click', (e) => { e.stopPropagation(); hapticFeedback(); goToSlide(parseInt(dot.dataset.slide)); }));
-      track.addEventListener('touchstart', handleTouchStart, { passive: true });
-      track.addEventListener('touchmove', handleTouchMove, { passive: true });
-      track.addEventListener('touchend', handleTouchEnd, { passive: true });
-      goToSlide(0);
-    })();
-
-    // === ШАПКА: СКРЫТИЕ ПРИ СКРОЛЛЕ ===
-    const header = document.getElementById('header');
-    let lastScrollY = window.scrollY;
-    let ticking = false;
-
-    function updateHeader() {
-      const currentScrollY = window.scrollY;
-      
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Скролл вниз - скрываем шапку
-        header.classList.add('hidden');
-        header.classList.remove('scrolled');
-      } else {
-        // Скролл вверх - показываем шапку
-        header.classList.remove('hidden');
-        if (currentScrollY > 50) {
-          header.classList.add('scrolled');
+        function goToDocSlide(index) {
+            docIndex = index;
+            updateCarousel(docWrapper, docIndicators, docIndex, docTotal);
         }
-      }
-      
-      lastScrollY = currentScrollY;
-      ticking = false;
-    }
 
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        window.requestAnimationFrame(updateHeader);
-        ticking = true;
-      }
-    }, { passive: true });
-
-    // === НАВИГАЦИЯ ===
-    const navItems = document.querySelectorAll('.nav-item');
-    navItems.forEach(item => {
-      item.addEventListener('click', (e) => {
-        e.preventDefault();
-        hapticFeedback();
-        navItems.forEach(n => n.classList.remove('active'));
-        item.classList.add('active');
-        // Показываем шапку при навигации
-        header.classList.remove('hidden');
-        if (item.dataset.section === 'fines') {
-          document.querySelector('[data-section="fines"]').classList.add('active');
-          document.querySelector('[data-section="fines"]').scrollIntoView({ behavior: 'smooth' });
-        } else if (item.dataset.section === 'contacts') {
-          document.querySelector('[data-section="contacts"]').scrollIntoView({ behavior: 'smooth' });
-        } else {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+        function goToCarSlide(index) {
+            carIndex = index;
+            updateCarousel(carWrapper, carIndicators, carIndex, carTotal);
         }
-      });
-    });
 
-    // === SERVICE WORKER ===
-    if ('serviceWorker' in navigator) {
-      const swCode = `const CACHE_NAME='snezhok-v2';self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(['./','./index.html'])))});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)))});`;
-      const blob = new Blob([swCode], { type: 'application/javascript' });
-      navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});
-    }
-    window.onerror = (msg, url, line) => console.error('Error:', msg, url, line);
-  </script>
+        // Touch support for swipe
+        function setupSwipe(wrapper, getIndex, setCurrentIndex, total) {
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            wrapper.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, false);
+
+            wrapper.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, false);
+
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0 && getIndex() < total - 1) {
+                        // Swipe left - next
+                        setCurrentIndex(getIndex() + 1);
+                    } else if (diff < 0 && getIndex() > 0) {
+                        // Swipe right - previous
+                        setCurrentIndex(getIndex() - 1);
+                    }
+                    updateCarousel(wrapper, 
+                        wrapper.parentElement.nextElementSibling, 
+                        getIndex(), 
+                        total
+                    );
+                }
+            }
+        }
+
+        // Initialize
+        createIndicators(docTotal, docIndicators, goToDocSlide);
+        createIndicators(carTotal, carIndicators, goToCarSlide);
+        
+        setupSwipe(docWrapper, () => docIndex, (idx) => docIndex = idx, docTotal);
+        setupSwipe(carWrapper, () => carIndex, (idx) => carIndex = idx, carTotal);
+    </script>
+
 </body>
 </html>
