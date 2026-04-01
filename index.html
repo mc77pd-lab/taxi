@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNEZHOK - Памятка водителя</title>
+    <style>
+        /* --- 1. Основные настройки и переменные --- */
+        :root {
+            --primary-color: #F0B501; /* Вспомогательный цвет */
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --card-bg: #f9f9f9;
+            --border-color: #e0e0e0;
+            
+            /* Цвета для выделений */
+            --bg-warning: #fff3cd; /* Светло-желтый */
+            --bg-danger: #f8d7da; /* Светло-красный */
+            --bg-info: #d1ecf1; /* Светло-синий */
+            --bg-success: #d4edda; /* Светло-зеленый */
+            --bg-gray: #e9ecef; /* Светло-серый */
+            --bg-burgundy: #721c24; /* Бордовый */
+            
+            --text-danger: #721c24;
+            --text-success: #155724;
+        }
+
+        /* Темная тема */
+        body.dark-theme {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --header-bg: rgba(18, 18, 18, 0.95);
+            --card-bg: #1e1e1e;
+            --border-color: #333333;
+            
+            --bg-warning: #4a3b00;
+            --bg-danger: #4a1c20;
+            --bg-info: #1c3a4a;
+            --bg-success: #1c4a25;
+            --bg-gray: #2c2c2c;
+            --bg-burgundy: #4a0f15;
+            
+            --text-danger: #ff8fa3;
+            --text-success: #80cfa0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+            padding-top: 60px; /* Отступ под шапку */
+            padding-bottom: 40px;
+        }
+
+        /* --- 2. Шапка сайта --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: var(--header-bg);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        header.hidden {
+            transform: translateY(-100%);
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            letter-spacing: 1px;
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Выпадающий список языков */
+        .lang-dropdown {
+            position: relative;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .lang-flag {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid var(--border-color);
+        }
+
+        .lang-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            min-width: 120px;
+        }
+
+        .lang-menu.active {
+            display: flex;
+        }
+
+        .lang-menu a {
+            padding: 10px 15px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.2s;
+        }
+
+        .lang-menu a:hover {
+            background-color: var(--bg-gray);
+        }
+
+        /* Переключатель темы */
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-color);
+            padding: 5px;
+        }
+
+        /* --- 3. Общие стили блоков --- */
+        .container {
+            max-width: 600px; /* Ограничение ширины для удобства чтения на планшетах */
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        section {
+            margin-bottom: 30px;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            margin: 15px 0 10px;
+            color: var(--text-color);
+        }
+
+        p, li {
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        /* Стили для выделений текста */
+        .highlight-yellow { background-color: var(--bg-warning); padding: 2px 4px; border-radius: 4px; }
+        .highlight-red { background-color: var(--bg-danger); color: var(--text-danger); padding: 2px 4px; border-radius: 4px; font-weight: bold; }
+        .highlight-blue { background-color: var(--bg-info); color: #0c5460; padding: 2px 4px; border-radius: 4px; font-style: italic; }
+        .highlight-green { background-color: var(--bg-success); color: var(--text-success); padding: 2px 4px; border-radius: 4px; }
+        .highlight-gray { background-color: var(--bg-gray); padding: 2px 4px; border-radius: 4px; }
+        .highlight-burgundy { background-color: var(--bg-burgundy); color: #fff; padding: 2px 4px; border-radius: 4px; font-weight: bold; }
+        
+        .text-underline { text-decoration: underline; }
+        .text-bold { font-weight: bold; }
+        .text-italic { font-style: italic; }
+        .text-danger { color: var(--text-danger); }
+
+        .warning-box {
+            border: 1px solid var(--primary-color);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            background-color: var(--bg-color);
+        }
+
+        /* --- 4. Карусели (Свайп) --- */
+        .carousel-container {
+            position: relative;
+            margin: 15px 0;
+        }
+
+        .carousel-track {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Firefox */
+            gap: 15px;
+            padding-bottom: 10px;
+        }
+
+        .carousel-track::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
+        }
+
+        .carousel-item {
+            flex: 0 0 85%; /* Показываем часть следующего слайда для подсказки свайпа */
+            scroll-snap-align: center;
+            background: var(--bg-color);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Для карусели контактов */
+        .contact-carousel .carousel-item {
+            flex: 0 0 90%;
+            padding: 15px;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            display: block;
+        }
+
+        .carousel-caption {
+            padding: 10px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        /* Индикаторы карусели */
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--border-color);
+            transition: background-color 0.3s;
+        }
+
+        .indicator.active {
+            background-color: var(--primary-color);
+        }
+
+        /* --- 5. Контакты --- */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contact-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+
+        .contact-schedule {
+            font-size: 0.85rem;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .contact-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 8px;
+            border-radius: 6px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .btn-phone { background-color: var(--bg-gray); color: var(--text-color); }
+        .btn-wa { background-color: #25D366; color: white; }
+        .btn-tg { background-color: #0088cc; color: white; }
+
+        .action-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        /* --- 6. Footer --- */
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        /* SVG Icons Helper */
+        .icon {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+        .icon-small {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+            vertical-align: middle;
+            margin-left: 4px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header id="main-header">
+        <div class="logo">SNEZHOK</div>
+        <div class="controls">
+            <!-- Выбор языка -->
+            <div class="lang-dropdown">
+                <button class="lang-btn" id="langToggle">
+                    <!-- Флаг РФ по умолчанию -->
+                    <img src="https://flagcdn.com/w40/ru.png" alt="RU" class="lang-flag" id="currentFlag">
+                </button>
+                <div class="lang-menu" id="langMenu">
+                    <a href="index.html"><img src="https://flagcdn.com/w20/ru.png" class="lang-flag"> Русский</a>
+                    <a href="kz.html"><img src="https://flagcdn.com/w20/kz.png" class="lang-flag"> Қазақша</a>
+                    <a href="kg.html"><img src="https://flagcdn.com/w20/kg.png" class="lang-flag"> Кыргызча</a>
+                    <a href="tj.html"><img src="https://flagcdn.com/w20/tj.png" class="lang-flag"> Тоҷикӣ</a>
+                    <a href="tm.html"><img src="https://flagcdn.com/w20/tm.png" class="lang-flag"> Türkmençe</a>
+                    <a href="uz.html"><img src="https://flagcdn.com/w20/uz.png" class="lang-flag"> O'zbekcha</a>
+                </div>
+            </div>
+            
+            <!-- Переключатель темы -->
+            <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
+                <!-- Иконка солнца (по умолчанию) -->
+                <svg class="icon" id="themeIcon" viewBox="0 0 24 24">
+                    <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 000-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- 1. Условия аренды -->
+        <section>
+            <h2>Условия аренды</h2>
+            <ol>
+                <li>Минимальный срок аренды – 14 дней.</li>
+                <li>Первый день аренды – бесплатно (для новых водителей).</li>
+                <li>Сдача автомобиля: понедельник - пятница.</li>
+                <li>За 3 дня до сдачи автомобиля оповестить начальника колонны.</li>
+                <li>Списание аренды – ежедневно в 12:00.</li>
+                <li>Комиссия парка – 3%.</li>
+                <li>
+                    Внутренняя страховка компании (КАСКО) – стоимость +100 ₽/день.*
+                    <br><span class="text-italic text-bold" style="font-size: 0.85rem;">* Внутренняя страховка – в случае значительного повреждения автомобиля водитель оплачивает не более 20.000 ₽, остальные расходы покрывает компания. Данная опция не действует в случае:</span>
+                    <ul>
+                        <li>передача автомобиля постороннему лицу;</li>
+                        <li>нахождение за рулем в состоянии опьянения;</li>
+                        <li>грубое нарушение правил дорожного движения;</li>
+                        <li>умышленное нанесение ущерба;</li>
+                        <li>уезд с места ДТП;</li>
+                        <li>отсутствие документов об оформлении ДТП;</li>
+                        <li>машина была неисправна и вы знали об этом;</li>
+                        <li>использовали авто в личных целях.</li>
+                    </ul>
+                </li>
+                <li>
+                    Водитель несет ответственность за автомобиль:
+                    <ul>
+                        <li>сколы, царапины, вмятины;</li>
+                        <li>повреждение ходовой части;</li>
+                        <li>покрышки, диски;</li>
+                        <li>стекла автомобиля;</li>
+                        <li>и другие повреждения.</li>
+                    </ul>
+                </li>
+                <li>Оплата штрафов и проезда по ЦКАД, МСД производится автоматически со счёта мобильного приложения водителя. Штрафы свыше 1 000 ₽ списываются по 1 000 ₽ ежедневно.</li>
+                <li>Запрещена передача автомобиля другому лицу.</li>
+                <li>Запрещено нецелевое использование автомобиля.</li>
+            </ol>
+        </section>
+
+        <!-- 2. Осмотр автомобиля при получении -->
+        <section>
+            <h2>Осмотр автомобиля при получении</h2>
+            
+            <h3>✔ Осмотр внешнего вида:</h3>
+            <ul>
+                <li>оклейка кузова (убедиться в наличии "шашек" на крыльях автомобиля);</li>
+                <li>наличие повреждений (царапин, вмятин и так далее);</li>
+                <li>состояние салона;</li>
+                <li>состояние колес;</li>
+                <li>целостность лобового стекла.</li>
+            </ul>
+
+            <h3>✔ Техническое состояние:</h3>
+            <ul>
+                <li>уровень масла, тормозной жидкости и охлаждающей жидкости;</li>
+                <li>состояния ремня генератора;</li>
+                <li>состояние аккумулятора.</li>
+            </ul>
+
+            <h3>✔ Проверить работу световых приборов:</h3>
+            <ul>
+                <li>габаритные огни;</li>
+                <li>фары;</li>
+                <li>поворотники;</li>
+                <li>стоп- сигнал;</li>
+                <li>лампочки заднего хода.</li>
+            </ul>
+
+            <h3>✔ Проверить наличие:</h3>
+            <ul>
+                <li>шашка на крышу;</li>
+                <li>шашки по бокам автомобиля;</li>
+                <li>знак аварийной остановки;</li>
+                <li>огнетушитель;</li>
+                <li>аптечка;</li>
+                <li>запасное колесо;</li>
+                <li>домкрат;</li>
+                <li>ключ для откручивания колеса.</li>
+            </ul>
+
+            <p class="text-bold">При получении автомобиля проверьте документы, сроки действия документов, сверьте регистрационные номера с документами.</p>
+        </section>
+
+        <!-- 3. Документы (Карусель) -->
+        <section>
+            <h2>При себе необходимо иметь</h2>
+            
+            <div class="carousel-container" id="docsCarousel">
+                <div class="carousel-track">
+                    <div class="carousel-item">
+                        <img src="img/driver_license/driver_license.png" alt="ВУ" onerror="this.src='https://placehold.co/600x400?text=Водительское+удостоверение'">
+                        <div class="carousel-caption">Водительское удостоверение <span class="text-danger text-bold">(проверьте срок действия)</span></div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/sts/sts_2.img" alt="СТС" onerror="this.src='https://placehold.co/600x400?text=СТС'">
+                        <div class="carousel-caption">Свидетельство о регистрации (СТС) <span class="text-danger text-bold">(проверьте срок действия)</span></div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/save/save.png" alt="ОСАГО" onerror="this.src='https://placehold.co/600x400?text=ОСАГО'">
+                        <div class="carousel-caption">Страховой полис ОСАГО <span class="text-danger text-bold">(проверьте срок действия)</span></div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/diagnostic/diag_card.png" alt="Диагностическая карта" onerror="this.src='https://placehold.co/600x400?text=Диагностическая+карта'">
+                        <div class="carousel-caption">Диагностическая карта <span class="text-danger text-bold">(проверьте срок действия)</span></div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/road_list/road_list.png" alt="Путевой лист" onerror="this.src='https://placehold.co/600x400?text=Путевой+лист'">
+                        <div class="carousel-caption"><span class="highlight-gray">Заполненный</span> путевой лист</div>
+                    </div>
+                </div>
+                <div class="carousel-indicators"></div>
+            </div>
+
+            <div class="warning-box highlight-red">
+                Неправильное заполнение путевого листа влечет наложение штрафа в размере <span class="highlight-red">100.000 ₽</span> и <span class="highlight-red">2 месяца</span> автомобиль будет находиться на <span class="highlight-red">штрафстоянке</span>
+            </div>
+
+            <h3 class="text-underline text-bold">Порядок получения путевого листа</h3>
+            <ol>
+                <li>По прибытию в парк, получаете у механика документы на автомобиль, карточку фрахтовщика (перевозчика), путевой лист, "шашку" на крышу. Ставите <span class="highlight-gray">подпись</span> о получении.</li>
+                <li>Проходите медицинского освидетельствование (общее самочувствие, температура тела, артериальное давление, проверка на состояние опьянения), ставите <span class="highlight-gray">время</span> и подпись у ответственного.</li>
+                <li>Получаете у механика ключи от автомобиля и производите осмотр автомобиля. После завершения осмотра, <span class="highlight-gray">время</span></li>
+                <li>и <span class="highlight-gray">подпись</span> у механика о выдаче транспортного средства.</li>
+                <li>Ставите свою <span class="highlight-gray">подпись</span> о приеме транспортного средства в технически исправном состоянии.</li>
+                <li>Ставите подпись в графе об осведомленности о действиях в случае утери "шашек", путевого листа или карты фрахтовщика.</li>
+                <li>На выезде из парка ставите отметку о <span class="highlight-gray">времени</span> выезда. Отметка о <span class="highlight-gray">километраже</span> автомобиля на момент выезда.</li>
+            </ol>
+            <p class="text-italic">В отдельных случаях возможен выезд механика и медицинского работника к водителю.</p>
+        </section>
+
+        <!-- 4. Ежедневный осмотр -->
+        <section>
+            <h2>Ежедневный осмотр автомобиля</h2>
+            <ul>
+                <li>✔ Обойдите автомобиль вокруг и убедитесь в отсутствии повреждений.</li>
+                <li>✔ Проверьте колеса.</li>
+                <li>✔ Проверьте:
+                    <ul>
+                        <li>уровень масла, тормозной жидкости, охлаждающей жидкости;</li>
+                        <li>ремень на наличие трещин и разрывов;</li>
+                        <li>состояние аккумулятора и крепление клемм аккумулятора;</li>
+                        <li>отсутствие течи жидкостей.</li>
+                    </ul>
+                </li>
+                <li>✔ Проверьте документы и срок их действия.</li>
+                <li>✔ Убедитесь в чистоте автомобиля.</li>
+            </ul>
+
+            <div class="highlight-red text-underline" style="padding: 5px; border-radius: 4px; margin-bottom: 10px;">
+                Если обнаружили повреждения на месте стоянки:
+            </div>
+            <ul>
+                <li>позвоните начальнику колонны;</li>
+                <li>не трогая машину, сфотографируйте со всех сторон машину, сфотографируйте повреждения и повреждения крупным планом;</li>
+                <li>вызовите полицию, для оформления происшествия.</li>
+            </ul>
+
+            <h3>✔ Рекомендации:</h3>
+            <p>Самое выгодное время для работы на линии — с 05:00 до 11:00 и с 15:00 до 20:00. В эти часы спрос на поездки максимальный, что позволяет эффективно планировать доход.</p>
+            <p>Однако мы хотим напомнить: ваш комфорт и безопасность важнее всего. Для стабильной работы необходим баланс между нагрузкой и отдыхом. Усталость снижает концентрацию, поэтому обязательно делайте перерывы и высыпайтесь.</p>
+            <p>Советуем заправлять и мыть автомобиль заранее, ещё с вечера. Это сэкономит вам утренние часы и позволит избежать ненужной спешки перед выездом на линию.</p>
+        </section>
+
+        <!-- 5. Наши автомобили -->
+        <section>
+            <h2>Наши автомобили</h2>
+            <div class="carousel-container" id="carsCarousel">
+                <div class="carousel-track">
+                    <!-- Заглушки, так как реальных фото нет -->
+                    <div class="carousel-item"><img src="img/vrem/granta.png" onerror="this.src='https://placehold.co/600x400?text=Granta'" alt="Granta"></div>
+                    <div class="carousel-item"><img src="img/vrem/h5.png" onerror="this.src='https://placehold.co/600x400?text=H5'" alt="H5"></div>
+                    <div class="carousel-item"><img src="img/vrem/jac.png" onerror="this.src='https://placehold.co/600x400?text=JAC'" alt="JAC"></div>
+                    <div class="carousel-item"><img src="img/vrem/jetta.png" onerror="this.src='https://placehold.co/600x400?text=Jetta'" alt="Jetta"></div>
+                    <div class="carousel-item"><img src="img/vrem/kaiyi.png" onerror="this.src='https://placehold.co/600x400?text=Kaiyi'" alt="Kaiyi"></div>
+                    <div class="carousel-item"><img src="img/vrem/moscvich.png" onerror="this.src='https://placehold.co/600x400?text=Moscvich'" alt="Moscvich"></div>
+                    <div class="carousel-item"><img src="img/vrem/polo.png" onerror="this.src='https://placehold.co/600x400?text=Polo'" alt="Polo"></div>
+                    <div class="carousel-item"><img src="img/vrem/rapid.png" onerror="this.src='https://placehold.co/600x400?text=Rapid'" alt="Rapid"></div>
+                    <div class="carousel-item"><img src="img/vrem/u5plus.png" onerror="this.src='https://placehold.co/600x400?text=U5+Plus'" alt="U5 Plus"></div>
+                </div>
+                <div class="carousel-indicators"></div>
+            </div>
+        </section>
+
+        <!-- 6. Техосмотр -->
+        <section>
+            <h2>Технический осмотр и ремонт</h2>
+            <img src="img/TO/TO.png" alt="ТО" style="width:100%; border-radius:8px; margin-bottom:15px;" onerror="this.src='https://placehold.co/600x300?text=Техническое+обслуживание'">
+            <p>Техническое обслуживание – каждые 10.000 км.</p>
+            <p>Ремонт и прочее обслуживание – только в автосервисе таксопарка! Техническое обслуживание и ремонт только по предварительной записи. Запись за три дня до визита в сервис.</p>
+            
+            <p class="highlight-yellow text-bold">Любое самостоятельное вмешательство (ремонт, замена запчасти, долив масла) только после согласования с начальником колонны!</p>
+            
+            <p class="highlight-blue">Совет: при получении автомобиля узнайте у начальника колонны через сколько километров вам нужно приехать на техническое обслуживание.</p>
+        </section>
+
+        <!-- 7. ГИБДД и МАДИ -->
+        <section>
+            <h2>Правила поведения при общении с ГИБДД и МАДИ</h2>
+            <ul>
+                <li>✔ Ведите себя спокойно (не нужно нервничать).</li>
+                <li>✔ Не торопитесь.</li>
+                <li>✔ Общайтесь вежливо.</li>
+                <li>✔ Не провоцируйте (грубость, повышенный тон и тому подобное). Не используйте фразы "на каком основании", "причина остановки", "не имеете право" и так далее.</li>
+                <li>✔ Если оформляют протокол, вежливо попросите объяснить причину оформления.</li>
+                <li>✔ Если не понимаете – просите переводчика.</li>
+                <li>✔ Если не понимаете – ничего не подписывайте!</li>
+                <li>✔ Сообщите начальнику колонны о составлении протокола.</li>
+            </ul>
+
+            <p class="highlight-yellow">Некоторые сотрудники могут воспользоваться незнанием вами русского языка или законов РФ. Если не уверены в законности их действий – звоните начальнику колонны!</p>
+
+            <img src="img/madi/madi.png" alt="МАДИ" style="width:100%; border-radius:8px; margin: 15px 0;" onerror="this.src='https://placehold.co/600x300?text=МАДИ'">
+            
+            <p>Сотрудники МАДИ могут проверить:</p>
+            <ul>
+                <li>наличие "шашек" на крыше и по бокам автомобиля;</li>
+                <li>наличие карточки фрахтовщика (перевозчика);</li>
+                <li>наличие путевого листа;</li>
+                <li>обеспечение безопасности перевозки пассажиров.</li>
+            </ul>
+            <p>Сотрудник МАДИ не может останавливать автомобиль для проверки документов. Это могут делать только сотрудники полиции.</p>
+
+            <p class="highlight-yellow">Если сотрудник МАДИ подошёл к вам самостоятельно и требует документы, то предоставьте ему их. Не вступайте в спор и не создавайте конфликтную ситуацию.</p>
+        </section>
+
+        <!-- 9. Выезд за пределы МО -->
+        <section>
+            <h2>Выезд за пределы Московской области</h2>
+            <img src="img/get_out/out.png" alt="Выезд" style="width:100%; border-radius:8px; margin-bottom:15px;" onerror="this.src='https://placehold.co/600x300?text=Выезд+за+МО'">
+            <p>При выезде за пределы Московской области звонок начальнику колонны обязателен!</p>
+            <p>В случае поломки или ДТП за пределами Московской области эвакуатор оплачивается водителем.</p>
+        </section>
+
+        <!-- 10. Что делать при ДТП -->
+        <section>
+            <h2>Что делать при ДТП</h2>
+            <ol>
+                <li>Остановитесь, включите аварийную сигнализацию, выставьте знак, за городом наденьте светоотражающий жилет.</li>
+                <li>
+                    Если есть пострадавшие – вызовите скорую помощь <span class="highlight-burgundy">(103 или 112)</span> 
+                    <span class="highlight-red text-italic">Если не умеете – не оказывайте помощь сами.</span>
+                </li>
+                <li>Сфотографируйте место ДТП, повреждение всех автомобилей, номера автомобилей.</li>
+                <li>Дождитесь сотрудника ГИБДД для оформления.</li>
+            </ol>
+            
+            <p>✔ Если сотрудник ГИБДД просит освободить проезжую часть, припаркуйте автомобиль соблюдая правила стоянки и остановки:</p>
+            <ul>
+                <li>не ставьте автомобиль в нарушении знака 3.27 <svg class="icon-small" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="red" stroke-width="2" fill="none"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07" stroke="red" stroke-width="2"/></svg>;</li>
+                <li>оплачивайте платную парковку;</li>
+                <li>не нарушайте другие правила дорожного движения.</li>
+            </ul>
+
+            <p class="text-bold">Условия для составления европротокола:</p>
+            <ul>
+                <li>начальник колонны одобрил составление европротокола;</li>
+                <li>в ДТП участвуют только два транспортных средства;</li>
+                <li>нет пострадавших;</li>
+                <li>у обоих водителей есть действующий полис ОСАГО;</li>
+                <li>оба водителя согласны на европротокол;</li>
+                <li>не повреждена инфраструктура, например ограждения, столбы;</li>
+                <li>расположение транспортных средств не было изменено после ДТП</li>
+            </ul>
+            
+            <p class="text-underline text-bold">Европротокол составляется в самом крайнем случае. Делайте все возможное для оформления ДТП сотрудниками ГИБДД.</p>
+            
+            <p class="highlight-blue">Совет: после составления европротокола, дождитесь пока второй участник ДТП уедет первым</p>
+            
+            <p class="highlight-red">В случае ДТП по вашей вине, эвакуатор оплачивается вами.</p>
+            
+            <img src="img/euro_1.png" alt="Европротокол" style="width:100%; border-radius:8px; margin-top:15px;" onerror="this.src='https://placehold.co/600x300?text=Европротокол'">
+        </section>
+
+        <!-- 11. Поломка в дороге -->
+        <section>
+            <h2>Поломка в дороге</h2>
+            <img src="img/dmg/dmg.png" alt="Поломка" style="width:100%; border-radius:8px; margin-bottom:15px;" onerror="this.src='https://placehold.co/600x300?text=Поломка'">
+            <p>В случае поломки на дороге необходимо:</p>
+            <ol>
+                <li>Остановить автомобиль соблюдая правила дорожного движения (в том числе знаки запрещающие остановку и стоянку) и правил безопасности.</li>
+                <li>Выставьте знак аварийной остановки.</li>
+                <li>Высадите пассажиров.</li>
+                <li>Позвоните начальнику колонны, для вызова механика или эвакуатора.</li>
+            </ol>
+            <p class="highlight-yellow">Если вынуждены встать на платной парковке, её необходимо оплатить — в дальнейшем вы получите компенсацию.</p>
+        </section>
+
+        <!-- 12. Штрафы -->
+        <section>
+            <h2>Штрафы</h2>
+            <p class="text-italic">* Обратите внимание: суммы штрафов, отображенные ниже, указаны в полном размере без учета льгот. Многие из них можно оплатить со скидкой 25 - 50%.</p>
+            
+            <p class="text-bold">Отсутствие карты фрахтовщика (перевозчика) – <span class="highlight-red">штраф 30.000 ₽</span></p>
+            <p>Карта фрахтовщика: оформляется при приёме водителя. Должна быть установлена на передней панели с правой стороны.</p>
+            <img src="img/taxi_card/taxi_card.png" alt="Карта" style="width:100%; border-radius:8px; margin: 10px 0;" onerror="this.src='https://placehold.co/600x300?text=Карта+фрахтовщика'">
+
+            <p class="text-bold">Отсутствие фонаря "такси" и (или) цветографической схемы "шашка" по бокам автомобиля – <span class="highlight-red">штраф 50.000 ₽</span></p>
+            <img src="img/taxi_hat/taxi_hat.png" alt="Фонарь" style="width:100%; border-radius:8px; margin: 10px 0;" onerror="this.src='https://placehold.co/600x300?text=Фонарь+такси'">
+            <p class="highlight-blue text-italic">Совет: после работы снимайте фонарь и кладите на пол со стороны водителя. Так фонарь не украдут, а при выходе на линию вы не забудете его установить. Не стоит класть фонарь в багажник.</p>
+
+            <p class="text-bold">Парковка на газоне и тротуаре запрещена <span class="highlight-red">штраф– 300.000 ₽</span></p>
+            <img src="img/grass/grass.png" alt="Газон" style="width:100%; border-radius:8px; margin: 10px 0;" onerror="this.src='https://placehold.co/600x300?text=Парковка+на+газоне'">
+            <p class="highlight-blue text-italic">Совет: паркуйте машину так, чтобы все четыре колеса стояли на асфальте проезжей части для автомобилей. Не ставьте машину на тротуар для пешеходов и на бордюр.</p>
+
+            <p class="text-bold">Нарушение правил перевозки детей <span class="highlight-red">штраф– 200.000 ₽</span></p>
+            <p>К нарушениям относится:</p>
+            <ul>
+                <li>отсутствие детского кресла;</li>
+                <li>неподходящее для ребенка кресло;</li>
+                <li>неправильно установленное кресло;</li>
+                <li>ребенок в кресле не пристегнут.</li>
+            </ul>
+            <p class="highlight-yellow">Если у клиента нет детского кресла — попросите отменить заказ. Если клиент отказывается — свяжитесь с техподдержкой.</p>
+            <p class="highlight-yellow">Если клиент со своим креслом — он устанавливает его самостоятельно.</p>
+            <img src="img/child/child_chair.png" alt="Кресло" style="width:100%; border-radius:8px; margin: 10px 0;" onerror="this.src='https://placehold.co/600x300?text=Детское+кресло'">
+            
+            <div class="carousel-container" id="childCarousel">
+                <div class="carousel-track">
+                    <div class="carousel-item"><img src="img/child/boy.png" onerror="this.src='https://placehold.co/600x400?text=Ребенок+1'" alt="Ребенок"></div>
+                    <div class="carousel-item"><img src="img/child/happy_sad.png" onerror="this.src='https://placehold.co/600x400?text=Ребенок+2'" alt="Ребенок"></div>
+                </div>
+                <div class="carousel-indicators"></div>
+            </div>
+
+            <p class="text-bold">Вождение в состоянии опьянения – <span class="highlight-red">штраф 145.000 ₽ и лишение прав на 1,5–2 года.</span></p>
+            <p class="highlight-red">Отказ от прохождения медицинского освидетельствования – <span class="text-danger text-bold">лишение прав на срок 1,5–2 года.</span></p>
+            <img src="img/alko/alko.jpg" alt="Алкоголь" style="width:100%; border-radius:8px; margin: 10px 0;" onerror="this.src='https://placehold.co/600x300?text=Алкоголь'">
+            <p>Не отказывайтесь от прохождения медицинского освидетельствования: это может быть проверка алкотестером на месте или поездка в медицинское учреждение.</p>
+
+            <p class="text-underline">Лекарства тоже могут влиять на вождение. Перед приёмом проверьте, можно ли водить.</p>
+            
+            <div style="border: 1px solid var(--bg-danger); padding: 10px; border-radius: 8px; margin: 10px 0; background: var(--bg-color);">
+                <p class="text-danger text-bold">Запрещено!</p>
+                <p style="font-size: 0.85rem;">Андипал, Беллатаминал, Валокордин, Валосердин, Каффетин, Корвалдин, Корвалол, Омнопон, Пентабуфен, Пенталгин-Н, Пентанов, Пливалгин, Седал, Седальгин Нео, Солпадеин, Тедеин, Теофедрин, Терпинкод, Тофф Плюс</p>
+            </div>
+
+            <div style="border: 1px solid var(--bg-warning); padding: 10px; border-radius: 8px; margin: 10px 0; background: var(--bg-color);">
+                <p class="text-bold" style="color: #856404;">С особой осторожностью!</p>
+                <p style="font-size: 0.85rem;">Алпразолам, Антигрипин, Атаракс, Габапентин, Диазепам, Димедрол, Лавокодин, Лоперамид, Сироп Битнера, Сироп (любой на спирту), Супрастин, Тавегил, Телфаст, Феназепам, Фенибут, Цетрин <span class="text-underline">и другие (смотри инструкцию)</span></p>
+            </div>
+
+            <p class="text-bold highlight-red">Неоплаченная парковка – <span class="text-danger">штраф 50.000 ₽</span></p>
+            <p class="highlight-yellow">ВНИМАНИЕ: время бесплатной парковки – первые 5 минут!</p>
+            
+            <p>В мобильном приложении <span class="highlight-green text-bold">«Парковки России»</span></p>
+            <ol>
+                <li>Откройте мобильное приложение и разрешите доступ к геолокации;</li>
+                <li>В появившемся окне введите номер телефона, на который будет отправлено СМС-сообщение с пин-кодом для входа в приложение;</li>
+                <li>Введите полученный пин-код в специальную форму в приложении;</li>
+                <li>Введите данные о своей машине в разделе «Автомобили»;</li>
+                <li>Выберите номер парковочной зоны на карте;</li>
+                <li>Нажмите «Припарковать»;</li>
+                <li>Для отмены парковки нажмите «Завершить».</li>
+            </ol>
+            <p class="highlight-green text-italic">До конца суток есть возможность изменить время парковки, при условии, что парковка была оплачена!</p>
+
+            <p><span class="highlight-green text-bold">СМС-сообщение</span> на номер 7757</p>
+            <ol>
+                <li>Для оплаты нужно отправить СМС-сообщение на номер 7757 с текстом: номер парковки*номер автомобиля*кол-во часов от 1 до 24.<br>
+                <span class="text-italic" style="background: var(--bg-gray); padding: 2px 5px; border-radius: 4px; display: inline-block; margin-top: 5px;">Пример: 1004*А123АА199*3</span></li>
+                <li>Для продления парковки — с текстом ХКол-во часов.<br>
+                <span class="text-italic" style="background: var(--bg-gray); padding: 2px 5px; border-radius: 4px; display: inline-block; margin-top: 5px;">Пример: X2</span></li>
+                <li>Для досрочной остановки парковки — с текстом S или С.<br>
+                <span class="text-italic" style="background: var(--bg-gray); padding: 2px 5px; border-radius: 4px; display: inline-block; margin-top: 5px;">Пример: S</span></li>
+            </ol>
+            <p class="text-italic">При этом сумма за неиспользованное время стоянки возвращается на ваш парковочный счет. Обязательно дождитесь СМС-отчет о выполненной услуге</p>
+
+            <img src="img/toll_park/toll_park.png" alt="Знаки" style="width:100%; border-radius:8px; margin: 10px 0;" onerror="this.src='https://placehold.co/600x300?text=Знаки+парковки'">
+            <p class="text-center" style="text-align: center; font-size: 0.8rem; opacity: 0.7;">Знаки платной парковки</p>
+
+            <p class="highlight-yellow">Помните: знак платной парковки установлен не всегда. Иногда есть только синяя разметка. Чтобы не ошибиться, перед парковкой откройте Яндекс Навигатор, Яндекс Про или приложение «Парковки России» — там точно указано, платное ли место.</p>
+            
+            <img src="img/toll_park/blue.png" alt="Разметка" style="width:100%; border-radius:8px; margin: 10px 0;" onerror="this.src='https://placehold.co/600x300?text=Разметка'">
+            <p class="text-center" style="text-align: center; font-size: 0.8rem; opacity: 0.7;">Разметка платной парковки</p>
+
+            <p class="highlight-red">Помните: внутри ТТК бесплатных парковок нет.</p>
+
+            <h3>Настройки приложения "Яндекс ПРО"</h3>
+            <p>Инструкция по настройке и использованию мобильного приложения "Парковки России".</p>
+
+            <div class="carousel-container" id="parkingInstrCarousel">
+                <div class="carousel-track">
+                    <div class="carousel-item">
+                        <img src="/img/toll_park_instruction/png/1.png" onerror="this.src='https://placehold.co/600x400?text=Шаг+1'" alt="1">
+                        <div class="carousel-caption">1. Нажать на значок "слои".</div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/img/toll_park_instruction/png/2.png" onerror="this.src='https://placehold.co/600x400?text=Шаг+2'" alt="2">
+                        <div class="carousel-caption">2. Включить режим отображения парковок</div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/img/toll_park_instruction/png/3.png" onerror="this.src='https://placehold.co/600x400?text=Шаг+3'" alt="3">
+                        <div class="carousel-caption">3. На карте будут показаны платные парковки и места где парковка запрещена.</div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="highlight-green text-bold" style="padding: 5px; text-align: center;">Приложение "Парковки России"</div>
+                        <img src="/img/toll_park_instruction/png/4.png" onerror="this.src='https://placehold.co/600x400?text=Шаг+4'" alt="4">
+                        <div class="carousel-caption">1. Нажать кнопку пополнения баланса (в начале у вас будет отображаться 0 ₽).</div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/img/toll_park_instruction/png/5.png" onerror="this.src='https://placehold.co/600x400?text=Шаг+5'" alt="5">
+                        <div class="carousel-caption">2. Выбрать сумму пополнения и нажать кнопку пополнения</div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/img/toll_park_instruction/png/6.png" onerror="this.src='https://placehold.co/600x400?text=Шаг+6'" alt="6">
+                        <div class="carousel-caption">3. Выбрать способ оплаты (СБП, Банковская карта или списание с номера телефона).</div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/img/toll_park_instruction/png/7.png" onerror="this.src='https://placehold.co/600x400?text=Шаг+7'" alt="7">
+                        <div class="carousel-caption">4. Нажать кнопку "Добавить автомобиль".</div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/img/toll_park_instruction/png/8.png" onerror="this.src='https://placehold.co/600x400?text=Шаг+8'" alt="8">
+                        <div class="carousel-caption">5. Ввести номер автомобиля. Используйте русские буквы.</div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/img/toll_park_instruction/png/9.png" onerror="this.src='https://placehold.co/600x400?text=Шаг+9'" alt="9">
+                        <div class="carousel-caption">6. Нажать кнопку готово.</div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="highlight-green text-bold" style="padding: 5px; text-align: center;">Как пользоваться.</div>
+                        <img src="/img/toll_park_instruction/png/10.png" onerror="this.src='https://placehold.co/600x400?text=Шаг+10'" alt="10">
+                        <div class="carousel-caption">В приложении "Яндекс ПРО" выбираете нужную вам парковку. Внизу отобразится номер парковочной зоны.</div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/img/toll_park_instruction/png/11.png" onerror="this.src='https://placehold.co/600x400?text=Шаг+11'" alt="11">
+                        <div class="carousel-caption">Зайти в приложение "Парковки России", нажать поиск вверху или внизу.</div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/img/toll_park_instruction/png/12.png" onerror="this.src='https://placehold.co/600x400?text=Шаг+12'" alt="12">
+                        <div class="carousel-caption">В поиске написать номер парковочной зоны, которая показана в приложении "Яндекс ПРО".</div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/img/toll_park_instruction/png/13.png" onerror="this.src='https://placehold.co/600x400?text=Шаг+13'" alt="13">
+                        <div class="carousel-caption">Нажать припарковать.</div>
+                    </div>
+                </div>
+                <div class="carousel-indicators"></div>
+            </div>
+
+            <p>По умолчанию время парковки выбрано на 1 час. Время можно изменить в большую и меньшую сторону.<br>
+            За 15 минут до окончания парковочного времени, приложение предложит продлить время.<br>
+            До конца суток можно изменить время начала, номер автомобиля, и парковочную зону. Изменения можно внести в настройках, только в том случае если парковка была ранее оплачена.</p>
+
+            <p class="text-bold">Проезд на запрещающий сигнал светофора – <span class="highlight-red">штраф 7.500 ₽</span></p>
+            <p>Снижайте скорость при мигающем зеленом сигнале светофора. Проезд на жёлтый сигнал светофора – запрещает движение.</p>
+
+            <p class="text-bold">Пересечение стоп-линии при запрещающем сигнале светофора – <span class="highlight-red">штраф 7.500 ₽</span></p>
+            <p>Останавливайтесь так, чтобы видеть стоп-линию.</p>
+
+            <p class="text-bold">Движение под "Кирпич" на автобусной полосе -- <span class="highlight-red">штраф 4.500 ₽</span></p>
+            <img src="img/brick/2.png" alt="Кирпич" style="width:100%; border-radius:8px; margin: 10px 0;" onerror="this.src='https://placehold.co/600x300?text=Кирпич'">
+
+            <p class="text-bold">Остановка и стоянка в зоне действия знака 3.27 <svg class="icon-small" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="red" stroke-width="2" fill="none"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07" stroke="red" stroke-width="2"/></svg> – <span class="highlight-red">штраф 4.500 ₽</span></p>
+            <p>Сочетание знаков <svg class="icon-small" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="red" stroke-width="2" fill="none"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07" stroke="red" stroke-width="2"/></svg> и знака <svg class="icon-small" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" stroke="blue" stroke-width="2" fill="none"/><line x1="4" y1="4" x2="20" y2="20" stroke="blue" stroke-width="2"/></svg> или <svg class="icon-small" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="blue" stroke-width="2" fill="none"/><text x="12" y="16" font-size="10" text-anchor="middle" fill="blue">P</text></svg> разрешает</p>
+            
+            <img src="img/taxi_parking/taxi_park.png" alt="Парковка такси" style="width:100%; border-radius:8px; margin: 10px 0;" onerror="this.src='https://placehold.co/600x300?text=Парковка+такси+1'">
+            <img src="img/taxi_parking/taxi_park_2.png" alt="Парковка такси 2" style="width:100%; border-radius:8px; margin: 10px 0;" onerror="this.src='https://placehold.co/600x300?text=Парковка+такси+2'">
+
+            <p class="text-bold">Ограничение скорости</p>
+            <p class="highlight-red">Превышение скорости влечет за собой наложение штрафа:</p>
+            <ul>
+                <li>20 - 40 км/ч – 750 ₽</li>
+                <li>40 - 60 км/ч – 1.500 ₽ - 2.250 ₽</li>
+                <li>60 - 80 км/ч – 3.000 ₽ - 3.750 ₽ / лишение прав на 4-6 месяцев</li>
+                <li>80 км/ч и более – 7.500 ₽ / лишение прав на 6 месяцев</li>
+            </ul>
+
+            <p>Наиболее встречающиеся ограничения скорости:</p>
+            <ul>
+                <li>в жилых зонах и дворовых территориях – 20 км/ч;</li>
+                <li>на всех остальных дорогах города – 60 км/ч (бывают исключения – 40 км/ч и 50 км/ч);</li>
+                <li>на ТТК и некоторых магистралях ведущих из города – 80 км/ч (есть участки 60 км/ч);</li>
+                <li>МКАД – 100 км/ч.</li>
+            </ul>
+
+            <p class="highlight-green text-italic">Соблюдайте правила скоростного режима!</p>
+
+            <p class="text-bold">Движение по обочине – <span class="highlight-red">штраф 2.250 ₽</span></p>
+            <p>Движение по обочине равносильно созданию аварийной ситуации. В случае возникновения ДТП виновником будете вы.</p>
+
+            <p class="text-bold">Не пристегнутый ремень безопасности – <span class="highlight-red">штраф 1.500 ₽</span></p>
+            <p class="highlight-yellow">Ответственность за непристегнутый ремень пассажиров несет водитель.</p>
+
+            <p class="text-bold">Использование телефона за рулем – <span class="highlight-red">штраф 1.500 ₽</span></p>
+            
+            <div class="warning-box" style="border-color: var(--bg-danger); background-color: var(--bg-danger);">
+                <p class="text-bold">В режиме "Доставка" запрещена перевозка пассажиров.</p>
+                <p class="text-bold">В режиме "Такси" запрещена перевозка посылок.</p>
+                <p class="text-bold">Уважаемые водители!</p>
+                <p>Остерегайтесь предложений пассажиров «подработать» или «перевезти пакет» за щедрое вознаграждение — за этим часто скрываются незаконные схемы влекущее административное и уголовное наказание.</p>
+                <p>Службы безопасности и полиция отслеживают подозрительные действия: даже неосторожный шаг может повлечь разбирательства. Ваша репутация и спокойствие дороже сиюминутной выгоды.</p>
+                <p>Если что-то вызывает сомнения — откажитесь, сообщите диспетчеру и доверяйте только официальным заказам.</p>
+                <p class="text-bold">Работайте законно и с уверенностью в завтрашнем дне!</p>
+            </div>
+        </section>
+
+        <!-- 13. Контакты -->
+        <section>
+            <h2>Контакты</h2>
+            <div class="carousel-container contact-carousel" id="contactsCarousel">
+                <div class="carousel-track">
+                    <!-- Кайрат -->
+                    <div class="carousel-item">
+                        <div class="contact-info">
+                            <img src="https://flagcdn.com/w80/kz.png" alt="KZ" style="width: 40px; border-radius: 4px; margin-bottom: 5px;">
+                            <div class="contact-name">Кайрат</div>
+                            <div class="contact-schedule">+7-915-321-45-30<br>9:00-20:00<br>воскресенье – выходной</div>
+                            <div class="contact-actions">
+                                <a href="tel:+79153214530" class="action-btn btn-phone">
+                                    <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.91 15.91 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                                </a>
+                                <a href="https://wa.me/79153214530" class="action-btn btn-wa">
+                                    <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01C17.18 3.03 14.69 2 12.04 2zM12.05 20.16c-1.5 0-2.97-.4-4.27-1.15l-.3-.18-3.15.83.84-3.07-.2-.31c-.83-1.32-1.27-2.85-1.27-4.41 0-4.55 3.71-8.26 8.26-8.26 2.21 0 4.28.86 5.84 2.42 1.56 1.56 2.42 3.63 2.42 5.84 0 4.56-3.71 8.27-8.27 8.27z"/></svg>
+                                </a>
+                                <a href="https://t.me/+79153214530" class="action-btn btn-tg">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.93 1.23-5.46 3.62-.51.35-.98.52-1.4.51-.46-.01-1.35-.26-2.01-.48-.81-.27-1.44-.42-1.38-.88.03-.24.37-.49 1.03-.75 4.04-1.76 6.74-2.92 8.09-3.48 3.85-1.6 4.64-1.88 5.17-1.88.11 0 .37.03.54.17.14.12.18.28.2.45-.02.07-.02.13-.03.2z"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Ринат -->
+                    <div class="carousel-item">
+                        <div class="contact-info">
+                            <img src="https://flagcdn.com/w80/ru.png" alt="RU" style="width: 40px; border-radius: 4px; margin-bottom: 5px;">
+                            <div class="contact-name">Ринат</div>
+                            <div class="contact-schedule">+7-926-186-82-92<br>9:00-20:00<br>воскресенье – выходной</div>
+                            <div class="contact-actions">
+                                <a href="tel:+79261868292" class="action-btn btn-phone"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.91 15.91 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></a>
+                                <a href="https://wa.me/79261868292" class="action-btn btn-wa"><svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01C17.18 3.03 14.69 2 12.04 2zM12.05 20.16c-1.5 0-2.97-.4-4.27-1.15l-.3-.18-3.15.83.84-3.07-.2-.31c-.83-1.32-1.27-2.85-1.27-4.41 0-4.55 3.71-8.26 8.26-8.26 2.21 0 4.28.86 5.84 2.42 1.56 1.56 2.42 3.63 2.42 5.84 0 4.56-3.71 8.27-8.27 8.27z"/></svg></a>
+                                <a href="https://t.me/+79261868292" class="action-btn btn-tg"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.93 1.23-5.46 3.62-.51.35-.98.52-1.4.51-.46-.01-1.35-.26-2.01-.48-.81-.27-1.44-.42-1.38-.88.03-.24.37-.49 1.03-.75 4.04-1.76 6.74-2.92 8.09-3.48 3.85-1.6 4.64-1.88 5.17-1.88.11 0 .37.03.54.17.14.12.18.28.2.45-.02.07-.02.13-.03.2z"/></svg></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Алтынбек -->
+                    <div class="carousel-item">
+                        <div class="contact-info">
+                            <img src="https://flagcdn.com/w80/kg.png" alt="KG" style="width: 40px; border-radius: 4px; margin-bottom: 5px;">
+                            <div class="contact-name">Алтынбек</div>
+                            <div class="contact-schedule">+7-999-577-54-61<br>вс-пт: 9:00-20:00<br>суббота – выходной</div>
+                            <div class="contact-actions">
+                                <a href="tel:+79995775461" class="action-btn btn-phone"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.91 15.91 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></a>
+                                <a href="https://wa.me/79995775461" class="action-btn btn-wa"><svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01C17.18 3.03 14.69 2 12.04 2zM12.05 20.16c-1.5 0-2.97-.4-4.27-1.15l-.3-.18-3.15.83.84-3.07-.2-.31c-.83-1.32-1.27-2.85-1.27-4.41 0-4.55 3.71-8.26 8.26-8.26 2.21 0 4.28.86 5.84 2.42 1.56 1.56 2.42 3.63 2.42 5.84 0 4.56-3.71 8.27-8.27 8.27z"/></svg></a>
+                                <a href="https://t.me/+79995775461" class="action-btn btn-tg"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.93 1.23-5.46 3.62-.51.35-.98.52-1.4.51-.46-.01-1.35-.26-2.01-.48-.81-.27-1.44-.42-1.38-.88.03-.24.37-.49 1.03-.75 4.04-1.76 6.74-2.92 8.09-3.48 3.85-1.6 4.64-1.88 5.17-1.88.11 0 .37.03.54.17.14.12.18.28.2.45-.02.07-.02.13-.03.2z"/></svg></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Гафар -->
+                    <div class="carousel-item">
+                        <div class="contact-info">
+                            <img src="https://flagcdn.com/w80/tj.png" alt="TJ" style="width: 40px; border-radius: 4px; margin-bottom: 5px;">
+                            <div class="contact-name">Гафар</div>
+                            <div class="contact-schedule">+7-999-767-64-92<br>9:00-20:00<br>воскресенье – выходной</div>
+                            <div class="contact-actions">
+                                <a href="tel:+79997676492" class="action-btn btn-phone"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.91 15.91 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></a>
+                                <a href="https://wa.me/79997676492" class="action-btn btn-wa"><svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01C17.18 3.03 14.69 2 12.04 2zM12.05 20.16c-1.5 0-2.97-.4-4.27-1.15l-.3-.18-3.15.83.84-3.07-.2-.31c-.83-1.32-1.27-2.85-1.27-4.41 0-4.55 3.71-8.26 8.26-8.26 2.21 0 4.28.86 5.84 2.42 1.56 1.56 2.42 3.63 2.42 5.84 0 4.56-3.71 8.27-8.27 8.27z"/></svg></a>
+                                <a href="https://t.me/+79997676492" class="action-btn btn-tg"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.93 1.23-5.46 3.62-.51.35-.98.52-1.4.51-.46-.01-1.35-.26-2.01-.48-.81-.27-1.44-.42-1.38-.88.03-.24.37-.49 1.03-.75 4.04-1.76 6.74-2.92 8.09-3.48 3.85-1.6 4.64-1.88 5.17-1.88.11 0 .37.03.54.17.14.12.18.28.2.45-.02.07-.02.13-.03.2z"/></svg></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Парвиз -->
+                    <div class="carousel-item">
+                        <div class="contact-info">
+                            <img src="https://flagcdn.com/w80/uz.png" alt="UZ" style="width: 40px; border-radius: 4px; margin-bottom: 5px;">
+                            <div class="contact-name">Парвиз</div>
+                            <div class="contact-schedule">+7-999-660-91-87<br>9:00-20:00<br>суббота – выходной</div>
+                            <div class="contact-actions">
+                                <a href="tel:+79996609187" class="action-btn btn-phone"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.91 15.91 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></a>
+                                <a href="https://wa.me/79996609187" class="action-btn btn-wa"><svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01C17.18 3.03 14.69 2 12.04 2zM12.05 20.16c-1.5 0-2.97-.4-4.27-1.15l-.3-.18-3.15.83.84-3.07-.2-.31c-.83-1.32-1.27-2.85-1.27-4.41 0-4.55 3.71-8.26 8.26-8.26 2.21 0 4.28.86 5.84 2.42 1.56 1.56 2.42 3.63 2.42 5.84 0 4.56-3.71 8.27-8.27 8.27z"/></svg></a>
+                                <a href="https://t.me/+79996609187" class="action-btn btn-tg"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.93 1.23-5.46 3.62-.51.35-.98.52-1.4.51-.46-.01-1.35-.26-2.01-.48-.81-.27-1.44-.42-1.38-.88.03-.24.37-.49 1.03-.75 4.04-1.76 6.74-2.92 8.09-3.48 3.85-1.6 4.64-1.88 5.17-1.88.11 0 .37.03.54.17.14.12.18.28.2.45-.02.07-.02.13-.03.2z"/></svg></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-indicators"></div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>Московская область, г. Нахабино, ул. Красноармейская, д. 61 Б</p>
+        <p><a href="https://yandex.ru/maps/-/CDu~yJ~" target="_blank">Открыть на Яндекс Картах</a></p>
+    </footer>
+
+    <script>
+        // --- 1. Скрытие шапки при скролле ---
+        let lastScrollTop = 0;
+        const header = document.getElementById('main-header');
+        
+        window.addEventListener('scroll', () => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > 60) {
+                header.classList.add('hidden');
+            } else {
+                header.classList.remove('hidden');
+            }
+            lastScrollTop = scrollTop;
+        });
+
+        // --- 2. Переключение темы ---
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const body = document.body;
+
+        // Иконка луны
+        const moonPath = "M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 01-4.4 2.26 5.403 5.403 0 01-3.14-9.8c-.44-.06-.9-.1-1.36-.1z";
+        // Иконка солнца (по умолчанию в HTML)
+        const sunPath = "M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 000-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z";
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-theme');
+            if (body.classList.contains('dark-theme')) {
+                themeIcon.innerHTML = `<path d="${moonPath}"/>`;
+            } else {
+                themeIcon.innerHTML = `<path d="${sunPath}"/>`;
+            }
+        });
+
+        // --- 3. Выпадающий список языков ---
+        const langToggle = document.getElementById('langToggle');
+        const langMenu = document.getElementById('langMenu');
+        const currentFlag = document.getElementById('currentFlag');
+
+        langToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langMenu.classList.toggle('active');
+        });
+
+        document.addEventListener('click', () => {
+            langMenu.classList.remove('active');
+        });
+
+        // Обработка выбора языка (визуально меняем флаг в шапке)
+        const langLinks = langMenu.querySelectorAll('a');
+        langLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                // В реальном проекте здесь будет переход по href
+                // e.preventDefault(); 
+                const selectedFlagSrc = link.querySelector('img').src;
+                currentFlag.src = selectedFlagSrc;
+            });
+        });
+
+        // --- 4. Карусели (Свайп + Индикаторы) ---
+        function initCarousel(containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            const track = container.querySelector('.carousel-track');
+            const items = Array.from(track.children);
+            const indicatorsContainer = container.querySelector('.carousel-indicators');
+
+            // Создание индикаторов
+            items.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('indicator');
+                if (index === 0) dot.classList.add('active');
+                indicatorsContainer.appendChild(dot);
+            });
+
+            const indicators = Array.from(indicatorsContainer.children);
+
+            // Обновление индикаторов при скролле
+            track.addEventListener('scroll', () => {
+                const itemWidth = items[0].offsetWidth + 15; // ширина + gap
+                const scrollPos = track.scrollLeft + (itemWidth / 2);
+                const activeIndex = Math.round(scrollPos / itemWidth);
+
+                indicators.forEach((dot, index) => {
+                    if (index === activeIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            });
+        }
+
+        // Инициализация всех каруселей
+        document.addEventListener('DOMContentLoaded', () => {
+            initCarousel('docsCarousel');
+            initCarousel('carsCarousel');
+            initCarousel('childCarousel');
+            initCarousel('parkingInstrCarousel');
+            initCarousel('contactsCarousel');
+        });
+
+    </script>
+</body>
+</html>
