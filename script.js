@@ -158,3 +158,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // === ЗАПУСК ===
   loadLanguage(currentLang);
 });
+/* 🔧 Фикс кнопки «Назад» для мобильных браузеров и GitHub Pages */
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted) {
+    // Страница восстановлена из кэша → безопасная перезагрузка
+    window.location.reload();
+  }
+});
