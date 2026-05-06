@@ -40,3 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (savedLang) window.location.href = 'main.html';
   */
 });
+/* 🔧 Фикс кнопки «Назад» для мобильных браузеров и GitHub Pages */
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted) {
+    // Страница восстановлена из кэша → безопасная перезагрузка
+    window.location.reload();
+  }
+});
