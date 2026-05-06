@@ -1,0 +1,186 @@
+/* entry.css — Абсолютно плавная анимация: ноль reflow, только GPU */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100dvh;
+  overflow: hidden; /* Жёсткий запрет скролла */
+  overscroll-behavior-y: none; /* Отключает "пружину" на iOS */
+}
+
+/* 🔑 КОНТЕЙНЕР НИКОГДА НЕ МЕНЯЕТ LAYOUT. Только transform и opacity анимируются. */
+.entry-wrapper {
+  height: 100dvh;
+  background-color: var(--color-bg, #1b1b1b);
+  background-image: radial-gradient(circle at center, rgba(252, 110, 32, 0.35) 0%, var(--color-bg, #1b1b1b) 55%);
+  background-repeat: no-repeat;
+  background-size: 120% 120%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Остаётся centre ВСЕГДА */
+  gap: 16px;               /* Остаётся 16px ВСЕГДА */
+  padding: 20px 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.car-entry {
+  width: 100%;
+  max-width: 380px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  border-radius: var(--radius-lg, 18px);
+  overflow: hidden;
+}
+.car-entry:active { filter: brightness(0.92); }
+
+/* 🔹 ВЕРХНЯЯ КАРТОЧКА: Плавный подъём без прыжка */
+#carYellow {
+  /* Transition в БАЗЕ = браузер знает, как анимировать с первого кадра */
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0); /* GPU-слой */
+}
+.entry-wrapper.mode-yellow #carYellow {
+  transform: translateY(-15%); /* Ровно 15% вверх, как ты просил */
+}
+
+/* Контейнер нижней зоны (фиксированная высота = ноль дерганий flex) */
+.entry-bottom-stack {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  height: 38vh;
+}
+
+/* 🔹 НИЖНЯЯ КАРТОЧКА: Плавный уезд вниз + затухание */
+#carBusiness {
+  position: absolute;
+  top: 0; left: 0; width: 100%;
+  z-index: 2;
+  background: rgba(50, 50, 50, 0.4);
+  border-radius: var(--radius-lg, 18px);
+  overflow: hidden;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.7s ease;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+.entry-wrapper.mode-yellow #carBusiness {
+  transform: translateY(100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 🔹 МЕНЮ ЯЗЫКОВ: Появляется плавно под верхней карточкой */
+.lang-menu {
+  position: absolute;
+  top: -40px; /* Визуальная подгонка под нижний край изображения */
+  left: 0; width: 100%;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease 0.1s, transform 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+  pointer-events: none;
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+}
+.entry-wrapper.mode-yellow .lang-menu {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.lang-menu-title {
+  color: var(--color-light, #ffe7d0);
+  font-size: 14px;
+  font-weight: 300;
+  margin: 0 0 6px 0;
+  text-align: center;
+}
+
+.lang-options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: max-content;
+  min-width: 200px;
+}
+
+.lang-opt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(50, 50, 50, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 231, 208, 0.15);
+  border-radius: var(--radius-md, 12px);
+  color: var(--color-light, #ffe7d0);
+  font-family: var(--font-main, system-ui);
+  font-size: 13px;
+  font-weight: 300;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+}
+.lang-opt:active {
+  transform: scale(0.98);
+  background: rgba(252, 110, 32, 0.15);
+  border-color: var(--color-accent, #fc6e20);
+}
+.lang-opt img {
+  width: 22px; height: 14px; border-radius: 2px; object-fit: cover; flex-shrink: 0;
+}
+
+/* Статичные подложки и изображения */
+.entry-wrapper .image-wrapper {
+  height: auto;
+  max-height: 36vh;
+  padding: 10px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.entry-wrapper .image-wrapper img {
+  max-height: 24vh;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+.entry-wrapper .image-caption {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-light, #ffe7d0);
+  margin-top: 0;
+  text-align: center;
+}
+
+/* 📱 Адаптация под маленькие экраны (<700px) */
+@media (max-height: 700px) {
+  .entry-wrapper { padding: 16px 12px; gap: 12px; }
+  .entry-bottom-stack { height: 34vh; }
+  .entry-wrapper .image-wrapper { max-height: 30vh; padding: 8px; }
+  .entry-wrapper .image-wrapper img { max-height: 20vh; }
+  .lang-options { gap: 5px; }
+  .lang-opt { padding: 8px 12px; font-size: 12px; }
+  .lang-menu-title { font-size: 12px; margin-bottom: 4px; }
+}
+/* 🔹 Логотип: синхронный подъём с верхней карточкой */
+.entry-wrapper .logo {
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.entry-wrapper.mode-yellow .logo {
+  transform: translateY(-30px); /* Поднимается вместе с карточкой */
+}

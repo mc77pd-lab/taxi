@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Выберите тип такси</title>
+  <!-- Глобальные стили (переменные, reset, шрифты) -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Стили только для этой страницы -->
+  <link rel="stylesheet" href="entry.css">
+</head>
+<body>
+
+  <main class="entry-wrapper" id="entryWrapper">
+    
+    <!-- 🔹 Логотип: компактно вверху, не мешает контенту -->
+    <div class="logo" style="margin-bottom: 8px;">
+      <img src="/logo/logo4.svg" alt="Логотип" class="logo-img" style="height: 36px; width: auto;" loading="lazy">
+    </div>
+
+    <!-- Верхняя карточка: Жёлтое такси -->
+    <div class="car-entry" id="carYellow">
+      <div class="image-wrapper">
+        <img src="auto/yellow.webp" alt="Жёлтое такси" class="carousel-img" loading="lazy">
+        <p class="image-caption">Жёлтое такси</p>
+      </div>
+    </div>
+
+    <!-- Нижняя зона: стек для анимации смены карточки на меню -->
+    <div class="entry-bottom-stack">
+      
+      <!-- Нижняя карточка: Бизнес-такси (перекрывает меню) -->
+      <div class="car-entry" id="carBusiness">
+        <div class="image-wrapper">
+          <img src="auto/buisnes.webp" alt="Бизнес такси" class="carousel-img" loading="lazy">
+          <p class="image-caption">Бизнес-такси</p>
+        </div>
+      </div>
+
+      <!-- Меню выбора языка (скрыто под карточкой) -->
+      <div class="lang-menu" id="langMenu">
+        <div class="lang-menu-title">Выберите язык</div>
+        <div class="lang-options">
+          <div class="lang-opt" data-lang="ru"><img src="flags/ru.svg" alt="" loading="lazy"><span>Русский</span></div>
+          <div class="lang-opt" data-lang="kg"><img src="flags/kg.svg" alt="" loading="lazy"><span>Кыргызча</span></div>
+          <div class="lang-opt" data-lang="kk"><img src="flags/kz.svg" alt="" loading="lazy"><span>Қазақша</span></div>
+          <div class="lang-opt" data-lang="tg"><img src="flags/tj.svg" alt="" loading="lazy"><span>Тоҷикӣ</span></div>
+          <div class="lang-opt" data-lang="tm"><img src="flags/tm.svg" alt="" loading="lazy"><span>Türkmen</span></div>
+          <div class="lang-opt" data-lang="uz"><img src="flags/uz.svg" alt="" loading="lazy"><span>O'zbekcha</span></div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Логика страницы -->
+  <script src="entry.js"></script>
+</body>
+</html>

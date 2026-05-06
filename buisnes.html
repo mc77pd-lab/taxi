@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Инструктаж</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- 1. Фиксированная шапка -->
+  <header class="floating-header">
+    <div class="header-inner">
+      <div class="logo">
+        <!-- Замени src на путь к своему SVG-логотипу -->
+        <img src="/logo/logo4.svg" alt="Логотип" class="logo-img" loading="lazy">
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. Основной контент (здесь будет скролл) -->
+  <main class="main-content">
+    <section id="conditions" class="info-section">
+      <h2 class="section-title">Условия парка</h2>
+      <div class="fade-divider"></div>
+
+      <p class="sub-heading">Правила работы, график сдачи авто и финансовые условия.</p>
+
+      <ul class="info-list">
+        <li class="list-item">
+          <span class="item-title">Срок аренды</span>
+          <p class="item-desc">Минимальный срок аренды — 14 дней.</p>
+        </li>
+        <li class="list-item">
+          <span class="item-title">Бонус для новых водителей</span>
+          <p class="item-desc">Первый день аренды — бесплатно.</p>
+        </li>
+        <li class="list-item">
+          <span class="item-title">Сдача автомобиля</span>
+          <p class="item-desc">График сдачи: понедельник – пятница. Оповестить начальника колонны
+            необходимо за 3 дня.</p>
+        </li>
+        <li class="list-item">
+          <span class="item-title">Списание аренды</span>
+          <p class="item-desc">Списание аренды происходит ежедневно в 12:00 со счёта приложения водителя.
+          </p>
+        </li>
+        <li class="list-item">
+          <span class="item-title">Комиссия парка</span>
+          <p class="item-desc">Составляет всего 3%.</p>
+        </li>
+        <li class="list-item">
+          <span class="item-title">Депозит</span>
+          <p class="item-desc">Обязательный депозит не менее 30.000 ₽
+          </p>
+        </li>
+      </ul>
+      <!-- Блок страховой информации -->
+      <div class="insurance-block">
+        <h3 class="sub-heading">Внутренняя страховка компании (КАСКО)</h3>
+        <p class="cost-text">Стоимость: 100 ₽ в день.</p>
+        <p class="desc-text">В случае значительного повреждения автомобиля водитель оплачивает не более
+          20 000 ₽, остальные расходы покрывает компания.</p>
+
+        <p class="list-intro">Страховка не действует в случае:</p>
+        <ul class="minimal-list">
+          <li>передачи автомобиля другому лицу;</li>
+          <li>нахождения за рулём в состоянии опьянения;</li>
+          <li>грубого нарушения ПДД;</li>
+          <li>умышленного повреждения автомобиля;</li>
+          <li>уезда с места ДТП;</li>
+          <li>отсутствия документов об оформлении ДТП;</li>
+          <li>если машина была неисправна, и вы знали об этом;</li>
+          <li>использования авто в личных целях.</li>
+        </ul>
+
+        <p class="liability-text">Материальная ответственность: водитель несет ответственность за сколы,
+          царапины, вмятины, повреждения ходовой части, покрышки, диски, стёкла автомобиля и иные повреждения не
+          являющиеся страховым случаем.</p>
+      </div>
+    </section>
+
+    <section id="briefing" class="info-section">
+      <h2 class="section-title">Инструктаж</h2>
+      <div class="fade-divider"></div>
+
+      <h3 class="sub-heading">Обязательный осмотр при приёмке автомобиля</h3>
+
+      <ul class="checklist-main">
+        <li class="checklist-group">
+          <span class="main-item-title">Внешний вид:</span>
+          <ul class="checklist-sub">
+            <li>наличие повреждений (царапин, вмятин и т.д.)</li>
+            <li>состояние салона</li>
+            <li>состояние колёс</li>
+            <li>целостность лобового стекла.</li>
+          </ul>
+        </li>
+
+        <li class="checklist-group">
+          <span class="main-item-title">Техническое состояние:</span>
+          <ul class="checklist-sub">
+            <li>уровень масла, тормозной и охлаждающей жидкости</li>
+            <li>состояние ремня генератора</li>
+            <li>состояние аккумулятора</li>
+          </ul>
+        </li>
+
+        <li class="checklist-group">
+          <span class="main-item-title">Световые приборы</span>
+          <ul class="checklist-sub">
+            <li>габаритные огни, фары, поворотники</li>
+            <li>стоп-сигналы, лампы заднего хода</li>
+          </ul>
+        </li>
+
+        <li class="checklist-group">
+          <span class="main-item-title">Наличие оборудования:</span>
+          <ul class="checklist-sub">
+            <li>знак аварийной остановки, огнетушитель, аптечка</li>
+            <li>запасное колесо, домкрат, баллонный ключ</li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="alert-block alert-orange">
+        <p class="alert-text">При получении автомобиля проверьте документы, сроки их действия, сверьте
+          регистрационные номера с документами.</p>
+      </div>
+      <h3 class="sub-heading">Необходимые документы</h3>
+
+      <div class="carousel" id="carousel-docs">
+        <div class="carousel-track">
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="docs/dl.webp" alt="Водительское удостоверение" class="carousel-img" loading="lazy">
+              <p class="image-caption">Водительское удостоверение <br>(проверьте срок действия)</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="docs/sts.webp" alt="Свидетельство о регистрации" class="carousel-img" loading="lazy">
+              <p class="image-caption">Свидетельство о регистрации (СТС) <br>(проверьте срок действия)
+              </p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="docs/s.webp" alt="Страховой полис ОСАГО" class="carousel-img" loading="lazy">
+              <p class="image-caption">Страховой полис ОСАГО <br>(проверьте срок действия)</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="docs/dc.webp" alt="Диагностическая карта" class="carousel-img" loading="lazy">
+              <p class="image-caption">Диагностическая карта <br>(проверьте срок действия)</p>
+            </div>
+          </div>
+          <!-- <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="docs/tc.webp" alt="Карточка фрахтовщика" class="carousel-img" loading="lazy">
+              <p class="image-caption">Карточка фрахтовщика</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="docs/rl.webp" alt="Заполненный путевой лист" class="carousel-img" loading="lazy">
+              <p class="image-caption">Заполненный путевой лист</p>
+            </div>
+          </div> -->
+        </div>
+        <div class="carousel-dots">
+          <span class="dot" data-index="0"></span>
+          <span class="dot" data-index="1"></span>
+          <span class="dot" data-index="2"></span>
+          <span class="dot" data-index="3"></span>
+          <!-- <span class="dot" data-index="4"></span>
+          <span class="dot" data-index="5"></span> -->
+        </div>
+      </div>
+      <!-- <div class="image-wrapper">
+        <img src="docs/tc2.webp" alt="Сведения об ОСГОП" class="carousel-img" loading="lazy">
+        <p class="image-caption">Сведения об ОСГОП указанны в данной графе</p>
+      </div>
+      <h3 class="sub-heading">Порядок получения путевого листа*</h3>
+      <ul class="minimal-list">
+        <li>По прибытии в парк, получите у механика документы на автомобиль, карточку фрахтовщика
+          (перевозчика), путевой лист, «шашку» на крышу. Ставите <span class="word-highlight">подпись</span> о получении.</li>
+        <li>Проходите медицинское освидетельствование (общее самочувствие, температура тела, артериальное
+          давление, проверка на состояние опьянения), ставите <span class="word-highlight">время</span> и
+          подпись у ответственного.</li>
+        <li>Получаете у механика ключи от автомобиля и производите осмотр автомобиля. После завершения
+          осмотра, <span class="word-highlight">время</span> и подпись у механика о выдаче транспортного
+          средства.</li>
+        <li>Ставите свою <span class="word-highlight">подпись</span> о приеме
+          транспортного средства в технически исправном состоянии.</li>
+        <li>Ставите свою <span class="word-highlight">подпись</span> в графе об
+          осведомленности о действиях в случае утери «шашек», путевого листа или карты фрахтовщика.</li>
+        <li>На выезде из парка ставите отметку о <span class="word-highlight">времени</span> выезда.</li>
+        <li>Отметка о <span class="word-highlight">километраже</span> автомобиля на момент
+          выезда.</li>
+      </ul>
+      <div class="alert-block alert-orange">
+        <p class="alert-text">Неправильное заполнение путевого листа, отсутствие путевого листа и другие
+          нарушения связанные с путевой документацией, влечёт наложение штрафа в размере 100.000 ₽ и помещение
+          автомобиля на штрафстоянку сроком до 2 месяцев.</p>
+      </div>
+      <p class="note-text">*В отдельных случаях возможен выезд механика и медицинского работника к
+        водителю.</p> -->
+      <br>
+      <h3 class="sub-heading">Ежедневный осмотр автомобиля</h3>
+      <ul class="minimal-list">
+        <li>Обойдите автомобиль вокруг, убедитесь в отсутствии повреждений.</li>
+        <li>Проверьте колёса.</li>
+        <li>Проверьте уровень жидкостей, ремень на трещины, состояние аккумулятора и крепление клемм,
+          отсутствие течи.</li>
+        <li>Проверьте документы и сроки их действия.</li>
+        <li>Убедитесь в чистоте автомобиля.</li>
+      </ul>
+      <div class="alert-block alert-orange">
+        <p class="alert-text">Если обнаружили повреждения на месте стоянки: позвоните начальнику колонны.
+          Не трогая машину, сфотографируйте её со всех сторон, зафиксируйте повреждения общим планом и крупно. Вызовите
+          полицию для оформления происшествия.</p>
+      </div>
+      <!-- <div class="carousel" id="carousel-auto">
+        <div class="carousel-track">
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="auto/granta.webp" alt="Granta" class="carousel-img" loading="lazy">
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="auto/polo.webp" alt="Polo" class="carousel-img" loading="lazy">
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="auto/rapid.webp" alt="Rapid" class="carousel-img" loading="lazy">
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="auto/jetta.webp" alt="Jetta" class="carousel-img" loading="lazy">
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="auto/moscvich.webp" alt="Moscvich" class="carousel-img" loading="lazy">
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="auto/kaiyi.webp" alt="Kaiyi" class="carousel-img" loading="lazy">
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="auto/jac.webp" alt="JAC" class="carousel-img" loading="lazy">
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="auto/baic.webp" alt="BAIC" class="carousel-img" loading="lazy">
+            </div>
+          </div>
+         <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="auto/h5.webp" alt="H5" class="carousel-img" loading="lazy">
+            </div>
+          </div>
+        </div>
+        <div class="carousel-dots">
+          <span class="dot" data-index="0"></span>
+          <span class="dot" data-index="1"></span>
+          <span class="dot" data-index="2"></span>
+          <span class="dot" data-index="3"></span>
+          <span class="dot" data-index="4"></span>
+          <span class="dot" data-index="5"></span>
+          <span class="dot" data-index="6"></span>
+          <span class="dot" data-index="7"></span>
+          <span class="dot" data-index="8"></span>
+        </div>
+      </div> -->
+      <div class="image-wrapper">
+        <img src="auto/h5.webp" alt="H5" class="carousel-img" loading="lazy">
+      </div>
+      <h3 class="sub-heading">Технический осмотр и ремонт</h3>
+      <ul class="minimal-list">
+        <li>ТО проводится каждые 10 000 км.</li>
+        <li>Ремонт и обслуживание – только в автосервисе таксопарка.</li>
+        <li>Запись на ТО и ремонт – за 1 день до визита.</li>
+        <li>Любое самостоятельное вмешательство (ремонт, замена запчасти, долив масла) – только после
+          согласования с начальником колонны.</li>
+      </ul>
+
+      <div class="alert-block alert-orange">
+        <p class="alert-text">При получении автомобиля узнайте у механика, через сколько километров вам
+          нужно приехать на техническое обслуживание.</p>
+      </div>
+      <h3 class="sub-heading">Выезд за пределы Московской области</h3>
+
+      <div class="image-wrapper" style="height: auto; min-height: 280px;">
+        <img src="get_out/out.webp" alt="Выезд за пределы МО" class="carousel-img" loading="lazy">
+        <p class="image-caption">Звонок начальнику колонны перед выездом за пределы Московской области
+          обязателен.</p>
+      </div>
+
+      <div class="alert-block alert-orange">
+        <p class="alert-text">В случае поломки или ДТП за пределами Московской области эвакуатор
+          оплачивается водителем.</p>
+      </div>
+      <h3 class="sub-heading">Действия при ДТП*</h3>
+      <ul class="minimal-list">
+        <li>Остановитесь, включите аварийную сигнализацию, выставьте знак. За городом наденьте
+          светоотражающий жилет.</li>
+        <li>Если есть пострадавшие – вызовите скорую (103 или 112). Не оказывайте первую помощь, если не
+          умеете.</li>
+        <li>Сфотографируйте место ДТП, повреждения всех автомобилей, их номера и пришлите начальнику
+          колонны.</li>
+        <li>Дождитесь сотрудника ГИБДД.</li>
+      </ul>
+      <p class="note-text">*При ДТП по вашей вине эвакуатор оплачиваете вы.</p>
+      <div class="alert-block alert-orange">
+        <p class="alert-text" style="font-weight: 300; margin-bottom: 12px;"><strong>Если сотрудник
+            ГИБДД просит освободить проезжую часть:</strong></p>
+        <ul class="minimal-list" style="margin: 0; border-left: none; padding-left: 24px;">
+          <li>Припаркуйтесь, соблюдая правила. Не ставьте автомобиль под знак <img src="signs/3_27.webp"
+              alt="Остановка запрещена" class="inline-icon" loading="lazy"></li>
+          <li>Оплатите платную парковку.</li>
+          <li>Не нарушайте иные правила ПДД.</li>
+        </ul>
+      </div>
+      <p class="list-intro">Условия для оформления европротокола*:</p>
+      <ul class="minimal-list">
+        <li>Начальник колонны одобрил европротокол;</li>
+        <li>в ДТП только 2 ТС, нет пострадавших;</li>
+        <li>у обоих водителей действующий ОСАГО;</li>
+        <li>оба согласны на европротокол, не повреждена инфраструктура, расположение ТС не менялось.
+        </li>
+      </ul>
+      <p class="note-text">*Европротокол – крайняя мера. Делайте всё возможное для оформления через
+        ГИБДД.</p>
+      <br>
+      <h3 class="sub-heading">Действия при поломке на дороге</h3>
+      <ul class="minimal-list">
+        <li>Остановитесь, соблюдая ПДД и технику безопасности.</li>
+        <li>Высадите пассажиров.</li>
+        <li>Выставьте знак аварийной остановки.</li>
+        <li>Позвоните начальнику колонны для вызова механика или эвакуатора.</li>
+      </ul>
+
+      <div class="alert-block alert-orange">
+        <p class="alert-text">Если вынуждены встать на платной парковке – оплатите её. В дальнейшем вы
+          получите компенсацию.</p>
+      </div>
+    </section>
+    <section id="fines" class="info-section">
+      <h2 class="section-title">Штрафы</h2>
+      <p class="desc-text">Все штрафы ГИБДД свыше 1.000 ₽ списываются автоматически со счёта приложения
+        частями по 1.000 ₽ ежедневно.</p>
+      <div class="fade-divider"></div>
+
+      <!-- <h3 class="sub-heading">Отсутствие карточки фрахтовщика (перевозчика)</h3>
+      <p class="section-subtitle" style="margin-bottom: 16px;">Штраф <span class="price-text">30.000 ₽</span>.</p>
+
+      <div class="image-wrapper" style="height: auto; min-height: 280px;">
+        <img src="fines/taxi_card.webp" alt="Карточка фрахтовщика" class="carousel-img" loading="lazy">
+        <p class="image-caption">Образец правильного расположения</p>
+      </div>
+      <br>
+      <h3 class="sub-heading">Отсутствие фонаря «Такси» или «шашек»</h3>
+      <p class="section-subtitle">Штраф <span class="price-text">50.000 ₽</span>.</p>
+
+      <div class="image-wrapper" style="height: auto; min-height: 280px;">
+        <img src="fines/taxi_hat.webp" alt="Фонарь такси" class="carousel-img" loading="lazy">
+        <p class="image-caption">После работы снимайте фонарь и кладите на пол со стороны водителя. Так
+          фонарь не украдут, а при выходе на линию вы не забудете его установить. Не стоит класть фонарь в багажник.</p>
+      </div> -->
+      <br>
+      <h3 class="sub-heading">Парковка на газоне и тротуаре</h3>
+      <p class="section-subtitle">Штраф <span class="price-text">300.000 ₽</span>.</p>
+
+      <div class="image-wrapper" style="height: auto; min-height: 280px;">
+        <img src="fines/grass.webp" alt="Парковка на газоне" class="carousel-img" loading="lazy">
+        <p class="image-caption">Паркуйте машину так, чтобы все четыре колеса стояли на асфальте
+          проезжей части. Не ставьте машину на газон, тротуар для пешеходов и на бордюр.</p>
+      </div>
+      <br>
+      <h3 class="sub-heading">Нарушение правил перевозки детей</h3>
+      <p class="section-subtitle">Штраф за отсутствие/неподходящее/неправильно установленное кресло или непристёгнутого
+        ребёнка <span class="price-text">200.000 ₽</span></p>
+
+      <div class="image-wrapper" style="height: auto; min-height: 280px;">
+        <img src="fines/child_chair.webp" alt="Детское кресло" class="carousel-img" loading="lazy">
+        <p class="image-caption">Дети старше 12 лет, ростом выше 150 см и весом более 36 кг, могут ехать
+          сзади пристегнутыми обычными ремнями безопасности.</p>
+      </div>
+      <div class="carousel" id="carousel-fines-example">
+        <div class="carousel-track">
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="fines/boy.webp" alt="Рост ребенка" class="carousel-img" loading="lazy">
+              <p class="image-caption">Рост ребенка выше 150 см</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="fines/good.webp" alt="Правильно" class="carousel-img" loading="lazy">
+              <p class="image-caption text-green">Правильно. Ремень проходит через плечо.</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="fines/not_good.webp" alt="Неправильно" class="carousel-img" loading="lazy">
+              <p class="image-caption text-orange">Неправильно. Ремень проходит через шею.</p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-dots">
+          <span class="dot" data-index="0"></span>
+          <span class="dot" data-index="1"></span>
+          <span class="dot" data-index="2"></span>
+        </div>
+      </div>
+      <div class="alert-block alert-orange">
+        <p class="alert-text">Если у клиента нет детского кресла — попросите отменить заказ. Если клиент
+          отказывается отменять заказ, оставайтесь на месте и дождитесь автоматической отмены заказа.</p>
+      </div>
+      <br>
+      <h3 class="sub-heading">Опьянение или отказ от медосвидетельствования</h3>
+      <p class="section-subtitle" style="margin-bottom: 16px;">Штраф <span class="price-text">145.000 ₽</span> + лишение
+        прав на 1,5–2 года.</p>
+
+      <div class="image-wrapper" style="height: auto; min-height: 280px;">
+        <img src="fines/alko.webp" alt="Алко" class="carousel-img" loading="lazy">
+        <p class="image-caption">Всегда соглашайтесь на прохождение медицинского освидетельствования,
+          даже если говорят, что можно отказаться!</p>
+      </div>
+      <br>
+
+      <p class="desc-text">Некоторые лекарства влияют на способность управлять транспортными
+        стредствами. Перед приёмом проверяйте инструкцию или спросите в аптеке при приобретении.</p>
+
+      <ul class="checklist-main">
+        <li class="checklist-group">
+          <span class="main-item-title">Категорически запрещено управлять автомобилем при приеме:</span>
+          <ul class="checklist-sub">
+            <li>Андипал, Беллатаминал, Валокордин, Валосердин, Каффетин, Корвалдин, Корвалол, Омнопон,
+              Пентабуфен, Пенталгин-Н, Пентанов, Пливалгин, Седал, Седальгин Нео, Солпадеин, Тедеин, Теофедрин,
+              Терпинкод, Тофф Плюс</li>
+          </ul>
+        </li>
+        <li class="checklist-group">
+          <span class="main-item-title">Нежелательно управлять автомобилем при приёме:</span>
+          <ul class="checklist-sub">
+            <li>Алпразолам, Антигриппин, Атаракс, Габапентин, Диазепам, Димедрол, Лавокодин, Лоперамид,
+              сиропы (на спирту), Супрастин, Тавегил, Телфаст, Феназепам, Фенибут, Цетрин и др.</li>
+          </ul>
+        </li>
+      </ul>
+      <br>
+      <h3 class="sub-heading">Проезд на запрещающий сигнал светофора</h3>
+      <p class="section-subtitle" style="margin-bottom: 16px;">Штраф: <span class="price-text">7.500 ₽</span>.</p>
+
+      <p class="desc-text">Жёлтый сигнал запрещает движение. Останавливайтесь до линии, если можете
+        безопасно затормозить.</p>
+
+      <p class="list-intro">Что считается нарушением:</p>
+      <ul class="minimal-list">
+        <li>Проезд на красный или жёлтый сигнал светофора.</li>
+        <li>Пересечение стоп-линии передней частью автомобиля при запрещающем сигнале светофора.</li>
+        <li>Выезд за стоп-линию при запрещающем жесте регулировщика.</li>
+      </ul>
+
+      <div class="alert-block alert-orange">
+        <p class="alert-text">Совет: Подъезжая к перекрёстку, заранее снижайте скорость. Если загорелся
+          жёлтый — тормозите, а не ускоряйтесь.</p>
+      </div>
+      <br>
+      <h3 class="sub-heading">Движение по автобусной полосе запрещено.</h3>
+      <p class="section-subtitle" style="margin-bottom: 16px;">Движение по автобусной полосе: штраф
+        <span class="price-text">4.500 ₽</span>.
+      </p>
+
+      <div class="image-wrapper" style="height: auto; min-height: 280px;">
+        <img src="fines/bus_line.webp" alt="Автобусная полоса" class="carousel-img" loading="lazy">
+        <p class="image-caption">Движение по автобусной полосе категорически запрещено!</p>
+      </div>
+      <br>
+      <h3 class="sub-heading">Остановка под знаком</h3>
+      <p class="section-subtitle" style="margin-bottom: 16px;">Остановка под знаком «Остановка запрещена»: штраф <span
+          class="price-text">4.500 ₽</span>.</p>
+      <img src="signs/3_27.webp" alt="Остановка запрещена" class="inline-icon"
+        style="display:inline-block; vertical-align:middle;" loading="lazy">
+
+      <div class="image-wrapper" style="height: auto; min-height: 280px;">
+        <img src="fines/folkon.webp" alt="Флакон" class="carousel-img" loading="lazy">
+        <p class="image-caption">Если точка посадки или высадки пассажира в зоне действия знака
+          «Остановка запрещена», то проедьте немного дальше, поверните во двор или встаньте на платной парковке и
+          высадите пассажира, вежливо объяснив причину вашего действия.</p>
+      </div>
+      <br>
+      <h3 class="sub-heading">Превышение скорости</h3>
+      <p class="section-subtitle" style="margin-bottom: 16px;">Штраф за превышение скорости: <span class="price-text">от
+          750 до 7.500 ₽</span>.</p>
+
+      <p class="list-intro">Превышать на 20 км/ч? Нет смысла!</p>
+      <ul class="minimal-list">
+        <li>Время? Не экономите — светофоры и пробки всё равно сравняют.</li>
+        <li>Расходы? Растут: больше штрафов, выше расход топлива.</li>
+        <li>Безопасность? Снижается: меньше времени на реакцию, выше риск ДТП.</li>
+        <li>Блокировка аккаунта Яндексом</li>
+      </ul>
+
+      <div class="alert-block alert-orange">
+        <p class="alert-text">Вывод: Плавная езда в рамках ограничения скорости — это выгодно, безопасно
+          и спокойно.</p>
+      </div>
+      <br>
+      <h3 class="sub-heading">Движение по обочине</h3>
+      <p class="section-subtitle" style="margin-bottom: 16px;">Штраф: <span class="price-text">2.250 ₽</span>.</p>
+      <p class="desc-text">Движение по обочине равносильно созданию аварийной ситуации. В случае ДТП
+        виноваты будете вы.</p>
+      <br>
+      <h3 class="sub-heading">Непристёгнутый ремень безопасности</h3>
+      <p class="section-subtitle" style="margin-bottom: 16px;">Штраф: <span class="price-text">1.500 ₽</span>.</p>
+      <p class="desc-text">Ответственность за пассажиров несёт водитель. В случае остановки сотрудниками
+        ГИБДД штраф получает водитель и пассажиры.</p>
+      <br>
+      <h3 class="sub-heading">Использование телефона за рулем</h3>
+      <p class="section-subtitle" style="margin-bottom: 16px;">Штраф: <span class="price-text">1.500 ₽</span>.</p>
+      <p class="desc-text">Используйте держатель для телефона и гарнитуру (наушник).</p>
+      <br>
+      <h3 class="sub-heading">Неоплаченная парковка</h3>
+      <p class="section-subtitle" style="margin-bottom: 16px;">Штраф: <span class="price-text">25.000 ₽</span>.</p>
+
+      <div class="image-wrapper" style="height: auto; min-height: 280px;">
+        <img src="fines/toll_park.webp" alt="Знаки платной парковки" class="carousel-img" loading="lazy">
+        <p class="image-caption">Знаки платной парковки</p>
+      </div>
+
+      <p class="desc-text">Помните: знак платной парковки установлен не всегда. Иногда есть только синяя
+        разметка. Чтобы не ошибиться, перед парковкой откройте Яндекс Навигатор, Яндекс Про или приложение «Парковки
+        России» — там точно указано, платное ли место.</p>
+
+      <div class="image-wrapper" style="height: auto; min-height: 280px;">
+        <img src="fines/blue.jpeg" alt="Разметка платной парковки" class="carousel-img" loading="lazy">
+        <p class="image-caption">Разметка платной парковки</p>
+      </div>
+
+      <div class="alert-block alert-orange">
+        <ul class="minimal-list" style="margin: 0; padding-left: 24px; border-left: none;">
+          <li>Время бесплатной парковки — первые 5 минут!</li>
+          <li>Внутри ТТК бесплатных парковок нет.</li>
+        </ul>
+      </div>
+    </section>
+    <!--БЛОК РЕКОМЕНДАЦИЙ-->
+    <section id="recommendations" class="info-section">
+      <h2 class="section-title">Рекомендации</h2>
+      <div class="fade-divider"></div>
+      <h3 class="sub-heading">Оплата парковки</h3>
+      <p class="desc-text">Рекомендуем настроить приложение "Яндекс Про" таким образом, чтобы на карте
+        отображались платные парковки и зоны где остановка запрещена. Также скачайте приложение "Парковки России" для
+        оплаты парковки.</p>
+      <br>
+      <p class="desc-text">Скачайте приложение "Парковки России"</p>
+
+      <div class="app-download-buttons">
+        <a href="https://apps.apple.com/bm/app/парковки-россии/id1434426876" class="download-btn" target="_blank"
+          rel="noopener">
+          <img src="logo/appstore.svg" alt="AppStore" class="store-icon" loading="lazy">
+          <span>AppStore</span>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=ru.mosparking.appnew" class="download-btn"
+          target="_blank" rel="noopener">
+          <img src="logo/playmarket.svg" alt="Google Play" class="store-icon" loading="lazy">
+          <span>Google Play</span>
+        </a>
+        <a href="https://appgallery.huawei.com/#/app/C101992459?appId=C101992459&source=appshare&subsource=C101992459"
+          class="download-btn" target="_blank" rel="noopener">
+          <img src="logo/appgallery.svg" alt="AppGallery" class="store-icon" loading="lazy">
+          <span>AppGallery</span>
+        </a>
+        <a href="https://apps.rustore.ru/app/ru.mosparking.appnew" class="download-btn" target="_blank" rel="noopener">
+          <img src="logo/rustore.svg" alt="RuStore" class="store-icon" loading="lazy">
+          <span>RuStore</span>
+        </a>
+      </div>
+      <br>
+      <p class="list-intro" style="text-align: center; margin: 24px 0 4px;">Настройка приложения
+        «Парковки России»</p>
+
+      <div class="carousel" id="carousel-parking-instruction">
+        <div class="carousel-track">
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="instruction/4.webp" alt="Шаг 1" class="carousel-img" loading="lazy">
+              <p class="image-caption">Нажмите кнопку пополнения баланса (в начале у вас будет
+                отображаться 0 ₽).</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="instruction/5.webp" alt="Шаг 2" class="carousel-img" loading="lazy">
+              <p class="image-caption">Выберите сумму пополнения и нажмите кнопку пополнения.</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="instruction/6.webp" alt="Шаг 3" class="carousel-img" loading="lazy">
+              <p class="image-caption">Выберите способ оплаты (СБП, Банковская карта или списание с
+                номера телефона).</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="instruction/7.webp" alt="Шаг 4" class="carousel-img" loading="lazy">
+              <p class="image-caption">Нажмите кнопку «Добавить автомобиль».</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="instruction/8.webp" alt="Шаг 5" class="carousel-img" loading="lazy">
+              <p class="image-caption">Введите номер автомобиля. Используйте русские буквы.</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="instruction/9.webp" alt="Шаг 6" class="carousel-img" loading="lazy">
+              <p class="image-caption">Нажмите кнопку «Готово».</p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-dots">
+          <span class="dot" data-index="0"></span>
+          <span class="dot" data-index="1"></span>
+          <span class="dot" data-index="2"></span>
+          <span class="dot" data-index="3"></span>
+          <span class="dot" data-index="4"></span>
+          <span class="dot" data-index="5"></span>
+        </div>
+      </div>
+      <p class="list-intro" style="text-align: center; margin: 40px 0 12px;">Отображение парковок в
+        приложении Яндекс Про</p>
+
+      <div class="carousel" id="carousel-yandex-layers">
+        <div class="carousel-track">
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="instruction/1.webp" alt="Шаг 1" class="carousel-img" loading="lazy">
+              <p class="image-caption">Нажмите значок «Слои».</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="instruction/2.webp" alt="Шаг 2" class="carousel-img" loading="lazy">
+              <p class="image-caption">Включите режим отображения парковок.</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="instruction/3.webp" alt="Шаг 3" class="carousel-img" loading="lazy">
+              <p class="image-caption">На карте появятся зоны платной парковки и места, где остановка
+                запрещена.</p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-dots">
+          <span class="dot" data-index="0"></span>
+          <span class="dot" data-index="1"></span>
+          <span class="dot" data-index="2"></span>
+        </div>
+      </div>
+      <p class="list-intro" style="text-align: center; margin: 40px 0 12px;">Как оплатить парковку</p>
+
+      <div class="carousel" id="carousel-parking-payment">
+        <div class="carousel-track">
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="instruction/10.webp" alt="Шаг 1" class="carousel-img" loading="lazy">
+              <p class="image-caption">В приложении «Яндекс ПРО» выбираете нужную вам парковку. Внизу
+                отобразится номер парковочной зоны.</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="instruction/11.webp" alt="Шаг 2" class="carousel-img" loading="lazy">
+              <p class="image-caption">Зайти в приложение «Парковки России», нажать поиск вверху или
+                внизу.</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="instruction/12.webp" alt="Шаг 3" class="carousel-img" loading="lazy">
+              <p class="image-caption">В поиске написать номер парковочной зоны, которая показана в
+                приложении «Яндекс ПРО».</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="instruction/13.webp" alt="Шаг 4" class="carousel-img" loading="lazy">
+              <p class="image-caption">Нажать «Припарковать».</p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-dots">
+          <span class="dot" data-index="0"></span>
+          <span class="dot" data-index="1"></span>
+          <span class="dot" data-index="2"></span>
+          <span class="dot" data-index="3"></span>
+        </div>
+      </div>
+
+      <ul class="minimal-list">
+        <li>Оплата выбранного времени списывается сразу, однако если вы завершаете парковку раньше, то
+          неиспользованные средства вернутся на счет.</li>
+        <li>По умолчанию время парковки выбрано на 1 час. Время можно изменить в большую и меньшую
+          сторону.</li>
+        <li>За 15 минут до окончания парковочного времени приложение предложит продлить время.</li>
+        <li>До конца суток можно изменить время начала, номер автомобиля и парковочную зону. Изменения
+          можно внести в настройках, только в том случае если парковка была ранее оплачена.</li>
+      </ul>
+      <div class="alert-block alert-orange">
+        <p class="alert-text" style="margin-bottom: 12px;"><strong>Также парковку можно оплатить с
+            помощью СМС</strong></p>
+        <p class="alert-text" style="margin-bottom: 8px;">Для оплаты нужно отправить СМС-сообщение на
+          номер 7757 с текстом: номер парковки*номер автомобиля*кол-во часов от 1 до 24</p>
+        <p class="alert-text" style="margin: 8px 0;"> <span class="text-light">Пример:
+            1004*А123АА199*3</span></p>
+        <p class="alert-text" style="margin: 8px 0;">Для продления парковки — с текстом X[кол-во часов]
+        </p>
+        <p class="alert-text" style="margin: 8px 0;"> <span class="text-light">Пример: X2</span></p>
+        <p class="alert-text" style="margin: 8px 0;">Для досрочной остановки парковки — с текстом S или
+          С</p>
+        <p class="alert-text" style="margin: 8px 0;"><span class="text-light">Пример: S</span></p>
+        <p class="alert-text" style="margin-top: 12px;">При этом сумма за неиспользованное время стоянки
+          возвращается на ваш парковочный счёт. Обязательно дождитесь СМС-отчёт о выполненной услуге!</p>
+      </div>
+      <br>
+      <h3 class="sub-heading">Рекомендуемый режим работы</h3>
+      <p class="desc-text">Самое выгодное время для работы: 05:00–11:00 и 15:00–20:00. В эти часы спрос
+        максимальный.</p>
+      <p class="desc-text">Ваш комфорт и безопасность важнее всего. Усталость снижает концентрацию,
+        поэтому обязательно делайте перерывы и высыпайтесь.</p>
+      <br>
+      <h3 class="sub-heading">Установите видеорегистратор</h3>
+      <p class="desc-text">Видеорегистратор поможет вам при возникновении спорных ситуаций с клиентом и другими
+        участниками дорожного движения.</p>
+      <br>
+      <h3 class="sub-heading">Следите за балансом</h3>
+      <p class="desc-text">Поддерживайте положительный баланс в приложении, во избежания образования задолженности.</p>
+      <br>
+      <h3 class="sub-heading">Соблюдайте закон</h3>
+      <p class="desc-text">Не перевозите никакие посылки работая в режиме "Такси". При выполнении заказа
+        с вами всегда должен быть клиент.</p>
+      <p class="desc-text">Остерегайтесь предложений «подработать» или «перевезти коробку». За этим
+        часто скрываются незаконные схемы. Полиция и службы безопасности отслеживают подозрительные действия.</p>
+      <p class="desc-text">Откажитесь, сообщите диспетчеру. Работайте законно!</p>
+      <br>
+<h3 class="sub-heading">Другие рекомендации</h3>
+<p class="desc-text">С другими правилами и рекомендациями можно ознакомиться в базе знаний Яндекса <a href="https://pro.yandex.ru/ru-ru/novosibirsk/knowledge-base/taxi/quality-standards/standarts-premium?section=нестандартные-ситуации" target="_blank" rel="noopener" style="color: var(--color-accent); text-decoration: none; border-bottom: 1px dashed var(--color-accent);">«Нажмите тут»</a></p>
+    </section>
+    <section id="contacts" class="info-section">
+      <h2 class="section-title">Контакты</h2>
+      <div class="fade-divider"></div>
+
+      <!--ПЕРВАЯ КАРУСЕЛЬ КОНТАКТОВ-->
+      <h3 class="sub-heading">Адрес таксопарка Волоколамское</h3>
+      <p class="desc-text" style="margin-bottom: 20px;">г. Москва, Волоколамское ш., д. 142, стр. 1
+      </p>
+
+      <a href="https://yandex.ru/maps/?text=г.+Москва,+Волоколамское+ш.,+д.+142,+стр.+1" class="route-btn"
+        target="_blank" rel="noopener">Построить маршрут</a>
+      <h3 class="sub-heading" style="margin-top: 24px;">По всем вопросам:</h3>
+          <!-- Карточка 6: Александр -->
+          <div class="carousel-slide">
+            <div class="contact-card">
+              <div class="card-header">
+                <img src="flags/ru.svg" alt="Флаг" class="contact-flag" loading="lazy">
+                <div class="card-info">
+                  <div class="card-name">Александр</div>
+                  <a href="tel:+79250088543" class="card-phone-link">+7-925-008-85-43</a>
+                  <div class="card-dayoff">Вс — выходной</div>
+                </div>
+              </div>
+              <div class="card-actions">
+                <a href="tel:+79250088543" class="icon-btn" aria-label="Позвонить"><span class="contact-icon"
+                    style="--icon-url: url('icon/phone.svg');"></span></a>
+                <a href="https://wa.me/79250088543" target="_blank" class="icon-btn" aria-label="WhatsApp">
+                  <img src="icon/whatsapp.svg" alt="WhatsApp" class="contact-icon-img" loading="lazy">
+                </a>
+                <a href="tg://resolve?phone=+79250088543" target="_blank" class="icon-btn" aria-label="Telegram">
+                  <img src="icon/tg.svg" alt="Telegram" class="contact-icon-img" loading="lazy">
+                </a>
+              </div>
+            </div>
+          </div>
+      <br>
+      <!--ВТОРАЯ КАРУСЕЛЬ КОНАТКТОВ-->
+      <h3 class="sub-heading">Адрес сервиса</h3>
+      <p class="desc-text" style="margin-bottom: 20px;">МО, г. Нахабино, ул. Красноармейская, д. 61 Б
+      </p>
+
+      <a href="https://yandex.ru/maps/?text=Московская+область+Нахабино+Красноармейская+61Б" class="route-btn"
+        target="_blank" rel="noopener">Построить маршрут</a>
+
+
+
+
+
+
+    </section>
+  </main>
+
+  <!-- 3. Фиксированное нижнее меню -->
+  <nav class="floating-bottom-nav">
+    <a href="#conditions" class="nav-item">
+      <span class="nav-icon" style="--icon-url: url('icon/contract.svg');"></span>
+      <span class="nav-label">Условия</span>
+    </a>
+    <a href="#briefing" class="nav-item">
+      <span class="nav-icon" style="--icon-url: url('icon/instruction.svg');"></span>
+      <span class="nav-label">Инструктаж</span>
+    </a>
+    <a href="#fines" class="nav-item">
+      <span class="nav-icon" style="--icon-url: url('icon/fines.svg');"></span>
+      <span class="nav-label">Штрафы</span>
+    </a>
+    <a href="#contacts" class="nav-item">
+      <span class="nav-icon" style="--icon-url: url('icon/contacts.svg');"></span>
+      <span class="nav-label">Контакты</span>
+    </a>
+  </nav>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,901 @@
+/* style.css — Часть 1: Фундамент и переменные */
+:root {
+  /* Твоя палитра */
+  --color-bg: #1b1b1b;
+  --color-surface: #323232;
+  --color-light: #ffe7d0;
+  --color-accent: #fc6e20;
+
+  /* Текст и градиенты */
+  --color-text: var(--color-light);
+  --color-text-muted: #b8a88f;
+  --gradient-title: linear-gradient(135deg, var(--color-accent), var(--color-light));
+
+  /* Размеры и отступы */
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --shadow-float: 0 10px 30px rgba(0, 0, 0, 0.45);
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+  /* Шрифт (всегда тонкий) */
+  --font-main: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+  /* Убирает синюю вспышку при нажатии на Android/iOS */
+}
+
+body {
+  font-family: var(--font-main);
+  font-weight: 300;
+  /* Тонкое начертание по умолчанию */
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.55;
+  min-height: 100dvh;
+  /* Корректная высота экрана на мобильных с учётом панелей браузера */
+  overflow-x: hidden;
+  /* Запрещаем горизонтальный скролл */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Зона скролла: отступы под фиксированные шапку и подвал */
+.main-content {
+  padding-top: calc(72px + var(--safe-top) + 24px);
+  padding-bottom: calc(84px + var(--safe-bottom) + 24px);
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.info-section {
+  margin-bottom: 36px;
+  animation: fadeInSection 0.6s ease both;
+  /* Плавное появление, оживим в JS позже */
+}
+
+.section-title {
+  font-size: 26px;
+  font-weight: 300;
+  /* Тонкий заголовок */
+  background: var(--gradient-title);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 14px;
+}
+
+@keyframes fadeInSection {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* style.css — Часть 2: Шапка и выпадающее меню */
+
+/* --- Фиксированная шапка с эффектом парения --- */
+.floating-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 12px 16px;
+  padding-top: calc(var(--safe-top) + 12px);
+  background: rgba(50, 50, 50, 0.5);
+  /* полупрозрачный фон */
+  backdrop-filter: blur(10px);
+  /* эффект матового стекла */
+  -webkit-backdrop-filter: blur(14px);
+  /* поддержка Safari */
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  box-shadow: var(--shadow-float);
+  transition: box-shadow 0.3s ease;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logo-img {
+  height: 48px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* --- Кнопка выбора языка --- */
+.lang-wrapper {
+  position: relative;
+}
+
+.lang-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid rgba(255, 231, 208, 0.25);
+  border-radius: var(--radius-md);
+  padding: 8px 10px;
+  color: var(--color-text);
+  font-family: var(--font-main);
+  font-weight: 300;
+  font-size: 14px;
+  cursor: pointer;
+  touch-action: manipulation;
+  /* убирает задержку нажатия на тач-устройствах */
+  -webkit-tap-highlight-color: transparent;
+  transition: all 0.25s ease;
+}
+
+.lang-btn:active {
+  transform: scale(0.97);
+  border-color: var(--color-accent);
+  background: rgba(252, 110, 32, 0.1);
+}
+
+.lang-btn .flag {
+  width: 18px;
+  height: 14px;
+  border-radius: 2px;
+  object-fit: cover;
+}
+
+/* --- Выпадающий список языков --- */
+.lang-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 190px;
+  background: rgba(27, 27, 27, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 231, 208, 0.15);
+  border-radius: var(--radius-md);
+  list-style: none;
+  padding: 6px 0;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(-10px) scale(0.96);
+  transform-origin: top right;
+  pointer-events: none;
+  /* клики игнорируются, пока закрыт */
+  transition: opacity 0.3s ease,
+    transform 0.35s cubic-bezier(0.34, 1.2, 0.64, 1);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+  z-index: 101;
+}
+
+.lang-dropdown.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.lang-dropdown li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.lang-dropdown li:active {
+  background: rgba(252, 110, 32, 0.15);
+  transform: scale(0.98);
+}
+
+.lang-dropdown li img {
+  width: 20px;
+  height: 14px;
+  border-radius: 2px;
+  object-fit: cover;
+}
+
+/* style.css — Часть 3: Нижнее меню, разделитель, подложки изображений */
+
+/* --- Фиксированное нижнее меню --- */
+.floating-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: stretch;
+  background: rgba(50, 50, 50, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  box-shadow: var(--shadow-float);
+  border-top: 1px solid rgba(255, 231, 208, 0.1);
+  padding-bottom: var(--safe-bottom);
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  /* Равномерное распределение по ширине */
+  text-decoration: none;
+  color: var(--color-text-muted);
+  font-size: 12px;
+  font-weight: 300;
+  padding: 12px 6px;
+  transition: color 0.3s ease, transform 0.2s ease, background 0.2s ease;
+  border-radius: var(--radius-md);
+}
+
+.nav-item:active {
+  transform: scale(0.95);
+  background: rgba(252, 110, 32, 0.08);
+}
+
+.nav-item.active {
+  color: var(--color-accent);
+  background: rgba(252, 110, 32, 0.12);
+}
+
+.nav-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+/* --- Исчезающая линия-разделитель --- */
+.fade-divider {
+  height: 1px;
+  margin: 16px 0 24px;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(200, 200, 200, 0.3) 20%,
+      rgba(200, 200, 200, 0.4) 50%,
+      rgba(200, 200, 200, 0.3) 80%,
+      transparent 100%);
+  border: none;
+}
+
+/* --- Подложка для изображений и подписей --- */
+.image-wrapper {
+  background: rgba(50, 50, 50, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 231, 208, 0.12);
+  border-radius: var(--radius-lg);
+  padding: 12px;
+  margin: 16px 0;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+
+  /* Фиксированная высота подложки */
+  height: calc((100dvh - 156px) * 0.65);
+
+  /* Центрирование содержимого внутри подложки */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  display: block;
+}
+
+.image-caption {
+  margin-top: auto;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--color-text-muted);
+  text-align: center;
+  line-height: 1.4;
+  flex-shrink: 0;
+  /* Подпись никогда не сжимается */
+}
+
+/* style.css — Часть 4: Иконки и оформление кнопок меню */
+.nav-icon {
+  width: 26px;
+  height: 26px;
+  display: inline-block;
+  background-color: var(--color-text-muted);
+  /* Цвет неактивной иконки */
+  -webkit-mask-image: var(--icon-url);
+  mask-image: var(--icon-url);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  transition: none;
+  /* Полностью убирает переливы */
+}
+
+/* Увеличиваем зону нажатия для удобства пальцев */
+.nav-item {
+  min-height: 56px;
+  padding: 10px 4px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Эффект нажатия */
+.nav-item.active {
+  color: var(--color-accent);
+  /* Текст и иконка получают один точный оранжевый цвет */
+}
+
+.nav-item.active .nav-icon {
+  background-color: var(--color-accent);
+  /* Точный оранжевый #fc6e20 */
+}
+
+.nav-item.active {
+  color: var(--color-accent);
+  background: rgba(252, 110, 32, 0.15);
+}
+
+/* style.css — Часть 5: Подзаголовок, список и заготовка предупреждения */
+.section-subtitle {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+}
+
+.list-item {
+  background: rgba(50, 50, 50, 0.35);
+  border: 1px solid rgba(255, 231, 208, 0.08);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.item-title {
+  display: block;
+  font-size: 15px;
+  font-weight: 300;
+  margin-bottom: 6px;
+  background: var(--gradient-title);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.item-desc {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-text-muted);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* style.css — Часть 6: Минималистичный список и страховка */
+.insurance-block {
+  margin: 28px 0;
+  padding: 0 2px;
+}
+
+.sub-heading {
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--color-text);
+  margin-bottom: 8px;
+}
+
+.cost-text {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-accent);
+  /* Акцент на стоимости */
+  margin-bottom: 12px;
+}
+
+.desc-text,
+.liability-text {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.list-intro {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-text);
+  margin-bottom: 14px;
+}
+
+.minimal-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  border-left: 1px solid rgba(252, 110, 32, 0.3);
+  /* Тонкая вертикальная линия для структуры */
+  padding-left: 16px;
+}
+
+.minimal-list li {
+  position: relative;
+  padding-left: 12px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-text-muted);
+  line-height: 1.45;
+}
+
+.minimal-list li::before {
+  content: "";
+  position: absolute;
+  left: -19px;
+  top: 9px;
+  width: 5px;
+  height: 5px;
+  background: var(--color-accent);
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+/* style.css — Часть 7: Чеклист инструктажа и оранжевое предупреждение */
+.checklist-main {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+}
+
+.checklist-group {
+  margin-bottom: 22px;
+}
+
+.main-item-title {
+  display: block;
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--color-text);
+  margin-bottom: 10px;
+}
+
+.checklist-sub {
+  list-style: none;
+  padding: 0 0 0 18px;
+  margin: 0;
+  position: relative;
+}
+
+/* Вертикальная линия, плавно исчезающая по краям */
+.checklist-sub::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom,
+      transparent 0%,
+      var(--color-text) 12%,
+      var(--color-text) 88%,
+      transparent 100%);
+}
+
+.checklist-sub li {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin-bottom: 6px;
+}
+
+/* Базовый стиль предупреждающего блока */
+.alert-block {
+  border-radius: var(--radius-md);
+  padding: 18px 16px;
+  margin: 24px 0;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 231, 208, 0.15);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.alert-text {
+  font-size: 14px;
+  font-weight: 300;
+  margin: 0;
+  line-height: 1.45;
+  color: var(--color-light);
+}
+
+/* Оранжевый модификатор */
+.alert-block.alert-orange {
+  border-color: var(--color-accent);
+  background: rgba(252, 110, 32, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 1px rgba(252, 110, 32, 0.3),
+    0 0 12px rgba(252, 110, 32, 0.15);
+}
+
+.alert-block.alert-orange .alert-text {
+  color: var(--color-accent);
+}
+
+/* style.css — Часть 8: Карусель с эффектом следующей карточки */
+.carousel {
+  position: relative;
+  margin: 24px 0 32px;
+  padding: 0 4px;
+  /* Убираем overflow-x: auto отсюда! */
+}
+
+
+.carousel-track {
+  display: flex;
+  gap: 12px;
+  /* Отступ между слайдами */
+
+  /* Переносим прокрутку СЮДА */
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+
+  /* Скрываем скроллбар */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 4px;
+  /* Небольшой отступ, чтобы не наезжать на точки */
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-track:active {
+  cursor: grabbing;
+}
+
+.carousel-slide {
+  flex: 0 0 85%;
+  /* 85% ширины = видно край следующего слайда */
+  scroll-snap-align: start;
+  /* Привязка к началу слайда */
+  padding: 0 6px;
+  box-sizing: border-box;
+}
+
+.carousel-img {
+  margin: auto 0;
+  width: 100%;
+  height: auto;
+  /* Сохраняет оригинальные пропорции */
+  max-height: calc(100% - 40px);
+  /* Не даёт картинке перекрыть подпись */
+  object-fit: contain;
+  /* Показывает картинку целиком, без обрезки */
+  border-radius: var(--radius-md);
+  display: block;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+/* Точки-индикаторы */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(184, 168, 143, 0.3);
+  transition: all 0.3s ease;
+  cursor: default;
+  /* Не кликабельны */
+}
+
+.dot.active {
+  background: var(--color-accent);
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* КОД ДЛЯ ИСПОЛЬЗОВАНИЯ САЙТА ТОЛЬКО МОБИЛЬНОЙ ВЕРСИИ*/
+@media (min-width: 768px) {
+  body {
+    background: #111;
+  }
+
+  .floating-header,
+  .floating-bottom-nav {
+    max-width: 430px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+
+  .main-content {
+    max-width: 430px;
+    margin: 0 auto;
+  }
+}
+
+.word-highlight {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 2px 6px;
+  font-weight: 300;
+  color: var(--color-light);
+  display: inline-block;
+}
+
+.note-text {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-top: 16px;
+  line-height: 1.4;
+}
+
+.inline-icon {
+  width: 24px;
+  height: auto;
+  vertical-align: middle;
+  margin-left: 4px;
+  display: inline-block;
+}
+
+.price-text {
+  color: var(--color-accent);
+  /* Оранжевый цвет */
+  font-weight: 300;
+  /* Сохраняет тонкий шрифт */
+}
+
+/* Цвета текста для подписей в карусели с детьми */
+.text-green {
+  color: #8bc34a;
+  /* Приглушенный, но контрастный зеленый для темного фона */
+}
+
+.text-orange {
+  color: var(--color-accent);
+  /* Твой основной оранжевый */
+}
+
+/* ─── КНОПКИ СКАЧИВАНИЯ ПРИЛОЖЕНИЙ ─── */
+.app-download-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 16px 0 20px;
+  max-width: 380px;
+}
+
+.download-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: rgba(255, 231, 208, 0.08);
+  border: 1px solid rgba(255, 231, 208, 0.12);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--color-light);
+  font-size: 0.9rem;
+  font-weight: 300;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+
+.download-btn:hover {
+  border-color: var(--color-accent);
+  background: rgba(255, 231, 208, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.store-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 400px) {
+  .app-download-buttons {
+    gap: 8px;
+    max-width: 100%;
+  }
+
+  .download-btn {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+    gap: 8px;
+  }
+
+  .store-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.text-light {
+  color: var(--color-light);
+  /* Светлый цвет текста, используемый на сайте */
+  font-weight: 300;
+}
+
+/* Кнопка построения маршрута */
+.route-btn {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto 24px;
+  padding: 14px 20px;
+  background: rgba(252, 110, 32, 0.12);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-md);
+  color: var(--color-accent);
+  font-family: var(--font-main);
+  font-size: 15px;
+  font-weight: 300;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(252, 110, 32, 0.15);
+}
+
+.route-btn:active {
+  transform: scale(0.98);
+  background: rgba(252, 110, 32, 0.25);
+  box-shadow: 0 6px 20px rgba(252, 110, 32, 0.25);
+}
+
+/* --- Карточки контактов --- */
+.contacts-carousel {
+  margin-bottom: 32px;
+}
+
+.contact-card {
+  background: rgba(50, 50, 50, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 231, 208, 0.12);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.contact-flag {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 231, 208, 0.2);
+  flex-shrink: 0;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card-name {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-text);
+}
+
+.card-phone-link {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+
+.card-dayoff {
+  font-size: 12px;
+  color: #888;
+  font-weight: 300;
+}
+
+.card-actions {
+  display: flex;
+  gap: 14px;
+  padding-top: 6px;
+}
+
+.icon-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 50%;
+  border: 1px solid rgba(255, 231, 208, 0.1);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.icon-btn:active {
+  transform: scale(0.9);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.contact-icon {
+  width: 22px;
+  height: 22px;
+  display: block;
+  -webkit-mask-image: var(--icon-url);
+  mask-image: var(--icon-url);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  background-color: var(--color-text);
+  /* Светлый цвет текста сайта */
+}
+
+/* WhatsApp и Telegram: остаются в оригинальных цветах SVG */
+.contact-icon-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+  /* Никаких фильтров и масок — SVG показывает свои родные цвета */
+}
