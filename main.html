@@ -9,122 +9,110 @@
 </head>
 
 <body>
-
   <!-- 1. Фиксированная шапка -->
   <header class="floating-header">
     <div class="header-inner">
       <div class="logo">
         <!-- Замени src на путь к своему SVG-логотипу -->
-        <img src="logo/logo4.svg" alt="Логотип" class="logo-img" data-i18n="2">
+        <img src="logo/logo4.svg" alt="Логотип" class="logo-img">
       </div>
       <div class="lang-wrapper">
         <button class="lang-btn" id="langToggle">
-          <img src="flags/ru.svg" alt="" class="flag"> <span data-i18n="3">Русский</span>
+          <img src="flags/ru.svg" alt="" class="flag"> <span data-i18n="2">Русский</span>
         </button>
         <ul class="lang-dropdown" id="langList">
-          <li data-lang="ru"><img src="flags/ru.svg" alt=""> <span data-i18n="4">Русский</span></li>
-          <li data-lang="kg"><img src="flags/kg.svg" alt=""> <span data-i18n="5">Кыргызча</span></li>
-          <li data-lang="kk"><img src="flags/kz.svg" alt=""> <span data-i18n="6">Қазақша</span></li>
-          <li data-lang="tg"><img src="flags/tj.svg" alt=""> <span data-i18n="7">Тоҷикӣ</span></li>
-          <li data-lang="tm"><img src="flags/tm.svg" alt=""> <span data-i18n="8">Türkmen</span></li>
-          <li data-lang="uz"><img src="flags/uz.svg" alt=""> <span data-i18n="9">O'zbekcha</span></li>
+          <li data-lang="ru"><img src="flags/ru.svg"> <span data-i18n="3">Русский</span></li>
+          <li data-lang="kg"><img src="flags/kg.svg"> <span data-i18n="4">Кыргызча</span></li>
+          <li data-lang="kk"><img src="flags/kz.svg"> <span data-i18n="5">Қазақша</span></li>
+          <li data-lang="tg"><img src="flags/tj.svg"> <span data-i18n="6">Тоҷикӣ</span></li>
+          <li data-lang="tm"><img src="flags/tm.svg"> <span data-i18n="7">Türkmen</span></li>
+          <li data-lang="uz"><img src="flags/uz.svg"> <span data-i18n="8">O'zbekcha</span></li>
         </ul>
       </div>
     </div>
   </header>
-
   <!-- 2. Основной контент (здесь будет скролл) -->
   <main class="main-content">
     <section id="conditions" class="info-section">
-      <h2 class="section-title" data-i18n="10">Условия парка</h2>
+      <h2 class="section-title" data-i18n="9">Условия парка</h2>
       <div class="fade-divider"></div>
-
-      <p class="sub-heading" data-i18n="11">Правила работы, график сдачи авто и финансовые условия.</p>
-
+      <p class="sub-heading" data-i18n="10">Правила работы, график сдачи авто и финансовые условия.</p>
       <ul class="info-list">
         <li class="list-item">
-          <span class="item-title" data-i18n="12">Срок аренды</span>
-          <p class="item-desc" data-i18n="13">Минимальный срок аренды — 14 дней.</p>
+          <span class="item-title" data-i18n="11">Срок аренды</span>
+          <p class="item-desc" data-i18n="12">Минимальный срок аренды — 14 дней.</p>
         </li>
         <li class="list-item">
-          <span class="item-title" data-i18n="14">Бонус для новых водителей</span>
-          <p class="item-desc" data-i18n="15">Первый день аренды — бесплатно.</p>
+          <span class="item-title" data-i18n="13">Бонус для новых водителей</span>
+          <p class="item-desc" data-i18n="14">Первый день аренды — бесплатно.</p>
         </li>
         <li class="list-item">
-          <span class="item-title" data-i18n="16">Сдача автомобиля</span>
-          <p class="item-desc" data-i18n="17">График сдачи: понедельник – пятница. Оповестить начальника колонны
+          <span class="item-title" data-i18n="15">Сдача автомобиля</span>
+          <p class="item-desc" data-i18n="16">График сдачи: понедельник – пятница. Оповестить начальника колонны
             необходимо за 3 дня.</p>
         </li>
         <li class="list-item">
-          <span class="item-title" data-i18n="18">Списание аренды</span>
-          <p class="item-desc" data-i18n="19">Списание аренды происходит ежедневно в 12:00 со счёта приложения водителя.
+          <span class="item-title" data-i18n="17">Списание аренды</span>
+          <p class="item-desc" data-i18n="18">Списание аренды происходит ежедневно в 12:00 со счёта приложения водителя.
           </p>
         </li>
         <li class="list-item">
-          <span class="item-title" data-i18n="20">Комиссия парка</span>
-          <p class="item-desc" data-i18n="21">Составляет всего 3%.</p>
+          <span class="item-title" data-i18n="19">Комиссия парка</span>
+          <p class="item-desc" data-i18n="20">Составляет всего 3%.</p>
         </li>
       </ul>
       <!-- Блок страховой информации -->
       <div class="insurance-block">
-        <h3 class="sub-heading" data-i18n="22">Внутренняя страховка компании (КАСКО)</h3>
-        <p class="cost-text" data-i18n="23">Стоимость: 100 ₽ в день.</p>
-        <p class="desc-text" data-i18n="24">В случае значительного повреждения автомобиля водитель оплачивает не более
+        <h3 class="sub-heading" data-i18n="21">Внутренняя страховка компании (КАСКО)</h3>
+        <p class="cost-text" data-i18n="22">Стоимость: 100 ₽ в день.</p>
+        <p class="desc-text" data-i18n="23">В случае значительного повреждения автомобиля водитель оплачивает не более
           20 000 ₽, остальные расходы покрывает компания.</p>
-
-        <p class="list-intro" data-i18n="25">Страховка не действует в случае:</p>
+        <p class="list-intro" data-i18n="24">Страховка не действует в случае:</p>
         <ul class="minimal-list">
-          <li data-i18n="26">передачи автомобиля другому лицу;</li>
-          <li data-i18n="27">нахождения за рулём в состоянии опьянения;</li>
-          <li data-i18n="28">грубого нарушения ПДД;</li>
-          <li data-i18n="29">умышленного повреждения автомобиля;</li>
-          <li data-i18n="30">уезда с места ДТП;</li>
-          <li data-i18n="31">отсутствия документов об оформлении ДТП;</li>
-          <li data-i18n="32">если машина была неисправна, и вы знали об этом;</li>
-          <li data-i18n="33">использования авто в личных целях.</li>
+          <li data-i18n="25">передачи автомобиля другому лицу;</li>
+          <li data-i18n="26">нахождения за рулём в состоянии опьянения;</li>
+          <li data-i18n="27">грубого нарушения ПДД;</li>
+          <li data-i18n="28">умышленного повреждения автомобиля;</li>
+          <li data-i18n="29">уезда с места ДТП;</li>
+          <li data-i18n="30">отсутствия документов об оформлении ДТП;</li>
+          <li data-i18n="31">если машина была неисправна, и вы знали об этом;</li>
+          <li data-i18n="32">использования авто в личных целях.</li>
         </ul>
-
-        <p class="liability-text" data-i18n="34">Материальная ответственность: водитель несет ответственность за сколы,
+        <p class="liability-text" data-i18n="33">Материальная ответственность: водитель несет ответственность за сколы,
           царапины, вмятины, повреждения ходовой части, покрышки, диски, стёкла автомобиля и иные повреждения не
           являющиеся страховым случаем.</p>
       </div>
     </section>
-
     <section id="briefing" class="info-section">
-      <h2 class="section-title" data-i18n="35">Инструктаж</h2>
+      <h2 class="section-title" data-i18n="34">Инструктаж</h2>
       <div class="fade-divider"></div>
-
-      <h3 class="sub-heading" data-i18n="36">Обязательный осмотр при приёмке автомобиля</h3>
-
+      <h3 class="sub-heading" data-i18n="35">Обязательный осмотр при приёмке автомобиля</h3>
       <ul class="checklist-main">
         <li class="checklist-group">
-          <span class="main-item-title" data-i18n="37">Внешний вид:</span>
+          <span class="main-item-title" data-i18n="36">Внешний вид:</span>
           <ul class="checklist-sub">
-            <li data-i18n="38">оклейка кузова</li>
-            <li data-i18n="39">наличие повреждений (царапин, вмятин и т.д.)</li>
-            <li data-i18n="40">состояние салона</li>
-            <li data-i18n="41">состояние колёс</li>
-            <li data-i18n="42">целостность лобового стекла.</li>
+            <li data-i18n="37">оклейка кузова</li>
+            <li data-i18n="38">наличие повреждений (царапин, вмятин и т.д.)</li>
+            <li data-i18n="39">состояние салона</li>
+            <li data-i18n="40">состояние колёс</li>
+            <li data-i18n="41">целостность лобового стекла.</li>
           </ul>
         </li>
-
         <li class="checklist-group">
-          <span class="main-item-title" data-i18n="43">Техническое состояние:</span>
+          <span class="main-item-title" data-i18n="42">Техническое состояние:</span>
           <ul class="checklist-sub">
-            <li data-i18n="44">уровень масла, тормозной и охлаждающей жидкости</li>
-            <li data-i18n="45">состояние ремня генератора</li>
-            <li data-i18n="46">состояние аккумулятора</li>
+            <li data-i18n="43">уровень масла, тормозной и охлаждающей жидкости</li>
+            <li data-i18n="44">состояние ремня генератора</li>
+            <li data-i18n="45">состояние аккумулятора</li>
           </ul>
         </li>
-
         <li class="checklist-group">
-          <span class="main-item-title" data-i18n="47">Световые приборы</span>
+          <span class="main-item-title" data-i18n="46">Световые приборы</span>
           <ul class="checklist-sub">
-            <li data-i18n="48">габаритные огни, фары, поворотники</li>
-            <li data-i18n="49">стоп-сигналы, лампы заднего хода</li>
+            <li data-i18n="47">габаритные огни, фары, поворотники</li>
+            <li data-i18n="48">стоп-сигналы, лампы заднего хода</li>
           </ul>
         </li>
-
         <li class="checklist-group">
           <span class="main-item-title" data-i18n="50">Наличие оборудования:</span>
           <ul class="checklist-sub">
@@ -134,49 +122,58 @@
           </ul>
         </li>
       </ul>
-
       <div class="alert-block alert-orange">
         <p class="alert-text" data-i18n="54">При получении автомобиля проверьте документы, сроки их действия, сверьте
           регистрационные номера с документами.</p>
       </div>
       <h3 class="sub-heading" data-i18n="55">Необходимые документы на линии</h3>
-
       <div class="carousel" id="carousel-docs">
         <div class="carousel-track">
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="docs/dl.webp" alt="Водительское удостоверение" class="carousel-img" data-i18n="56">
-              <p class="image-caption" data-i18n="57">Водительское удостоверение <br>(проверьте срок действия)</p>
-            </div>
-          </div>
-          <div class="carousel-slide">
-            <div class="image-wrapper">
-              <img src="docs/sts.webp" alt="Свидетельство о регистрации" class="carousel-img" data-i18n="58">
-              <p class="image-caption" data-i18n="59">Свидетельство о регистрации (СТС) <br>(проверьте срок действия)
+              <img src="docs/dl.webp" alt="Водительское удостоверение" class="carousel-img">
+              <p class="image-caption"><span data-i18n="57">Водительское удостоверение</span>
+                <br>
+                <span class="price-text" data-i18n="57.1">(проверьте срок действия)</span>
               </p>
             </div>
           </div>
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="docs/s.webp" alt="Страховой полис ОСАГО" class="carousel-img" data-i18n="60">
-              <p class="image-caption" data-i18n="61">Страховой полис ОСАГО <br>(проверьте срок действия)</p>
+              <img src="docs/sts.webp" alt="Свидетельство о регистрации" class="carousel-img">
+              <p class="image-caption"><span data-i18n="59">Свидетельство о регистрации (СТС)</span>
+                <br>
+                <span class="price-text" data-i18n="59.1">(срок действия)</span>
+              </p>
             </div>
           </div>
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="docs/dc.webp" alt="Диагностическая карта" class="carousel-img" data-i18n="62">
-              <p class="image-caption" data-i18n="63">Диагностическая карта <br>(проверьте срок действия)</p>
+              <img src="docs/s.webp" alt="Страховой полис ОСАГО" class="carousel-img">
+              <p class="image-caption"><span data-i18n="61">Страховой полис ОСАГО</span>
+                <br>
+                <span class="price-text" data-i18n="61.1">(проверьте срок действия)</span>
+              </p>
             </div>
           </div>
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="docs/tc.webp" alt="Карточка фрахтовщика" class="carousel-img" data-i18n="64">
+              <img src="docs/dc.webp" alt="Диагностическая карта" class="carousel-img">
+              <p class="image-caption"><span data-i18n="63">Диагностическая карта</span>
+                <br>
+                <span class="price-text" data-i18n="63.1">(срок действия)</span>
+              </p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="image-wrapper">
+              <img src="docs/tc.webp" alt="Карточка фрахтовщика" class="carousel-img">
               <p class="image-caption" data-i18n="65">Карточка фрахтовщика</p>
             </div>
           </div>
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="docs/rl.webp" alt="Заполненный путевой лист" class="carousel-img" data-i18n="66">
+              <img src="docs/rl.webp" alt="Заполненный путевой лист" class="carousel-img">
               <p class="image-caption" data-i18n="67">Заполненный путевой лист</p>
             </div>
           </div>
@@ -191,7 +188,7 @@
         </div>
       </div>
       <div class="image-wrapper">
-        <img src="docs/tc2.webp" alt="Сведения об ОСГОП" class="carousel-img" data-i18n="68">
+        <img src="docs/tc2.webp" alt="Сведения об ОСГОП" class="carousel-img">
         <p class="image-caption" data-i18n="69">Сведения об ОСГОП указаны в данной графе</p>
       </div>
       <h3 class="sub-heading" data-i18n="70">Порядок получения путевого листа*</h3>
@@ -200,19 +197,24 @@
           (перевозчика), путевой лист, «шашку» на крышу. Ставите <span class="word-highlight"
             data-i18n="72">подпись</span> <span data-i18n="72.1">о получении.</span></li>
         <li data-i18n="73">Проходите медицинское освидетельствование (общее самочувствие, температура тела, артериальное
-          давление, проверка на состояние опьянения), ставите <span class="word-highlight" data-i18n="74">время</span> <span data-i18n="74.1">и
-          подпись у ответственного.</span></li>
+          давление, проверка на состояние опьянения), ставите <span class="word-highlight" data-i18n="74">время</span>
+          <span data-i18n="74.1">и
+            подпись у ответственного.</span></li>
         <li data-i18n="75">Получаете у механика ключи от автомобиля и производите осмотр автомобиля. После завершения
-          осмотра, ставите <span class="word-highlight" data-i18n="76">время</span> <span data-i18n="76.1">и подпись у механика о выдаче транспортного
-          средства.</span></li>
-        <li data-i18n="77">Ставите свою <span class="word-highlight" data-i18n="78">подпись</span> <span data-i18n="78.1">о приеме
-          транспортного средства в технически исправном состоянии.</span></li>
-        <li data-i18n="79">Ставите свою <span class="word-highlight" data-i18n="80">подпись</span> <span data-i18n="80.1">в графе об
-          осведомленности о действиях в случае утери «шашек», путевого листа или карты фрахтовщика.</span></li>
+          осмотра, ставите <span class="word-highlight" data-i18n="76">время</span> <span data-i18n="76.1">и подпись у
+            механика о выдаче транспортного
+            средства.</span></li>
+        <li data-i18n="77">Ставите свою <span class="word-highlight" data-i18n="78">подпись</span> <span
+            data-i18n="78.1">о приеме
+            транспортного средства в технически исправном состоянии.</span></li>
+        <li data-i18n="79">Ставите свою <span class="word-highlight" data-i18n="80">подпись</span> <span
+            data-i18n="80.1">в графе об
+            осведомленности о действиях в случае утери «шашек», путевого листа или карты фрахтовщика.</span></li>
         <li data-i18n="81">На выезде из парка ставите отметку о <span class="word-highlight"
             data-i18n="82">времени</span> <span data-i18n="82.1">выезда.</span></li>
-        <li data-i18n="83">Отметка о <span class="word-highlight" data-i18n="84">километраже</span> <span data-i18n="84.1">автомобиля на момент
-          выезда.</span></li>
+        <li data-i18n="83">Отметка о <span class="word-highlight" data-i18n="84">километраже</span> <span
+            data-i18n="84.1">автомобиля на момент
+            выезда.</span></li>
       </ul>
       <div class="alert-block alert-orange">
         <p class="alert-text" data-i18n="85">Неправильное заполнение путевого листа, отсутствие путевого листа и другие
@@ -240,47 +242,47 @@
         <div class="carousel-track">
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="auto/granta.webp" alt="Granta" class="carousel-img" data-i18n="94">
+              <img src="auto/granta.webp" alt="Granta" class="carousel-img">
             </div>
           </div>
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="auto/polo.webp" alt="Polo" class="carousel-img" data-i18n="95">
+              <img src="auto/polo.webp" alt="Polo" class="carousel-img">
             </div>
           </div>
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="auto/rapid.webp" alt="Rapid" class="carousel-img" data-i18n="96">
+              <img src="auto/rapid.webp" alt="Rapid" class="carousel-img">
             </div>
           </div>
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="auto/jetta.webp" alt="Jetta" class="carousel-img" data-i18n="97">
+              <img src="auto/jetta.webp" alt="Jetta" class="carousel-img">
             </div>
           </div>
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="auto/moscvich.webp" alt="Moscvich" class="carousel-img" data-i18n="98">
+              <img src="auto/moscvich.webp" alt="Moscvich" class="carousel-img">
             </div>
           </div>
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="auto/kaiyi.webp" alt="Kaiyi" class="carousel-img" data-i18n="99">
+              <img src="auto/kaiyi.webp" alt="Kaiyi" class="carousel-img">
             </div>
           </div>
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="auto/jac.webp" alt="JAC" class="carousel-img" data-i18n="100">
+              <img src="auto/jac.webp" alt="JAC" class="carousel-img">
             </div>
           </div>
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="auto/baic.webp" alt="BAIC" class="carousel-img" data-i18n="101">
+              <img src="auto/baic.webp" alt="BAIC" class="carousel-img">
             </div>
           </div>
-         <!-- <div class="carousel-slide">
+          <!-- <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="auto/h5.webp" alt="H5" class="carousel-img" data-i18n="102">
+              <img src="auto/h5.webp" alt="H5" class="carousel-img">
             </div>
           </div> -->
         </div>
@@ -304,19 +306,16 @@
         <li data-i18n="107">Любое самостоятельное вмешательство (ремонт, замена запчасти, долив масла) – только после
           согласования с начальником колонны.</li>
       </ul>
-
       <div class="alert-block alert-orange">
         <p class="alert-text" data-i18n="108">При получении автомобиля узнайте у механика, через сколько километров вам
           нужно приехать на техническое обслуживание.</p>
       </div>
       <h3 class="sub-heading" data-i18n="109">Выезд за пределы Московской области</h3>
-
       <div class="image-wrapper" style="height: auto; min-height: 280px;">
-        <img src="get_out/out.webp" alt="Выезд за пределы МО" class="carousel-img" data-i18n="110">
+        <img src="get_out/out.webp" alt="Выезд за пределы МО" class="carousel-img">
         <p class="image-caption" data-i18n="111">Звонок начальнику колонны перед выездом за пределы Московской области
           обязателен.</p>
       </div>
-
       <div class="alert-block alert-orange">
         <p class="alert-text" data-i18n="112">В случае поломки или ДТП за пределами Московской области эвакуатор
           оплачивается водителем.</p>
@@ -336,8 +335,8 @@
         <p class="alert-text" style="font-weight: 300; margin-bottom: 12px;"><strong data-i18n="119">Если сотрудник
             ГИБДД просит освободить проезжую часть:</strong></p>
         <ul class="minimal-list" style="margin: 0; border-left: none; padding-left: 24px;">
-          <li data-i18n="120">Припаркуйтесь, соблюдая правила. Не ставьте автомобиль под знак <img src="signs/3_27.webp"
-              alt="Остановка запрещена" class="inline-icon" data-i18n="121"></li>
+          <li><span data-i18n="120">Припаркуйтесь, соблюдая правила. Не ставьте автомобиль под знак</span><img
+              src="signs/3_27.webp" alt="Остановка запрещена" class="inline-icon"></li>
           <li data-i18n="122">Оплатите платную парковку.</li>
           <li data-i18n="123">Не нарушайте иные правила ПДД.</li>
         </ul>
@@ -360,7 +359,6 @@
         <li data-i18n="133">Выставьте знак аварийной остановки.</li>
         <li data-i18n="134">Позвоните начальнику колонны для вызова механика или эвакуатора.</li>
       </ul>
-
       <div class="alert-block alert-orange">
         <p class="alert-text" data-i18n="135">Если вынуждены встать на платной парковке – оплатите её. В дальнейшем вы
           получите компенсацию.</p>
@@ -371,39 +369,36 @@
       <p class="desc-text" data-i18n="137">Все штрафы ГИБДД свыше 1 000 ₽ списываются автоматически со счёта приложения
         частями по 1 000 ₽ ежедневно.</p>
       <div class="fade-divider"></div>
-
       <h3 class="sub-heading" data-i18n="138">Отсутствие карточки фрахтовщика (перевозчика)</h3>
-      <p class="section-subtitle" style="margin-bottom: 16px;">Штраф <span class="price-text">30 000 ₽</span>.</p>
-
+      <p class="section-subtitle" style="margin-bottom: 16px;"><span data-i18n="138.1">Штраф: </span><span
+          class="price-text">30 000 ₽</span>.</p>
       <div class="image-wrapper" style="height: auto; min-height: 280px;">
-        <img src="fines/taxi_card.webp" alt="Карточка фрахтовщика" class="carousel-img" data-i18n="139">
+        <img src="fines/taxi_card.webp" alt="Карточка фрахтовщика" class="carousel-img">
         <p class="image-caption" data-i18n="140">Образец правильного расположения</p>
       </div>
       <br>
       <h3 class="sub-heading" data-i18n="141">Отсутствие фонаря «Такси» или «шашек»</h3>
-      <p class="section-subtitle">Штраф <span class="price-text">50 000 ₽</span>.</p>
-
+      <p class="section-subtitle"><span data-i18n="141.1">Штраф: </span><span class="price-text">50 000 ₽</span>.</p>
       <div class="image-wrapper" style="height: auto; min-height: 280px;">
-        <img src="fines/taxi_hat.webp" alt="Фонарь такси" class="carousel-img" data-i18n="142">
+        <img src="fines/taxi_hat.webp" alt="Фонарь такси" class="carousel-img">
         <p class="image-caption" data-i18n="143">После работы снимайте фонарь и кладите на пол со стороны водителя. Так
           фонарь не украдут, а при выходе на линию вы не забудете его установить. Не стоит класть фонарь в багажник.</p>
       </div>
       <br>
       <h3 class="sub-heading" data-i18n="144">Парковка на газоне и тротуаре</h3>
-      <p class="section-subtitle">Штраф <span class="price-text">300 000 ₽</span>.</p>
-
+      <p class="section-subtitle"><span data-i18n="144.1">Штраф: </span><span class="price-text">300 000 ₽</span>.</p>
       <div class="image-wrapper" style="height: auto; min-height: 280px;">
-        <img src="fines/grass.webp" alt="Парковка на газоне" class="carousel-img" data-i18n="145">
+        <img src="fines/grass.webp" alt="Парковка на газоне" class="carousel-img">
         <p class="image-caption" data-i18n="146">Паркуйте машину так, чтобы все четыре колеса стояли на асфальте
           проезжей части. Не ставьте машину на газон, тротуар для пешеходов и на бордюр.</p>
       </div>
       <br>
       <h3 class="sub-heading" data-i18n="147">Нарушение правил перевозки детей</h3>
-      <p class="section-subtitle">Штраф за отсутствие/неподходящее/неправильно установленное кресло или непристёгнутого
-        ребёнка <span class="price-text">200 000 ₽</span></p>
-
+      <p class="section-subtitle"><span data-i18n="147.1">Штраф за отсутствие/неподходящее/неправильно установленное
+          кресло или непристёгнутого
+          ребёнка: </span><span class="price-text">200 000 ₽</span></p>
       <div class="image-wrapper" style="height: auto; min-height: 280px;">
-        <img src="fines/child_chair.webp" alt="Детское кресло" class="carousel-img" data-i18n="148">
+        <img src="fines/child_chair.webp" alt="Детское кресло" class="carousel-img">
         <p class="image-caption" data-i18n="149">Дети старше 12 лет, ростом выше 150 см и весом более 36 кг, могут ехать
           сзади пристегнутыми обычными ремнями безопасности.</p>
       </div>
@@ -411,19 +406,19 @@
         <div class="carousel-track">
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="fines/boy.webp" alt="Рост ребенка" class="carousel-img" data-i18n="150">
+              <img src="fines/boy.webp" alt="Рост ребенка" class="carousel-img">
               <p class="image-caption" data-i18n="151">Рост ребенка выше 150 см</p>
             </div>
           </div>
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="fines/good.webp" alt="Правильно" class="carousel-img" data-i18n="152">
+              <img src="fines/good.webp" alt="Правильно" class="carousel-img">
               <p class="image-caption text-green" data-i18n="153">Правильно. Ремень проходит через плечо.</p>
             </div>
           </div>
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="fines/not_good.webp" alt="Неправильно" class="carousel-img" data-i18n="154">
+              <img src="fines/not_good.webp" alt="Неправильно" class="carousel-img">
               <p class="image-caption text-orange" data-i18n="155">Неправильно. Ремень проходит через шею.</p>
             </div>
           </div>
@@ -440,19 +435,17 @@
       </div>
       <br>
       <h3 class="sub-heading" data-i18n="157">Опьянение или отказ от медосвидетельствования</h3>
-      <p class="section-subtitle" style="margin-bottom: 16px;">Штраф <span class="price-text">145 000 ₽</span> + лишение
-        прав на 1,5–2 года.</p>
-
+      <p class="section-subtitle" style="margin-bottom: 16px;"><span data-i18n="157.1">Штраф: </span><span
+          class="price-text">145 000 ₽</span> + <span data-i18n="157.2">лишение
+          прав на 1,5–2 года.</span></p>
       <div class="image-wrapper" style="height: auto; min-height: 280px;">
-        <img src="fines/alko.webp" alt="Алко" class="carousel-img" data-i18n="158">
+        <img src="fines/alko.webp" alt="Алко" class="carousel-img">
         <p class="image-caption" data-i18n="159">Всегда соглашайтесь на прохождение медицинского освидетельствования,
           даже если говорят, что можно отказаться!</p>
       </div>
       <br>
-
       <p class="desc-text" data-i18n="160">Некоторые лекарства влияют на способность управлять транспортными
-        стредствами. Перед приёмом проверяйте инструкцию или спросите в аптеке при приобретении.</p>
-
+        средствами. Перед приёмом проверяйте инструкцию или спросите в аптеке при приобретении.</p>
       <ul class="checklist-main">
         <li class="checklist-group">
           <span class="main-item-title" data-i18n="161">Категорически запрещено управлять автомобилем при приеме:</span>
@@ -472,94 +465,86 @@
       </ul>
       <br>
       <h3 class="sub-heading" data-i18n="165">Проезд на запрещающий сигнал светофора</h3>
-      <p class="section-subtitle" style="margin-bottom: 16px;">Штраф: <span class="price-text">7 500 ₽</span>.</p>
-
+      <p class="section-subtitle" style="margin-bottom: 16px;"><span data-i18n="165.1">Штраф: </span><span
+          class="price-text">7 500 ₽</span>.</p>
       <p class="desc-text" data-i18n="166">Жёлтый сигнал запрещает движение. Останавливайтесь до линии, если можете
         безопасно затормозить.</p>
-
       <p class="list-intro" data-i18n="167">Что считается нарушением:</p>
       <ul class="minimal-list">
         <li data-i18n="168">Проезд на красный или жёлтый сигнал светофора.</li>
         <li data-i18n="169">Пересечение стоп-линии передней частью автомобиля при запрещающем сигнале светофора.</li>
         <li data-i18n="170">Выезд за стоп-линию при запрещающем жесте регулировщика.</li>
       </ul>
-
       <div class="alert-block alert-orange">
         <p class="alert-text" data-i18n="171">Совет: Подъезжая к перекрёстку, заранее снижайте скорость. Если загорелся
           жёлтый — тормозите, а не ускоряйтесь.</p>
       </div>
       <br>
-      <h3 class="sub-heading" data-i18n="172">Движение по автобусной полосе</h3>
-      <p class="section-subtitle" style="margin-bottom: 16px;">Движение по автобусной полосе со знаком «кирпич»: штраф
+      <h3 class="sub-heading" data-i18n="172">Движение по автобусной полосе со знаком "кирпич"</h3>
+      <p class="section-subtitle" style="margin-bottom: 16px;"><span data-i18n="172.1">Штраф: </span>
         <span class="price-text">4 500 ₽</span>.
       </p>
-
       <div class="image-wrapper" style="height: auto; min-height: 280px;">
-        <img src="fines/brick.webp" alt="Знак кирпич" class="carousel-img" data-i18n="173">
+        <img src="fines/brick.webp" alt="Знак кирпич" class="carousel-img">
         <p class="image-caption" data-i18n="174">Движение по автобусной полосе разрешено, за исключением автобусной
           полосы с установленным знаком «кирпич».</p>
       </div>
       <br>
-      <h3 class="sub-heading" data-i18n="175">Остановка под знаком</h3>
-      <p class="section-subtitle" style="margin-bottom: 16px;">Остановка под знаком «Остановка запрещена»: штраф <span
+      <h3 class="sub-heading" data-i18n="175">Остановка под знаком "остановка запрещена"</h3>
+      <p class="section-subtitle" style="margin-bottom: 16px;"><span data-i18n="175.1">Штраф: </span><span
           class="price-text">4 500 ₽</span>.</p>
-      <img src="signs/3_27.webp" alt="Остановка запрещена" class="inline-icon" data-i18n="176"
-        style="display:inline-block; vertical-align:middle;">
-
       <div class="image-wrapper" style="height: auto; min-height: 280px;">
-        <img src="fines/folkon.webp" alt="Фалкон" class="carousel-img" data-i18n="177">
+        <img src="fines/folkon.webp" alt="Фалкон" class="carousel-img">
         <p class="image-caption" data-i18n="178">Если точка посадки или высадки пассажира в зоне действия знака
           «Остановка запрещена», то проедьте немного дальше, поверните во двор или встаньте на платной парковке и
           высадите пассажира, вежливо объяснив причину вашего действия.</p>
       </div>
       <br>
       <h3 class="sub-heading" data-i18n="179">Превышение скорости</h3>
-      <p class="section-subtitle" style="margin-bottom: 16px;">Штраф за превышение скорости: <span class="price-text">от
-          750 до 7 500 ₽</span>.</p>
-
+      <p class="section-subtitle" style="margin-bottom: 16px;"><span data-i18n="179.1">Штраф: </span><span
+          class="price-text">750 - 7 500 ₽</span>.</p>
       <p class="list-intro" data-i18n="180">Превышать на 20 км/ч? Нет смысла!</p>
       <ul class="minimal-list">
         <li data-i18n="181">Время? Не экономите — светофоры и пробки всё равно сравняют.</li>
         <li data-i18n="182">Расходы? Растут: больше штрафов, выше расход топлива.</li>
         <li data-i18n="183">Безопасность? Снижается: меньше времени на реакцию, выше риск ДТП.</li>
       </ul>
-
       <div class="alert-block alert-orange">
         <p class="alert-text" data-i18n="184">Вывод: Плавная езда в рамках ограничения скорости — это выгодно, безопасно
           и спокойно.</p>
       </div>
       <br>
       <h3 class="sub-heading" data-i18n="185">Движение по обочине</h3>
-      <p class="section-subtitle" style="margin-bottom: 16px;">Штраф: <span class="price-text">2 250 ₽</span>.</p>
+      <p class="section-subtitle" style="margin-bottom: 16px;"><span data-i18n="185.1">Штраф: </span><span
+          class="price-text">2 250 ₽</span>.</p>
       <p class="desc-text" data-i18n="186">Движение по обочине равносильно созданию аварийной ситуации. В случае ДТП
         виноваты будете вы.</p>
       <br>
       <h3 class="sub-heading" data-i18n="187">Непристёгнутый ремень безопасности</h3>
-      <p class="section-subtitle" style="margin-bottom: 16px;">Штраф: <span class="price-text">1 500 ₽</span>.</p>
+      <p class="section-subtitle" style="margin-bottom: 16px;"><span data-i18n="187.1">Штраф: </span><span
+          class="price-text">1 500 ₽</span>.</p>
       <p class="desc-text" data-i18n="188">Ответственность за пассажиров несёт водитель. В случае остановки сотрудниками
         ГИБДД штраф получает водитель и пассажиры.</p>
       <br>
       <h3 class="sub-heading" data-i18n="189">Использование телефона за рулем</h3>
-      <p class="section-subtitle" style="margin-bottom: 16px;">Штраф: <span class="price-text">1 500 ₽</span>.</p>
+      <p class="section-subtitle" style="margin-bottom: 16px;"><span data-i18n="189.1">Штраф: </span><span
+          class="price-text">1 500 ₽</span>.</p>
       <p class="desc-text" data-i18n="190">Используйте держатель для телефона и гарнитуру (наушник).</p>
       <br>
       <h3 class="sub-heading" data-i18n="191">Неоплаченная парковка</h3>
-      <p class="section-subtitle" style="margin-bottom: 16px;">Штраф: <span class="price-text">25 000 ₽</span>.</p>
-
+      <p class="section-subtitle" style="margin-bottom: 16px;"><span data-i18n="191.1">Штраф: </span><span
+          class="price-text">25 000 ₽</span>.</p>
       <div class="image-wrapper" style="height: auto; min-height: 280px;">
-        <img src="fines/toll_park.webp" alt="Знаки платной парковки" class="carousel-img" data-i18n="192">
+        <img src="fines/toll_park.webp" alt="Знаки платной парковки" class="carousel-img">
         <p class="image-caption" data-i18n="193">Знаки платной парковки</p>
       </div>
-
       <p class="desc-text" data-i18n="194">Помните: знак платной парковки установлен не всегда. Иногда есть только синяя
-        разметка. Чтобы не ошибиться, перед парковкой откройте Яндекс Навигатор, Яндекс Про или приложение «Парковки
+        разметка. Чтобы не ошибиться, перед парковкой откройте «Яндекс Навигатор, «Яндекс Про» или приложение «Парковки
         России» — там точно указано, платное ли место.</p>
-
       <div class="image-wrapper" style="height: auto; min-height: 280px;">
-        <img src="fines/blue.jpeg" alt="Разметка платной парковки" class="carousel-img" data-i18n="195">
+        <img src="fines/blue.jpeg" alt="Разметка платной парковки" class="carousel-img">
         <p class="image-caption" data-i18n="196">Разметка платной парковки</p>
       </div>
-
       <div class="alert-block alert-orange">
         <ul class="minimal-list" style="margin: 0; padding-left: 24px; border-left: none;">
           <li data-i18n="197">Время бесплатной парковки — первые 5 минут!</li>
@@ -572,74 +557,72 @@
       <h2 class="section-title" data-i18n="199">Рекомендации</h2>
       <div class="fade-divider"></div>
       <h3 class="sub-heading" data-i18n="200">Оплата парковки</h3>
-      <p class="desc-text" data-i18n="201">Рекомендуем настроить приложение "Яндекс Про" таким образом, чтобы на карте
-        отображались платные парковки и зоны где остановка запрещена. Также скачайте приложение "Парковки России" для
+      <p class="desc-text" data-i18n="201">Рекомендуем настроить приложение «Яндекс Про» таким образом, чтобы на карте
+        отображались платные парковки и зоны где остановка запрещена. Также скачайте приложение «Парковки России» для
         оплаты парковки.</p>
       <br>
-      <p class="desc-text" data-i18n="202">Скачайте приложение "Парковки России"</p>
-
+      <p class="desc-text" data-i18n="202">Скачайте приложение «Парковки России»</p>
       <div class="app-download-buttons">
         <a href="https://apps.apple.com/bm/app/парковки-россии/id1434426876" class="download-btn" target="_blank"
           rel="noopener">
-          <img src="logo/appstore.svg" alt="AppStore" class="store-icon" data-i18n="203">
-          <span data-i18n="204">AppStore</span>
+          <img src="logo/appstore.svg" alt="AppStore" class="store-icon">
+          <span>AppStore</span>
         </a>
         <a href="https://play.google.com/store/apps/details?id=ru.mosparking.appnew" class="download-btn"
           target="_blank" rel="noopener">
-          <img src="logo/playmarket.svg" alt="Google Play" class="store-icon" data-i18n="205">
-          <span data-i18n="206">Google Play</span>
+          <img src="logo/playmarket.svg" alt="Google Play" class="store-icon">
+          <span>Google Play</span>
         </a>
         <a href="https://appgallery.huawei.com/#/app/C101992459?appId=C101992459&source=appshare&subsource=C101992459"
           class="download-btn" target="_blank" rel="noopener">
-          <img src="logo/appgallery.svg" alt="AppGallery" class="store-icon" data-i18n="207">
-          <span data-i18n="208">AppGallery</span>
+          <img src="logo/appgallery.svg" alt="AppGallery" class="store-icon">
+          <span>AppGallery</span>
         </a>
         <a href="https://apps.rustore.ru/app/ru.mosparking.appnew" class="download-btn" target="_blank" rel="noopener">
-          <img src="logo/rustore.svg" alt="RuStore" class="store-icon" data-i18n="209">
-          <span data-i18n="210">RuStore</span>
+          <img src="logo/rustore.svg" alt="RuStore" class="store-icon">
+          <span>RuStore</span>
         </a>
       </div>
       <br>
       <p class="list-intro" style="text-align: center; margin: 24px 0 4px;" data-i18n="211">Настройка приложения
         «Парковки России»</p>
-
       <div class="carousel" id="carousel-parking-instruction">
         <div class="carousel-track">
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="instruction/4.webp" alt="Шаг 1" class="carousel-img" data-i18n="212">
+              <img src="instruction/4.webp" alt="Шаг 1" class="carousel-img">
               <p class="image-caption" data-i18n="213">Нажмите кнопку пополнения баланса (в начале у вас будет
                 отображаться 0 ₽).</p>
             </div>
           </div>
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="instruction/5.webp" alt="Шаг 2" class="carousel-img" data-i18n="214">
+              <img src="instruction/5.webp" alt="Шаг 2" class="carousel-img">
               <p class="image-caption" data-i18n="215">Выберите сумму пополнения и нажмите кнопку пополнения.</p>
             </div>
           </div>
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="instruction/6.webp" alt="Шаг 3" class="carousel-img" data-i18n="216">
+              <img src="instruction/6.webp" alt="Шаг 3" class="carousel-img">
               <p class="image-caption" data-i18n="217">Выберите способ оплаты (СБП, Банковская карта или списание с
                 номера телефона).</p>
             </div>
           </div>
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="instruction/7.webp" alt="Шаг 4" class="carousel-img" data-i18n="218">
+              <img src="instruction/7.webp" alt="Шаг 4" class="carousel-img">
               <p class="image-caption" data-i18n="219">Нажмите кнопку «Добавить автомобиль».</p>
             </div>
           </div>
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="instruction/8.webp" alt="Шаг 5" class="carousel-img" data-i18n="220">
+              <img src="instruction/8.webp" alt="Шаг 5" class="carousel-img">
               <p class="image-caption" data-i18n="221">Введите номер автомобиля. Используйте русские буквы.</p>
             </div>
           </div>
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="instruction/9.webp" alt="Шаг 6" class="carousel-img" data-i18n="222">
+              <img src="instruction/9.webp" alt="Шаг 6" class="carousel-img">
               <p class="image-caption" data-i18n="223">Нажмите кнопку «Готово».</p>
             </div>
           </div>
@@ -654,25 +637,24 @@
         </div>
       </div>
       <p class="list-intro" style="text-align: center; margin: 40px 0 12px;" data-i18n="224">Отображение парковок в
-        приложении Яндекс Про</p>
-
+        приложении «Яндекс Про»</p>
       <div class="carousel" id="carousel-yandex-layers">
         <div class="carousel-track">
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="instruction/1.webp" alt="Шаг 1" class="carousel-img" data-i18n="225">
+              <img src="instruction/1.webp" alt="Шаг 1" class="carousel-img">
               <p class="image-caption" data-i18n="226">Нажмите значок «Слои».</p>
             </div>
           </div>
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="instruction/2.webp" alt="Шаг 2" class="carousel-img" data-i18n="227">
+              <img src="instruction/2.webp" alt="Шаг 2" class="carousel-img">
               <p class="image-caption" data-i18n="228">Включите режим отображения парковок.</p>
             </div>
           </div>
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="instruction/3.webp" alt="Шаг 3" class="carousel-img" data-i18n="229">
+              <img src="instruction/3.webp" alt="Шаг 3" class="carousel-img">
               <p class="image-caption" data-i18n="230">На карте появятся зоны платной парковки и места, где остановка
                 запрещена.</p>
             </div>
@@ -685,33 +667,32 @@
         </div>
       </div>
       <p class="list-intro" style="text-align: center; margin: 40px 0 12px;" data-i18n="231">Как оплатить парковку</p>
-
       <div class="carousel" id="carousel-parking-payment">
         <div class="carousel-track">
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="instruction/10.webp" alt="Шаг 1" class="carousel-img" data-i18n="232">
+              <img src="instruction/10.webp" alt="Шаг 1" class="carousel-img">
               <p class="image-caption" data-i18n="233">В приложении «Яндекс Про» выбираете нужную вам парковку. Внизу
                 отобразится номер парковочной зоны.</p>
             </div>
           </div>
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="instruction/11.webp" alt="Шаг 2" class="carousel-img" data-i18n="234">
+              <img src="instruction/11.webp" alt="Шаг 2" class="carousel-img">
               <p class="image-caption" data-i18n="235">Зайти в приложение «Парковки России», нажать поиск вверху или
                 внизу.</p>
             </div>
           </div>
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="instruction/12.webp" alt="Шаг 3" class="carousel-img" data-i18n="236">
+              <img src="instruction/12.webp" alt="Шаг 3" class="carousel-img">
               <p class="image-caption" data-i18n="237">В поиске написать номер парковочной зоны, которая показана в
                 приложении «Яндекс Про».</p>
             </div>
           </div>
           <div class="carousel-slide">
             <div class="image-wrapper">
-              <img src="instruction/13.webp" alt="Шаг 4" class="carousel-img" data-i18n="238">
+              <img src="instruction/13.webp" alt="Шаг 4" class="carousel-img">
               <p class="image-caption" data-i18n="239">Нажать «Припарковать».</p>
             </div>
           </div>
@@ -723,7 +704,6 @@
           <span class="dot" data-index="3"></span>
         </div>
       </div>
-
       <ul class="minimal-list">
         <li data-i18n="240">Оплата выбранного времени списывается сразу, однако если вы завершаете парковку раньше, то
           неиспользованные средства вернутся на счет.</li>
@@ -757,11 +737,13 @@
         поэтому обязательно делайте перерывы и высыпайтесь.</p>
       <br>
       <h3 class="sub-heading" data-i18n="reg">Установите видеорегистратор</h3>
-      <p class="desc-text" data-i18n="reg_txt">Видеорегистратор поможет вам при возникновении спорных ситуаций с клиентом и другими
+      <p class="desc-text" data-i18n="reg_txt">Видеорегистратор поможет вам при возникновении спорных ситуаций с
+        клиентом и другими
         участниками дорожного движения.</p>
       <br>
       <h3 class="sub-heading" data-i18n="balance">Следите за балансом</h3>
-      <p class="desc-text" data-i18n="balance_txt">Поддерживайте положительный баланс в приложении, во избежание появления задолженности.</p>
+      <p class="desc-text" data-i18n="balance_txt">Поддерживайте положительный баланс в приложении, во избежание
+        появления задолженности.</p>
       <br>
       <h3 class="sub-heading" data-i18n="255">Соблюдайте закон</h3>
       <p class="desc-text" data-i18n="256">Не перевозите никакие посылки работая в режиме "Такси". При выполнении заказа
@@ -773,24 +755,20 @@
     <section id="contacts" class="info-section">
       <h2 class="section-title" data-i18n="259">Контакты</h2>
       <div class="fade-divider"></div>
-
       <!--ПЕРВАЯ КАРУСЕЛЬ КОНТАКТОВ-->
       <h3 class="sub-heading" data-i18n="260">Адрес таксопарка Волоколамское</h3>
       <p class="desc-text" style="margin-bottom: 20px;" data-i18n="261">г. Москва, Волоколамское ш., д. 142, стр. 1
       </p>
-
       <a href="https://yandex.ru/maps/?text=г.+Москва,+Волоколамское+ш.,+д.+142,+стр.+1" class="route-btn"
         target="_blank" rel="noopener" data-i18n="262">Построить маршрут</a>
       <h3 class="sub-heading" style="margin-top: 24px;" data-i18n="263">Сотрудники таксопарка</h3>
-
       <div class="carousel contacts-carousel">
         <div class="carousel-track">
-
           <!-- Карточка 1: Адилет К. -->
           <div class="carousel-slide">
             <div class="contact-card">
               <div class="card-header">
-                <img src="flags/kg.svg" alt="Флаг" class="contact-flag" data-i18n="264">
+                <img src="flags/kg.svg" alt="Флаг" class="contact-flag">
                 <div class="card-info">
                   <div class="card-name" data-i18n="265">Адилет К.</div>
                   <a href="tel:+79995773095" class="card-phone-link">+7-999-577-30-95</a>
@@ -798,26 +776,23 @@
                 </div>
               </div>
               <div class="card-actions">
-                <a href="tel:+79995773095" class="icon-btn" aria-label="Позвонить" data-i18n="267">
+                <a href="tel:+79995773095" class="icon-btn" aria-label="Позвонить">
                   <span class="contact-icon" style="--icon-url: url('icon/phone.svg');"></span>
                 </a>
-                <a href="https://wa.me/79995773095" target="_blank" class="icon-btn" aria-label="WhatsApp"
-                  data-i18n="268">
-                  <img src="icon/whatsapp.svg" alt="WhatsApp" class="contact-icon-img" data-i18n="269">
+                <a href="https://wa.me/79995773095" target="_blank" class="icon-btn" aria-label="WhatsApp">
+                  <img src="icon/whatsapp.svg" alt="WhatsApp" class="contact-icon-img">
                 </a>
-                <a href="tg://resolve?phone=+79995773095" target="_blank" class="icon-btn" aria-label="Telegram"
-                  data-i18n="270">
-                  <img src="icon/tg.svg" alt="Telegram" class="contact-icon-img" data-i18n="271"> 
+                <a href="tg://resolve?phone=+79995773095" target="_blank" class="icon-btn" aria-label="Telegram">
+                  <img src="icon/tg.svg" alt="Telegram" class="contact-icon-img">
                 </a>
               </div>
             </div>
           </div>
-
           <!-- Карточка 2: Арген -->
           <div class="carousel-slide">
             <div class="contact-card">
               <div class="card-header">
-                <img src="flags/kg.svg" alt="Флаг" class="contact-flag" data-i18n="272">
+                <img src="flags/kg.svg" alt="Флаг" class="contact-flag">
                 <div class="card-info">
                   <div class="card-name" data-i18n="273">Арген</div>
                   <a href="tel:+79995775453" class="card-phone-link">+7-999-577-54-53</a>
@@ -825,22 +800,20 @@
                 </div>
               </div>
               <div class="card-actions">
-                <a href="tel:+79995775453" class="icon-btn" aria-label="Позвонить" data-i18n="275"><span
-                    class="contact-icon" style="--icon-url: url('icon/phone.svg');"></span></a>
-                <a href="https://wa.me/79995775453" target="_blank" class="icon-btn" aria-label="WhatsApp"
-                  data-i18n="276"><img src="icon/whatsapp.svg" alt="WhatsApp" class="contact-icon-img"
-                    data-i18n="277"></a>
-                <a href="tg://resolve?phone=+79995775453" target="_blank" class="icon-btn" aria-label="Telegram"
-                  data-i18n="278"><img src="icon/tg.svg" alt="Telegram" class="contact-icon-img" data-i18n="279"></a>
+                <a href="tel:+79995775453" class="icon-btn" aria-label="Позвонить"><span class="contact-icon"
+                    style="--icon-url: url('icon/phone.svg');"></span></a>
+                <a href="https://wa.me/79995775453" target="_blank" class="icon-btn" aria-label="WhatsApp"><img
+                    src="icon/whatsapp.svg" alt="WhatsApp" class="contact-icon-img"></a>
+                <a href="tg://resolve?phone=+79995775453" target="_blank" class="icon-btn" aria-label="Telegram"><img
+                    src="icon/tg.svg" alt="Telegram" class="contact-icon-img"></a>
               </div>
             </div>
           </div>
-
           <!-- Карточка 3: Адилет З. -->
           <div class="carousel-slide">
             <div class="contact-card">
               <div class="card-header">
-                <img src="flags/kg.svg" alt="Флаг" class="contact-flag" data-i18n="280">
+                <img src="flags/kg.svg" alt="Флаг" class="contact-flag">
                 <div class="card-info">
                   <div class="card-name" data-i18n="281">Адилет З.</div>
                   <a href="tel:+79997676678" class="card-phone-link">+7-999-767-66-78</a>
@@ -848,22 +821,20 @@
                 </div>
               </div>
               <div class="card-actions">
-                <a href="tel:+79997676678" class="icon-btn" aria-label="Позвонить" data-i18n="283"><span
-                    class="contact-icon" style="--icon-url: url('icon/phone.svg');"></span></a>
-                <a href="https://wa.me/79997676678" target="_blank" class="icon-btn" aria-label="WhatsApp"
-                  data-i18n="284"><img src="icon/whatsapp.svg" alt="WhatsApp" class="contact-icon-img"
-                    data-i18n="285"></a>
-                <a href="tg://resolve?phone=+79997676678" target="_blank" class="icon-btn" aria-label="Telegram"
-                  data-i18n="286"><img src="icon/tg.svg" alt="Telegram" class="contact-icon-img" data-i18n="287"></a>
+                <a href="tel:+79997676678" class="icon-btn" aria-label="Позвонить"><span class="contact-icon"
+                    style="--icon-url: url('icon/phone.svg');"></span></a>
+                <a href="https://wa.me/79997676678" target="_blank" class="icon-btn" aria-label="WhatsApp"><img
+                    src="icon/whatsapp.svg" alt="WhatsApp" class="contact-icon-img"></a>
+                <a href="tg://resolve?phone=+79997676678" target="_blank" class="icon-btn" aria-label="Telegram"><img
+                    src="icon/tg.svg" alt="Telegram" class="contact-icon-img"></a>
               </div>
             </div>
           </div>
-
           <!-- Карточка 4: Муратбек -->
           <div class="carousel-slide">
             <div class="contact-card">
               <div class="card-header">
-                <img src="flags/kg.svg" alt="Флаг" class="contact-flag" data-i18n="288">
+                <img src="flags/kg.svg" alt="Флаг" class="contact-flag">
                 <div class="card-info">
                   <div class="card-name" data-i18n="289">Муратбек</div>
                   <a href="tel:+79995775897" class="card-phone-link">+7-999-577-58-97</a>
@@ -871,22 +842,20 @@
                 </div>
               </div>
               <div class="card-actions">
-                <a href="tel:+79995775897" class="icon-btn" aria-label="Позвонить" data-i18n="291"><span
-                    class="contact-icon" style="--icon-url: url('icon/phone.svg');"></span></a>
-                <a href="https://wa.me/79995775897" target="_blank" class="icon-btn" aria-label="WhatsApp"
-                  data-i18n="292"><img src="icon/whatsapp.svg" alt="WhatsApp" class="contact-icon-img"
-                    data-i18n="293"></a>
-                <a href="tg://resolve?phone=+79995775897" target="_blank" class="icon-btn" aria-label="Telegram"
-                  data-i18n="294"><img src="icon/tg.svg" alt="Telegram" class="contact-icon-img" data-i18n="295"></a>
+                <a href="tel:+79995775897" class="icon-btn" aria-label="Позвонить"><span class="contact-icon"
+                    style="--icon-url: url('icon/phone.svg');"></span></a>
+                <a href="https://wa.me/79995775897" target="_blank" class="icon-btn" aria-label="WhatsApp"><img
+                    src="icon/whatsapp.svg" alt="WhatsApp" class="contact-icon-img"></a>
+                <a href="tg://resolve?phone=+79995775897" target="_blank" class="icon-btn" aria-label="Telegram"><img
+                    src="icon/tg.svg" alt="Telegram" class="contact-icon-img"></a>
               </div>
             </div>
           </div>
-
           <!-- Карточка 5: Юрий -->
           <div class="carousel-slide">
             <div class="contact-card">
               <div class="card-header">
-                <img src="flags/ru.svg" alt="Флаг" class="contact-flag" data-i18n="296">
+                <img src="flags/ru.svg" alt="Флаг" class="contact-flag">
                 <div class="card-info">
                   <div class="card-name" data-i18n="297">Юрий</div>
                   <a href="tel:+79996609167" class="card-phone-link">+7-999-660-91-67</a>
@@ -894,22 +863,20 @@
                 </div>
               </div>
               <div class="card-actions">
-                <a href="tel:+79996609167" class="icon-btn" aria-label="Позвонить" data-i18n="299"><span
-                    class="contact-icon" style="--icon-url: url('icon/phone.svg');"></span></a>
-                <a href="https://wa.me/79996609167" target="_blank" class="icon-btn" aria-label="WhatsApp"
-                  data-i18n="300"><img src="icon/whatsapp.svg" alt="WhatsApp" class="contact-icon-img"
-                    data-i18n="301"></a>
-                <a href="tg://resolve?phone=+79996609167" target="_blank" class="icon-btn" aria-label="Telegram"
-                  data-i18n="302"><img src="icon/tg.svg" alt="Telegram" class="contact-icon-img" data-i18n="303"></a>
+                <a href="tel:+79996609167" class="icon-btn" aria-label="Позвонить"><span class="contact-icon"
+                    style="--icon-url: url('icon/phone.svg');"></span></a>
+                <a href="https://wa.me/79996609167" target="_blank" class="icon-btn" aria-label="WhatsApp"><img
+                    src="icon/whatsapp.svg" alt="WhatsApp" class="contact-icon-img"></a>
+                <a href="tg://resolve?phone=+79996609167" target="_blank" class="icon-btn" aria-label="Telegram"><img
+                    src="icon/tg.svg" alt="Telegram" class="contact-icon-img"></a>
               </div>
             </div>
           </div>
-
           <!-- Карточка 6: Ганс -->
           <div class="carousel-slide">
             <div class="contact-card">
               <div class="card-header">
-                <img src="flags/ru.svg" alt="Флаг" class="contact-flag" data-i18n="304">
+                <img src="flags/ru.svg" alt="Флаг" class="contact-flag">
                 <div class="card-info">
                   <div class="card-name" data-i18n="305">Ганс</div>
                   <a href="tel:+79251725604" class="card-phone-link">+7-925-172-56-04</a>
@@ -917,37 +884,32 @@
                 </div>
               </div>
               <div class="card-actions">
-                <a href="tel:+79251725604" class="icon-btn" aria-label="Позвонить" data-i18n="307"><span
-                    class="contact-icon" style="--icon-url: url('icon/phone.svg');"></span></a>
-                <a href="https://wa.me/79251725604" target="_blank" class="icon-btn" aria-label="WhatsApp"
-                  data-i18n="308"><img src="icon/whatsapp.svg" alt="WhatsApp" class="contact-icon-img"
-                    data-i18n="309"></a>
-                <a href="tg://resolve?phone=+79251725604" target="_blank" class="icon-btn" aria-label="Telegram"
-                  data-i18n="310"><img src="icon/tg.svg" alt="Telegram" class="contact-icon-img" data-i18n="311"></a>
+                <a href="tel:+79251725604" class="icon-btn" aria-label="Позвонить"><span class="contact-icon"
+                    style="--icon-url: url('icon/phone.svg');"></span></a>
+                <a href="https://wa.me/79251725604" target="_blank" class="icon-btn" aria-label="WhatsApp"><img
+                    src="icon/whatsapp.svg" alt="WhatsApp" class="contact-icon-img"></a>
+                <a href="tg://resolve?phone=+79251725604" target="_blank" class="icon-btn" aria-label="Telegram"><img
+                    src="icon/tg.svg" alt="Telegram" class="contact-icon-img"></a>
               </div>
             </div>
           </div>
 
         </div>
       </div>
-
       <!--ВТОРАЯ КАРУСЕЛЬ КОНАТКТОВ-->
       <h3 class="sub-heading" data-i18n="312">Адрес таксопарка Нахабино</h3>
       <p class="desc-text" style="margin-bottom: 20px;" data-i18n="313">МО, г. Нахабино, ул. Красноармейская, д. 61 Б
       </p>
-
       <a href="https://yandex.ru/maps/?text=Московская+область+Нахабино+Красноармейская+61Б" class="route-btn"
         target="_blank" rel="noopener" data-i18n="314">Построить маршрут</a>
       <h3 class="sub-heading" style="margin-top: 24px;" data-i18n="315">Сотрудники таксопарка</h3>
-
       <div class="carousel contacts-carousel">
         <div class="carousel-track">
-
           <!-- Карточка 1: Ринат -->
           <div class="carousel-slide">
             <div class="contact-card">
               <div class="card-header">
-                <img src="flags/kg.svg" alt="Флаг" class="contact-flag" data-i18n="316">
+                <img src="flags/kg.svg" alt="Флаг" class="contact-flag">
                 <div class="card-info">
                   <div class="card-name" data-i18n="317">Ринат</div>
                   <a href="tel:+79261868292" class="card-phone-link">+7 926 186-82-92</a>
@@ -955,26 +917,23 @@
                 </div>
               </div>
               <div class="card-actions">
-                <a href="tel:+79261868292" class="icon-btn" aria-label="Позвонить" data-i18n="319">
+                <a href="tel:+79261868292" class="icon-btn" aria-label="Позвонить">
                   <span class="contact-icon" style="--icon-url: url('icon/phone.svg');"></span>
                 </a>
-                <a href="https://wa.me/79261868292" target="_blank" class="icon-btn" aria-label="WhatsApp"
-                  data-i18n="320">
-                  <img src="icon/whatsapp.svg" alt="WhatsApp" class="contact-icon-img" data-i18n="321">
+                <a href="https://wa.me/79261868292" target="_blank" class="icon-btn" aria-label="WhatsApp">
+                  <img src="icon/whatsapp.svg" alt="WhatsApp" class="contact-icon-img">
                 </a>
-                <a href="tg://resolve?phone=+79261868292" target="_blank" class="icon-btn" aria-label="Telegram"
-                  data-i18n="322">
-                  <img src="icon/tg.svg" alt="Telegram" class="contact-icon-img" data-i18n="323">
+                <a href="tg://resolve?phone=+79261868292" target="_blank" class="icon-btn" aria-label="Telegram">
+                  <img src="icon/tg.svg" alt="Telegram" class="contact-icon-img">
                 </a>
               </div>
             </div>
           </div>
-
           <!-- Карточка 2: Алтынбек -->
           <div class="carousel-slide">
             <div class="contact-card">
               <div class="card-header">
-                <img src="flags/kg.svg" alt="Флаг" class="contact-flag" data-i18n="324">
+                <img src="flags/kg.svg" alt="Флаг" class="contact-flag">
                 <div class="card-info">
                   <div class="card-name" data-i18n="325">Алтынбек</div>
                   <a href="tel:+79995775461" class="card-phone-link">+7 999 577-54-61</a>
@@ -982,22 +941,20 @@
                 </div>
               </div>
               <div class="card-actions">
-                <a href="tel:+79995775461" class="icon-btn" aria-label="Позвонить" data-i18n="327"><span
-                    class="contact-icon" style="--icon-url: url('icon/phone.svg');"></span></a>
-                <a href="https://wa.me/79995775461" target="_blank" class="icon-btn" aria-label="WhatsApp"
-                  data-i18n="328"><img src="icon/whatsapp.svg" alt="WhatsApp" class="contact-icon-img"
-                    data-i18n="329"></a>
-                <a href="tg://resolve?phone=+79995775461" target="_blank" class="icon-btn" aria-label="Telegram"
-                  data-i18n="330"><img src="icon/tg.svg" alt="Telegram" class="contact-icon-img" data-i18n="331"></a>
+                <a href="tel:+79995775461" class="icon-btn" aria-label="Позвонить"><span class="contact-icon"
+                    style="--icon-url: url('icon/phone.svg');"></span></a>
+                <a href="https://wa.me/79995775461" target="_blank" class="icon-btn" aria-label="WhatsApp"><img
+                    src="icon/whatsapp.svg" alt="WhatsApp" class="contact-icon-img"></a>
+                <a href="tg://resolve?phone=+79995775461" target="_blank" class="icon-btn" aria-label="Telegram"><img
+                    src="icon/tg.svg" alt="Telegram" class="contact-icon-img"></a>
               </div>
             </div>
           </div>
-
           <!-- Карточка 3: Кайрат -->
           <div class="carousel-slide">
             <div class="contact-card">
               <div class="card-header">
-                <img src="flags/kg.svg" alt="Флаг" class="contact-flag" data-i18n="332">
+                <img src="flags/kg.svg" alt="Флаг" class="contact-flag">
                 <div class="card-info">
                   <div class="card-name" data-i18n="333">Кайрат</div>
                   <a href="tel:+79153214530" class="card-phone-link">+7 915 321-45-30</a>
@@ -1005,22 +962,20 @@
                 </div>
               </div>
               <div class="card-actions">
-                <a href="tel:+79153214530" class="icon-btn" aria-label="Позвонить" data-i18n="335"><span
-                    class="contact-icon" style="--icon-url: url('icon/phone.svg');"></span></a>
-                <a href="https://wa.me/79153214530" target="_blank" class="icon-btn" aria-label="WhatsApp"
-                  data-i18n="336"><img src="icon/whatsapp.svg" alt="WhatsApp" class="contact-icon-img"
-                    data-i18n="337"></a>
-                <a href="tg://resolve?phone=+79153214530" target="_blank" class="icon-btn" aria-label="Telegram"
-                  data-i18n="338"><img src="icon/tg.svg" alt="Telegram" class="contact-icon-img" data-i18n="339"></a>
+                <a href="tel:+79153214530" class="icon-btn" aria-label="Позвонить"><span class="contact-icon"
+                    style="--icon-url: url('icon/phone.svg');"></span></a>
+                <a href="https://wa.me/79153214530" target="_blank" class="icon-btn" aria-label="WhatsApp"><img
+                    src="icon/whatsapp.svg" alt="WhatsApp" class="contact-icon-img"></a>
+                <a href="tg://resolve?phone=+79153214530" target="_blank" class="icon-btn" aria-label="Telegram"><img
+                    src="icon/tg.svg" alt="Telegram" class="contact-icon-img"></a>
               </div>
             </div>
           </div>
-
           <!-- Карточка 4: Нуртилек -->
           <div class="carousel-slide">
             <div class="contact-card">
               <div class="card-header">
-                <img src="flags/kg.svg" alt="Флаг" class="contact-flag" data-i18n="340">
+                <img src="flags/kg.svg" alt="Флаг" class="contact-flag">
                 <div class="card-info">
                   <div class="card-name" data-i18n="341">Нуртилек</div>
                   <a href="tel:+79067282761" class="card-phone-link">+7-906-728-27-61</a>
@@ -1028,22 +983,20 @@
                 </div>
               </div>
               <div class="card-actions">
-                <a href="tel:+79067282761" class="icon-btn" aria-label="Позвонить" data-i18n="343"><span
-                    class="contact-icon" style="--icon-url: url('icon/phone.svg');"></span></a>
-                <a href="https://wa.me/79067282761" target="_blank" class="icon-btn" aria-label="WhatsApp"
-                  data-i18n="344"><img src="icon/whatsapp.svg" alt="WhatsApp" class="contact-icon-img"
-                    data-i18n="345"></a>
-                <a href="tg://resolve?phone=+79067282761" target="_blank" class="icon-btn" aria-label="Telegram"
-                  data-i18n="346"><img src="icon/tg.svg" alt="Telegram" class="contact-icon-img" data-i18n="347"></a>
+                <a href="tel:+79067282761" class="icon-btn" aria-label="Позвонить"><span class="contact-icon"
+                    style="--icon-url: url('icon/phone.svg');"></span></a>
+                <a href="https://wa.me/79067282761" target="_blank" class="icon-btn" aria-label="WhatsApp"><img
+                    src="icon/whatsapp.svg" alt="WhatsApp" class="contact-icon-img"></a>
+                <a href="tg://resolve?phone=+79067282761" target="_blank" class="icon-btn" aria-label="Telegram"><img
+                    src="icon/tg.svg" alt="Telegram" class="contact-icon-img"></a>
               </div>
             </div>
           </div>
-
           <!-- Карточка 5: Парвиз -->
           <div class="carousel-slide">
             <div class="contact-card">
               <div class="card-header">
-                <img src="flags/tj.svg" alt="Флаг" class="contact-flag" data-i18n="348">
+                <img src="flags/tj.svg" alt="Флаг" class="contact-flag">
                 <div class="card-info">
                   <div class="card-name" data-i18n="349">Парвиз</div>
                   <a href="tel:+79996609187" class="card-phone-link">+7 999 660-91-87</a>
@@ -1051,22 +1004,20 @@
                 </div>
               </div>
               <div class="card-actions">
-                <a href="tel:+79996609187" class="icon-btn" aria-label="Позвонить" data-i18n="351"><span
-                    class="contact-icon" style="--icon-url: url('icon/phone.svg');"></span></a>
-                <a href="https://wa.me/79996609187" target="_blank" class="icon-btn" aria-label="WhatsApp"
-                  data-i18n="352"><img src="icon/whatsapp.svg" alt="WhatsApp" class="contact-icon-img"
-                    data-i18n="353"></a>
-                <a href="tg://resolve?phone=+79996609187" target="_blank" class="icon-btn" aria-label="Telegram"
-                  data-i18n="354"><img src="icon/tg.svg" alt="Telegram" class="contact-icon-img" data-i18n="355"></a>
+                <a href="tel:+79996609187" class="icon-btn" aria-label="Позвонить"><span class="contact-icon"
+                    style="--icon-url: url('icon/phone.svg');"></span></a>
+                <a href="https://wa.me/79996609187" target="_blank" class="icon-btn" aria-label="WhatsApp"><img
+                    src="icon/whatsapp.svg" alt="WhatsApp" class="contact-icon-img"></a>
+                <a href="tg://resolve?phone=+79996609187" target="_blank" class="icon-btn" aria-label="Telegram"><img
+                    src="icon/tg.svg" alt="Telegram" class="contact-icon-img"></a>
               </div>
             </div>
           </div>
-
           <!-- Карточка 6: Гафар -->
           <div class="carousel-slide">
             <div class="contact-card">
               <div class="card-header">
-                <img src="flags/tm.svg" alt="Флаг" class="contact-flag" data-i18n="356">
+                <img src="flags/tm.svg" alt="Флаг" class="contact-flag">
                 <div class="card-info">
                   <div class="card-name" data-i18n="357">Гафар</div>
                   <a href="tel:+79997676492" class="card-phone-link">+7 999 767-64-92</a>
@@ -1074,23 +1025,20 @@
                 </div>
               </div>
               <div class="card-actions">
-                <a href="tel:+79997676492" class="icon-btn" aria-label="Позвонить" data-i18n="359"><span
-                    class="contact-icon" style="--icon-url: url('icon/phone.svg');"></span></a>
-                <a href="https://wa.me/79997676492" target="_blank" class="icon-btn" aria-label="WhatsApp"
-                  data-i18n="360"><img src="icon/whatsapp.svg" alt="WhatsApp" class="contact-icon-img"
-                    data-i18n="361"></a>
-                <a href="tg://resolve?phone=+79997676492" target="_blank" class="icon-btn" aria-label="Telegram"
-                  data-i18n="362"><img src="icon/tg.svg" alt="Telegram" class="contact-icon-img" data-i18n="363"></a>
+                <a href="tel:+79997676492" class="icon-btn" aria-label="Позвонить"><span class="contact-icon"
+                    style="--icon-url: url('icon/phone.svg');"></span></a>
+                <a href="https://wa.me/79997676492" target="_blank" class="icon-btn" aria-label="WhatsApp"><img
+                    src="icon/whatsapp.svg" alt="WhatsApp" class="contact-icon-img"></a>
+                <a href="tg://resolve?phone=+79997676492" target="_blank" class="icon-btn" aria-label="Telegram"><img
+                    src="icon/tg.svg" alt="Telegram" class="contact-icon-img"></a>
               </div>
             </div>
           </div>
-
         </div>
       </div>
       <!-- Сюда позже вставим контент -->
     </section>
   </main>
-
   <!-- 3. Фиксированное нижнее меню -->
   <nav class="floating-bottom-nav">
     <a href="#conditions" class="nav-item">
@@ -1110,7 +1058,6 @@
       <span class="nav-label" data-i18n="367">Контакты</span>
     </a>
   </nav>
-
   <script src="script.js"></script>
 </body>
 

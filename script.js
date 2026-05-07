@@ -9,12 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
   let translations = {};
 
   const LANG_MAP = {
-    ru: { file: 'ru', flag: 'ru', nameKey: '3' },
-    kg: { file: 'kg', flag: 'kg', nameKey: '5' },
-    kk: { file: 'kz', flag: 'kz', nameKey: '6' },
-    tg: { file: 'tj', flag: 'tj', nameKey: '7' },
-    tm: { file: 'tm', flag: 'tm', nameKey: '8' },
-    uz: { file: 'uz', flag: 'uz', nameKey: '9' }
+    ru: { file: 'ru', flag: 'ru', nameKey: '2' },
+    kg: { file: 'kg', flag: 'kg', nameKey: '4' },
+    kk: { file: 'kz', flag: 'kz', nameKey: '5' },
+    tg: { file: 'tj', flag: 'tj', nameKey: '6' },
+    tm: { file: 'tm', flag: 'tm', nameKey: '7' },
+    uz: { file: 'uz', flag: 'uz', nameKey: '8' }
   };
 
   async function loadLanguage(lang) {
@@ -61,16 +61,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (flag) flag.src = `flags/${map.flag}.svg`;
 
     // 2. 🔑 Меняем текст кнопки на название ТЕКУЩЕГО языка
-    const labelSpan = document.querySelector('#langToggle span[data-i18n="3"]');
-    if (labelSpan && translations[map.nameKey]) {
-      labelSpan.textContent = translations[map.nameKey];
-    }
+  const labelSpan = document.querySelector('#langToggle span');
+  if (labelSpan && translations[map.nameKey]) {
+    labelSpan.textContent = translations[map.nameKey];
+  }
 
     // 3. Подсвечиваем выбранный язык в меню
-    document.querySelectorAll('#langList li').forEach(li => {
-      li.classList.toggle('active', li.dataset.lang === currentLang);
-    });
-  }
+  document.querySelectorAll('#langList li').forEach(li => {
+    li.classList.toggle('active', li.dataset.lang === currentLang);
+  });
+}
 
   // === 1. МЕНЮ ЯЗЫКОВ ===
   const langBtn = document.getElementById('langToggle');
